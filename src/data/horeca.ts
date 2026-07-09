@@ -42,10 +42,12 @@ export interface HorecaFormData {
   empresa: string
   cargo: string
   tipoNegocio: string
+  tipoNegocioOtro: string
   ciudad: string
   departamento: string
   email: string
   telefono: string
   consumoMensual: string
   productos: string[]
+  productoOtro: string
 }

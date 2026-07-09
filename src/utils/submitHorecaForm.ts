@@ -14,13 +14,21 @@ export async function submitHorecaForm(data: HorecaFormData): Promise<void> {
       'Nombre completo': data.nombre,
       'Empresa o establecimiento': data.empresa,
       Cargo: data.cargo || '—',
-      'Tipo de negocio': data.tipoNegocio || '—',
+      'Tipo de negocio':
+        data.tipoNegocio === 'Otro'
+          ? `Otro: ${data.tipoNegocioOtro || '—'}`
+          : data.tipoNegocio || '—',
       Ciudad: data.ciudad,
       Departamento: data.departamento || '—',
       'Correo electrónico': data.email,
       'Teléfono / WhatsApp': data.telefono,
       'Consumo mensual aproximado': data.consumoMensual || '—',
-      'Productos o servicios de interés': data.productos.length > 0 ? data.productos.join(', ') : '—',
+      'Productos o servicios de interés':
+        data.productos.length > 0
+          ? data.productos
+              .map((p) => (p === 'Otro' && data.productoOtro ? `Otro: ${data.productoOtro}` : p))
+              .join(', ')
+          : '—',
     }),
   })
 

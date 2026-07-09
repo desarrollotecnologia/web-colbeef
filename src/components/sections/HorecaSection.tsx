@@ -23,18 +23,20 @@ const emptyForm: HorecaFormData = {
   empresa: '',
   cargo: '',
   tipoNegocio: '',
+  tipoNegocioOtro: '',
   ciudad: '',
   departamento: '',
   email: '',
   telefono: '',
   consumoMensual: '',
   productos: [],
+  productoOtro: '',
 }
 
 const inputClass =
-  'w-full px-4 py-3 border border-gray-200 rounded-lg text-sm text-colbeef-dark placeholder:text-colbeef-gray/70 focus:border-colbeef-green focus:outline-none focus:ring-1 focus:ring-colbeef-green/30 transition-colors'
+  'w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-colbeef-dark placeholder:text-colbeef-gray/70 focus:border-colbeef-green focus:outline-none focus:ring-1 focus:ring-colbeef-green/30 transition-colors'
 
-const labelClass = 'block text-sm font-semibold text-colbeef-dark mb-1.5'
+const labelClass = 'block text-xs sm:text-sm font-semibold text-colbeef-dark mb-1'
 
 export function HorecaSection() {
   const [form, setForm] = useState<HorecaFormData>(emptyForm)
@@ -43,12 +45,18 @@ export function HorecaSection() {
   const [errorMessage, setErrorMessage] = useState('')
 
   const toggleProduct = (product: string) => {
-    setForm((prev) => ({
-      ...prev,
-      productos: prev.productos.includes(product)
+    setForm((prev) => {
+      const isSelected = prev.productos.includes(product)
+      const productos = isSelected
         ? prev.productos.filter((p) => p !== product)
-        : [...prev.productos, product],
-    }))
+        : [...prev.productos, product]
+
+      return {
+        ...prev,
+        productos,
+        productoOtro: product === 'Otro' && isSelected ? '' : prev.productoOtro,
+      }
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,6 +64,18 @@ export function HorecaSection() {
 
     if (!privacyAccepted) {
       setErrorMessage('Debes autorizar el tratamiento de datos personales para continuar.')
+      setStatus('error')
+      return
+    }
+
+    if (form.tipoNegocio === 'Otro' && !form.tipoNegocioOtro.trim()) {
+      setErrorMessage('Indica cuál es el tipo de negocio.')
+      setStatus('error')
+      return
+    }
+
+    if (form.productos.includes('Otro') && !form.productoOtro.trim()) {
+      setErrorMessage('Indica qué otro producto o servicio te interesa.')
       setStatus('error')
       return
     }
@@ -77,12 +97,12 @@ export function HorecaSection() {
   }
 
   return (
-    <AnimatedSection className="py-16 md:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-12 md:space-y-16">
-        <FadeIn>
-          <div className="rounded-2xl md:rounded-3xl overflow-hidden bg-colbeef-green-darker border border-colbeef-green-light/20 shadow-2xl">
-            <div className="grid lg:grid-cols-2 min-h-[420px]">
-              <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center">
+    <AnimatedSection className="bg-white">
+      <FadeIn>
+        <div className="w-full bg-colbeef-green-darker overflow-hidden">
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] min-h-[420px] lg:min-h-[480px]">
+            <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16 py-8 md:py-10 lg:py-12 flex flex-col justify-center items-start">
+              <div className="w-full max-w-xl lg:max-w-2xl">
                 <Logo size="md" className="mb-6" />
 
                 <p className="text-white/60 text-[10px] font-bold tracking-[0.2em] uppercase mb-3">
@@ -95,7 +115,7 @@ export function HorecaSection() {
                 <p className="text-colbeef-green-light text-3xl sm:text-4xl md:text-5xl font-bold uppercase mb-4">
                   Horeca
                 </p>
-                <p className="text-white/75 text-sm md:text-base leading-relaxed mb-8 max-w-lg">
+                <p className="text-white/75 text-sm md:text-base leading-relaxed mb-8">
                   Calidad, rendimiento y servicio para hoteles, restaurantes, cafeterías y catering de alto nivel.
                 </p>
 
@@ -117,26 +137,28 @@ export function HorecaSection() {
                   })}
                 </div>
               </div>
+            </div>
 
-              <div className="relative min-h-[240px] lg:min-h-0">
-                <img
-                  src={images.horecaBanner}
-                  alt="Chef profesional preparando carne Colbeef"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-colbeef-green-darker/80 via-colbeef-green-darker/20 to-transparent lg:from-colbeef-green-darker/60 lg:via-transparent" />
-              </div>
+            <div className="relative min-h-[280px] lg:min-h-full">
+              <img
+                src={images.horecaBanner}
+                alt="Chef profesional preparando carne premium Colbeef"
+                className="absolute inset-0 w-full h-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-colbeef-green-darker via-colbeef-green-darker/50 to-transparent lg:from-colbeef-green-darker/95 lg:via-colbeef-green-darker/25 lg:to-transparent" />
             </div>
           </div>
-        </FadeIn>
+        </div>
+      </FadeIn>
 
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-10 md:py-12">
         <FadeIn delay={0.1}>
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-8 md:mb-10">
-              <h3 className="text-colbeef-green text-xl sm:text-2xl font-bold uppercase tracking-wide mb-5">
+          <div>
+            <div className="mb-5 md:mb-6">
+              <h3 className="text-colbeef-green text-lg sm:text-xl font-bold uppercase tracking-wide mb-2 md:mb-3">
                 Solicita información para el canal Horeca
               </h3>
-              <p className="text-colbeef-gray text-sm md:text-base leading-relaxed text-left sm:text-center">
+              <p className="text-colbeef-gray text-xs sm:text-sm leading-relaxed max-w-4xl">
                 {horecaIntroText}
               </p>
             </div>
@@ -145,7 +167,7 @@ export function HorecaSection() {
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="rounded-2xl border border-colbeef-green/30 bg-colbeef-green-pale p-8 text-center"
+                className="rounded-xl border border-colbeef-green/30 bg-colbeef-green-pale p-6 text-center"
               >
                 <p className="text-colbeef-green font-bold text-lg mb-2">¡Solicitud enviada!</p>
                 <p className="text-colbeef-gray text-sm leading-relaxed">
@@ -154,14 +176,14 @@ export function HorecaSection() {
                 <button
                   type="button"
                   onClick={() => setStatus('idle')}
-                  className="mt-6 text-colbeef-green text-xs font-semibold uppercase tracking-widest hover:underline"
+                  className="mt-4 text-colbeef-green text-xs font-semibold uppercase tracking-widest hover:underline"
                 >
                   Enviar otra solicitud
                 </button>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
                   <div>
                     <label htmlFor="horeca-nombre" className={labelClass}>
                       Nombre completo <span className="text-colbeef-red">*</span>
@@ -203,14 +225,20 @@ export function HorecaSection() {
                     />
                   </div>
 
-                  <div>
+                  <div className={form.tipoNegocio === 'Otro' ? 'sm:col-span-2 lg:col-span-1' : ''}>
                     <label htmlFor="horeca-tipo" className={labelClass}>
                       Tipo de negocio
                     </label>
                     <select
                       id="horeca-tipo"
                       value={form.tipoNegocio}
-                      onChange={(e) => setForm({ ...form, tipoNegocio: e.target.value })}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          tipoNegocio: e.target.value,
+                          tipoNegocioOtro: e.target.value === 'Otro' ? form.tipoNegocioOtro : '',
+                        })
+                      }
                       className={`${inputClass} bg-white`}
                     >
                       <option value="">Seleccione una opción</option>
@@ -221,6 +249,23 @@ export function HorecaSection() {
                       ))}
                     </select>
                   </div>
+
+                  {form.tipoNegocio === 'Otro' && (
+                    <div className="sm:col-span-2 lg:col-span-2">
+                      <label htmlFor="horeca-tipo-otro" className={labelClass}>
+                        Especifique el tipo de negocio <span className="text-colbeef-red">*</span>
+                      </label>
+                      <input
+                        id="horeca-tipo-otro"
+                        type="text"
+                        required
+                        value={form.tipoNegocioOtro}
+                        onChange={(e) => setForm({ ...form, tipoNegocioOtro: e.target.value })}
+                        placeholder="Ej: Comedor empresarial, dark kitchen..."
+                        className={inputClass}
+                      />
+                    </div>
+                  )}
 
                   <div>
                     <label htmlFor="horeca-ciudad" className={labelClass}>
@@ -276,36 +321,36 @@ export function HorecaSection() {
                       className={inputClass}
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label htmlFor="horeca-consumo" className={labelClass}>
-                    Número aproximado de porciones o consumo mensual
-                  </label>
-                  <select
-                    id="horeca-consumo"
-                    value={form.consumoMensual}
-                    onChange={(e) => setForm({ ...form, consumoMensual: e.target.value })}
-                    className={`${inputClass} bg-white`}
-                  >
-                    <option value="">Seleccione una opción</option>
-                    {horecaConsumptionOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="sm:col-span-2 lg:col-span-1">
+                    <label htmlFor="horeca-consumo" className={labelClass}>
+                      Consumo mensual aproximado
+                    </label>
+                    <select
+                      id="horeca-consumo"
+                      value={form.consumoMensual}
+                      onChange={(e) => setForm({ ...form, consumoMensual: e.target.value })}
+                      className={`${inputClass} bg-white`}
+                    >
+                      <option value="">Seleccione una opción</option>
+                      {horecaConsumptionOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 <fieldset>
-                  <legend className={`${labelClass} mb-3`}>
+                  <legend className={`${labelClass} mb-2`}>
                     ¿Qué productos o servicios le interesan?
                   </legend>
-                  <div className="grid sm:grid-cols-2 gap-3">
+                  <div className="flex flex-wrap gap-2">
                     {horecaProductOptions.map((product) => (
                       <label
                         key={product}
-                        className="flex items-center gap-3 rounded-lg border border-gray-200 px-4 py-3 cursor-pointer hover:border-colbeef-green/40 transition-colors has-[:checked]:border-colbeef-green has-[:checked]:bg-colbeef-green-pale/50"
+                        className="inline-flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 cursor-pointer hover:border-colbeef-green/40 transition-colors has-[:checked]:border-colbeef-green has-[:checked]:bg-colbeef-green-pale/50"
                       >
                         <input
                           type="checkbox"
@@ -313,45 +358,64 @@ export function HorecaSection() {
                           onChange={() => toggleProduct(product)}
                           className="w-4 h-4 accent-colbeef-green"
                         />
-                        <span className="text-sm text-colbeef-dark">{product}</span>
+                        <span className="text-xs sm:text-sm text-colbeef-dark whitespace-nowrap">{product}</span>
                       </label>
                     ))}
                   </div>
+
+                  {form.productos.includes('Otro') && (
+                    <div className="mt-3 max-w-md">
+                      <label htmlFor="horeca-producto-otro" className={labelClass}>
+                        Especifique el producto o servicio <span className="text-colbeef-red">*</span>
+                      </label>
+                      <input
+                        id="horeca-producto-otro"
+                        type="text"
+                        required
+                        value={form.productoOtro}
+                        onChange={(e) => setForm({ ...form, productoOtro: e.target.value })}
+                        placeholder="Ej: Cuartos traseros, menudencias..."
+                        className={inputClass}
+                      />
+                    </div>
+                  )}
                 </fieldset>
 
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    required
-                    checked={privacyAccepted}
-                    onChange={(e) => setPrivacyAccepted(e.target.checked)}
-                    className="w-4 h-4 mt-0.5 accent-colbeef-green shrink-0"
-                  />
-                  <span className="text-sm text-colbeef-gray leading-relaxed">
-                    Autorizo el tratamiento de mis datos personales conforme a la{' '}
-                    <Link to="/corporativo/gobierno-corporativo" className="text-colbeef-green font-semibold underline">
-                      Política de Tratamiento de Datos de COLBEEF
-                    </Link>
-                    .
-                  </span>
-                </label>
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pt-1">
+                  <label className="flex items-start gap-2.5 cursor-pointer lg:max-w-2xl">
+                    <input
+                      type="checkbox"
+                      required
+                      checked={privacyAccepted}
+                      onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                      className="w-4 h-4 mt-0.5 accent-colbeef-green shrink-0"
+                    />
+                    <span className="text-xs sm:text-sm text-colbeef-gray leading-snug">
+                      Autorizo el tratamiento de mis datos personales conforme a la{' '}
+                      <Link to="/corporativo/gobierno-corporativo" className="text-colbeef-green font-semibold underline">
+                        Política de Tratamiento de Datos de COLBEEF
+                      </Link>
+                      .
+                    </span>
+                  </label>
+
+                  <motion.button
+                    type="submit"
+                    disabled={status === 'loading'}
+                    whileHover={{ scale: status === 'loading' ? 1 : 1.02 }}
+                    whileTap={{ scale: status === 'loading' ? 1 : 0.98 }}
+                    className="w-full lg:w-auto lg:min-w-[220px] shrink-0 bg-colbeef-green text-white py-2.5 px-6 text-sm font-semibold tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-colbeef-green-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed rounded-lg shadow-lg shadow-colbeef-green/15"
+                  >
+                    {status === 'loading' ? 'Enviando...' : 'Enviar solicitud'}
+                    <Send className="w-4 h-4" />
+                  </motion.button>
+                </div>
 
                 {status === 'error' && errorMessage && (
                   <p className="text-colbeef-red text-sm text-center" role="alert">
                     {errorMessage}
                   </p>
                 )}
-
-                <motion.button
-                  type="submit"
-                  disabled={status === 'loading'}
-                  whileHover={{ scale: status === 'loading' ? 1 : 1.02 }}
-                  whileTap={{ scale: status === 'loading' ? 1 : 0.98 }}
-                  className="w-full bg-colbeef-green text-white py-3.5 text-sm font-semibold tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-colbeef-green-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed rounded-lg shadow-lg shadow-colbeef-green/15"
-                >
-                  {status === 'loading' ? 'Enviando...' : 'Enviar solicitud'}
-                  <Send className="w-4 h-4" />
-                </motion.button>
               </form>
             )}
           </div>
