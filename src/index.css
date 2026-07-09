@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+@theme {
+  --color-colbeef-green: #1a823d;
+  --color-colbeef-green-dark: #0d3d1f;
+  --color-colbeef-green-darker: #052412;
+  --color-colbeef-green-light: #2e9d52;
+  --color-colbeef-green-pale: #e8f5ec;
+  --color-colbeef-red: #d32f2f;
+  --color-colbeef-red-dark: #b71c1c;
+  --color-colbeef-gold: #d4af37;
+  --color-colbeef-cream: #f7f5f0;
+  --color-colbeef-gray: #6b7280;
+  --color-colbeef-dark: #1a1a1a;
+  --font-sans: "Montserrat", system-ui, sans-serif;
+  --font-display: "Montserrat", system-ui, sans-serif;
+  --header-height: 4.5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-colbeef-dark);
+  background: #fff;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.pt-header {
+  padding-top: var(--header-height);
+}
+
+::selection {
+  background: var(--color-colbeef-green);
+  color: white;
+}
+
+.overlay-hero {
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 36, 18, 0.3) 0%,
+    rgba(5, 36, 18, 0.55) 100%
+  );
+}
+
+.torn-edge-top {
+  clip-path: polygon(
+    0% 12px,
+    3% 0%,
+    7% 10px,
+    11% 2px,
+    15% 12px,
+    19% 0%,
+    23% 10px,
+    27% 2px,
+    31% 12px,
+    35% 0%,
+    39% 10px,
+    43% 2px,
+    47% 12px,
+    51% 0%,
+    55% 10px,
+    59% 2px,
+    63% 12px,
+    67% 0%,
+    71% 10px,
+    75% 2px,
+    79% 12px,
+    83% 0%,
+    87% 10px,
+    91% 2px,
+    95% 12px,
+    100% 0%,
+    100% 100%,
+    0% 100%
+  );
+}
+
+.torn-edge-bottom {
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% calc(100% - 12px),
+    97% 100%,
+    93% calc(100% - 10px),
+    89% 100%,
+    85% calc(100% - 12px),
+    81% 100%,
+    77% calc(100% - 10px),
+    73% 100%,
+    69% calc(100% - 12px),
+    65% 100%,
+    61% calc(100% - 10px),
+    57% 100%,
+    53% calc(100% - 12px),
+    49% 100%,
+    45% calc(100% - 10px),
+    41% 100%,
+    37% calc(100% - 12px),
+    33% 100%,
+    29% calc(100% - 10px),
+    25% 100%,
+    21% calc(100% - 12px),
+    17% 100%,
+    13% calc(100% - 10px),
+    9% 100%,
+    5% calc(100% - 12px),
+    0% 100%
+  );
+}
+
+.carousel-3d-scene {
+  --carousel-card-w: clamp(150px, 38vw, 320px);
+  --carousel-card-h: clamp(195px, 49vw, 410px);
+  --carousel-radius: clamp(185px, 44vw, 460px);
+  --carousel-duration: 32s;
+  height: clamp(260px, 58vmin, 560px);
+  perspective: clamp(800px, 90vw, 1400px);
+  perspective-origin: 50% 42%;
+}
+
+@media (min-width: 480px) {
+  .carousel-3d-scene {
+    --carousel-card-w: clamp(175px, 34vw, 320px);
+    --carousel-card-h: clamp(225px, 44vw, 410px);
+    --carousel-radius: clamp(210px, 40vw, 460px);
+  }
+}
+
+@media (min-width: 768px) {
+  .carousel-3d-scene {
+    --carousel-card-w: clamp(220px, 28vw, 320px);
+    --carousel-card-h: clamp(285px, 36vw, 410px);
+    --carousel-radius: clamp(270px, 34vw, 460px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-3d-scene {
+    --carousel-card-w: clamp(260px, 22vw, 320px);
+    --carousel-card-h: clamp(335px, 28vw, 410px);
+    --carousel-radius: clamp(320px, 28vw, 460px);
+  }
+}
+
+@media (min-width: 1536px) {
+  .carousel-3d-scene {
+    --carousel-card-w: 320px;
+    --carousel-card-h: 410px;
+    --carousel-radius: 460px;
+    height: 560px;
+  }
+}
+
+@keyframes carousel-3d-spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.carousel-3d-ring {
+  transform-style: preserve-3d;
+  animation: carousel-3d-spin var(--carousel-duration) linear infinite;
+  will-change: transform;
+}
+
+.carousel-3d-face {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
