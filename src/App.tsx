@@ -15,9 +15,11 @@ import { CertificacionesPage } from './pages/corporativo/CertificacionesPage'
 import { GobiernoCorporativoPage } from './pages/corporativo/GobiernoCorporativoPage'
 import { ContactoPage } from './pages/ContactoPage'
 
+const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, '')
+
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={routerBasename}>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />

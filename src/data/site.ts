@@ -1,5 +1,6 @@
 import { icons, images } from './assets'
 import { footerCorporativo } from './navigation'
+import { assetUrl } from '../utils/assetUrl'
 
 export {
   navLinks,
@@ -42,9 +43,9 @@ export const heroSlides = [
 ]
 
 export const certifications = [
-  { id: 'haccp', name: 'HACCP', image: '/assets/corporativo/certificaciones/todos-certificados.png' },
-  { id: 'iso', name: 'ISO 22000', image: '/assets/corporativo/certificaciones/todos-certificados.png' },
-  { id: 'invima', name: 'Invima', image: '/assets/corporativo/certificaciones/invima-sello.png' },
+  { id: 'haccp', name: 'HACCP', image: assetUrl('/assets/corporativo/certificaciones/todos-certificados.png') },
+  { id: 'iso', name: 'ISO 22000', image: assetUrl('/assets/corporativo/certificaciones/todos-certificados.png') },
+  { id: 'invima', name: 'Invima', image: assetUrl('/assets/corporativo/certificaciones/invima-sello.png') },
 ]
 
 export const footerProducts = [

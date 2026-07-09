@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Award, Send, Shield, Snowflake, Truck } from 'lucide-react'
 import { images } from '../../data/assets'
@@ -328,9 +329,9 @@ export function HorecaSection() {
                   />
                   <span className="text-sm text-colbeef-gray leading-relaxed">
                     Autorizo el tratamiento de mis datos personales conforme a la{' '}
-                    <a href="/corporativo/gobierno-corporativo" className="text-colbeef-green font-semibold underline">
+                    <Link to="/corporativo/gobierno-corporativo" className="text-colbeef-green font-semibold underline">
                       Política de Tratamiento de Datos de COLBEEF
-                    </a>
+                    </Link>
                     .
                   </span>
                 </label>
