@@ -31,7 +31,7 @@ export function AboutSection() {
               ))}
             </div>
 
-            <Button to="/corporativo/nosotros" showArrow>
+            <Button to="/corporativo/filosofia" showArrow>
               Ver más
             </Button>
           </FadeIn>

@@ -1,133 +1,106 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, ChevronRight } from 'lucide-react'
-import { familiaColbeef, filosofiaTabs, valoresCorporativos } from '../../data/nosotros'
-import { corporativo, brand } from '../../data/assets'
+import { motion } from 'framer-motion'
+import { Eye, Target } from 'lucide-react'
+import { familiaColbeef, filosofiaTabs } from '../../data/nosotros'
+import { corporativo } from '../../data/assets'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
+import { ValoresFlipSection } from './ValoresFlipSection'
+
+const filosofiaItems = filosofiaTabs.filter((tab) => tab.id === 'mision' || tab.id === 'vision')
+
+const itemIcons = {
+  mision: Target,
+  vision: Eye,
+} as const
 
 export function FilosofiaSection() {
-  const [openId, setOpenId] = useState<string>('mision')
-  const [activeSidebar, setActiveSidebar] = useState<string>('mision')
-
-  const scrollToAccordion = (id: string) => {
-    setActiveSidebar(id)
-    setOpenId(id)
-    const el = document.getElementById(`filosofia-${id}`)
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 120
-      window.scrollTo({ top, behavior: 'smooth' })
-    }
-  }
-
   return (
     <AnimatedSection className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="grid lg:grid-cols-12 gap-10">
-          <FadeIn className="lg:col-span-3 hidden lg:block">
-            <div className="bg-gray-100 rounded-2xl p-6 sticky top-28">
-              <h3 className="text-colbeef-green font-bold text-sm tracking-widest uppercase mb-6">
-                Filosofía
-              </h3>
-              <nav className="space-y-3">
-                {filosofiaTabs.map((tab) => (
-                  <button
-                    key={tab.id}
-                    type="button"
-                    onClick={() => scrollToAccordion(tab.id)}
-                    className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all ${
-                      activeSidebar === tab.id
-                        ? 'bg-colbeef-green text-white'
-                        : 'bg-colbeef-green-darker text-white/80 hover:bg-colbeef-green'
-                    }`}
-                  >
-                    {tab.label}
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                ))}
-              </nav>
-            </div>
-          </FadeIn>
+        <FadeIn className="text-center mb-10 md:mb-14">
+          <p className="text-colbeef-green text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-3">
+            Corporativo
+          </p>
+          <h2 className="text-colbeef-dark text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wide">
+            Filosofía
+          </h2>
+        </FadeIn>
 
-          <div className="lg:col-span-9 space-y-4">
-            {filosofiaTabs.map((tab, i) => (
-              <div key={tab.id} id={`filosofia-${tab.id}`}>
-                <FadeIn delay={i * 0.08}>
-                <div className="border border-colbeef-green/10 rounded-2xl overflow-hidden">
-                  <button
-                    type="button"
-                    onClick={() => setOpenId(openId === tab.id ? '' : tab.id)}
-                    className="w-full flex items-center justify-between bg-colbeef-green text-white px-6 py-4 text-left"
-                  >
-                    <span className="font-bold text-sm md:text-base break-words pr-2">{tab.title}</span>
-                    <ChevronDown
-                      className={`w-5 h-5 transition-transform ${openId === tab.id ? 'rotate-180' : ''}`}
-                    />
-                  </button>
-                  <AnimatePresence initial={false}>
-                    {openId === tab.id && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
-                      >
-                        <p className="px-6 py-5 text-colbeef-gray text-sm md:text-base leading-relaxed bg-white">
-                          {tab.content}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-                </FadeIn>
-              </div>
-            ))}
-          </div>
-        </div>
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-16">
+          {filosofiaItems.map((item, index) => {
+            const Icon = itemIcons[item.id as keyof typeof itemIcons]
 
-        <div className="mt-16">
-          <div
-            className="relative rounded-2xl overflow-hidden p-6 md:p-10 mb-8"
-            style={{
-              backgroundImage: `url(${corporativo.filosofia.fondoValores})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          >
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {valoresCorporativos.map((valor, i) => (
-                <FadeIn key={valor.name} delay={i * 0.05}>
-                  <div className="bg-colbeef-green/85 backdrop-blur-sm border border-white/30 rounded-xl p-5 text-white h-full">
-                    <h4 className="font-bold text-xs tracking-wider uppercase mb-2">{valor.name}</h4>
-                    <p className="text-white/80 text-xs leading-relaxed">{valor.description}</p>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
+            return (
+              <motion.article
+                key={item.id}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.12, duration: 0.45 }}
+                whileHover={{ y: -6 }}
+                className="group relative overflow-hidden rounded-2xl border border-colbeef-green/15 bg-gradient-to-br from-white to-[#d4edda]/40 p-6 sm:p-8 shadow-sm hover:shadow-lg hover:border-colbeef-green/35 transition-shadow duration-300"
+              >
+                <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-colbeef-green/5 transition-transform duration-500 group-hover:scale-125" />
 
-          <div className="grid md:grid-cols-2 rounded-2xl overflow-hidden shadow-lg">
-            <div className="bg-colbeef-green-darker p-8 md:p-12 flex flex-col justify-center">
-              <img
-                src={brand.logo}
-                alt="Colbeef"
-                className="h-12 md:h-14 w-auto object-contain mb-4"
-              />
-              <p className="text-white font-bold text-sm md:text-base tracking-wide uppercase leading-relaxed">
-                Trabajamos unidos para generar{' '}
-                <span className="text-colbeef-green-light">confianza, calidad y progreso.</span>
-              </p>
-            </div>
-            <div className="bg-colbeef-green p-8 md:p-12 space-y-4">
-              <p className="text-white/90 text-sm leading-relaxed">{familiaColbeef.intro}</p>
-              {familiaColbeef.paragraphs.map((p) => (
-                <p key={p.slice(0, 24)} className="text-white/80 text-sm leading-relaxed">
-                  {p}
+                <motion.div
+                  className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-colbeef-green text-white shadow-md"
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{
+                    duration: 2.8,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: index * 0.3,
+                  }}
+                  whileHover={{ scale: 1.08, rotate: [0, -6, 6, 0] }}
+                >
+                  <Icon className="h-7 w-7" strokeWidth={1.75} />
+                </motion.div>
+
+                <h3 className="text-colbeef-green text-xl sm:text-2xl font-bold uppercase tracking-wide mb-4">
+                  {item.title}
+                </h3>
+
+                <p className="text-colbeef-gray text-sm md:text-base leading-relaxed">
+                  {item.content}
                 </p>
-              ))}
+
+                <div className="mt-6 h-1 w-16 rounded-full bg-colbeef-green/30 transition-all duration-300 group-hover:w-28 group-hover:bg-colbeef-green" />
+              </motion.article>
+            )
+          })}
+        </div>
+
+        <ValoresFlipSection />
+
+        <FadeIn>
+          <div className="rounded-2xl overflow-hidden shadow-xl">
+            <div className="grid md:grid-cols-2 min-h-[340px] lg:min-h-[420px]">
+              <div className="relative min-h-[280px] md:min-h-full bg-colbeef-green-darker">
+                <img
+                  src={corporativo.filosofia.familiaColbeef}
+                  alt="Familia Colbeef"
+                  className="absolute inset-0 w-full h-full object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-colbeef-green-darker via-colbeef-green-darker/55 to-colbeef-green-darker/10" />
+                <div className="absolute inset-0 bg-gradient-to-r from-colbeef-green-darker/70 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-l from-colbeef-green/40 via-transparent to-transparent md:from-colbeef-green/30" />
+
+                <p className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-6 text-white font-bold text-xs sm:text-sm md:text-base tracking-wide uppercase leading-snug max-w-[95%]">
+                  Trabajamos unidos para generar{' '}
+                  <span className="text-colbeef-green-light">confianza, calidad y progreso.</span>
+                </p>
+              </div>
+
+              <div className="bg-colbeef-green p-6 sm:p-8 md:p-10 lg:p-12 space-y-4 flex flex-col justify-center">
+                <p className="text-white/90 text-sm leading-relaxed">{familiaColbeef.intro}</p>
+                {familiaColbeef.paragraphs.map((p) => (
+                  <p key={p.slice(0, 24)} className="text-white/80 text-sm leading-relaxed">
+                    {p}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        </FadeIn>
       </div>
     </AnimatedSection>
   )

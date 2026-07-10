@@ -5,5 +5,5 @@ export const compromisoProcesoContent = {
   image: '/assets/images/servicios/compromiso-proceso.jpg',
   imageAlt: 'Instalaciones de Colbeef con paneles solares',
   ctaLabel: 'Conozca más sobre Colbeef',
-  ctaHref: '/corporativo/nosotros',
+  ctaHref: '/corporativo/filosofia',
 }

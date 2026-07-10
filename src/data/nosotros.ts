@@ -1,5 +1,4 @@
 export const nosotrosDropdown = [
-  { label: 'Nosotros', href: '/corporativo/nosotros' },
   { label: 'Filosofía', href: '/corporativo/filosofia' },
   { label: 'Historia', href: '/corporativo/historia' },
   { label: 'Certificaciones', href: '/corporativo/certificaciones' },

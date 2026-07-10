@@ -4,10 +4,9 @@ import { HomePage } from './pages/HomePage'
 import { ProductosPage } from './pages/ProductosPage'
 import { CortesPage } from './pages/productos/CortesPage'
 import { SubproductosPage } from './pages/productos/SubproductosPage'
-import { defaultServiceHref } from './data/navigation'
+import { defaultCorporativoHref, defaultServiceHref } from './data/navigation'
 import { ServiceDetailPage } from './pages/servicios/ServiceDetailPage'
 import { SostenibilidadIndexPage } from './pages/sostenibilidad/SostenibilidadIndexPage'
-import { CorporativoNosotrosPage } from './pages/corporativo/CorporativoNosotrosPage'
 import { CorporativoHistoriaPage } from './pages/corporativo/CorporativoHistoriaPage'
 import { FilosofiaPage } from './pages/corporativo/FilosofiaPage'
 import { CertificacionesPage } from './pages/corporativo/CertificacionesPage'
@@ -33,17 +32,17 @@ export default function App() {
           <Route path="/sostenibilidad" element={<SostenibilidadIndexPage />} />
           <Route path="/sostenibilidad/:slug" element={<Navigate to="/sostenibilidad" replace />} />
 
-          <Route path="/corporativo/nosotros" element={<CorporativoNosotrosPage />} />
           <Route path="/corporativo/historia" element={<CorporativoHistoriaPage />} />
           <Route path="/corporativo/filosofia" element={<FilosofiaPage />} />
           <Route path="/corporativo/certificaciones" element={<CertificacionesPage />} />
           <Route path="/corporativo/gobierno-corporativo" element={<GobiernoCorporativoPage />} />
-          <Route path="/corporativo" element={<Navigate to="/corporativo/nosotros" replace />} />
+          <Route path="/corporativo" element={<Navigate to={defaultCorporativoHref} replace />} />
+          <Route path="/corporativo/nosotros" element={<Navigate to={defaultCorporativoHref} replace />} />
 
           <Route path="/contacto" element={<ContactoPage />} />
 
           {/* Redirecciones anteriores */}
-          <Route path="/nosotros" element={<Navigate to="/corporativo/nosotros" replace />} />
+          <Route path="/nosotros" element={<Navigate to={defaultCorporativoHref} replace />} />
           <Route path="/nosotros/filosofia" element={<Navigate to="/corporativo/filosofia" replace />} />
           <Route path="/nosotros/sostenibilidad" element={<Navigate to="/sostenibilidad" replace />} />
           <Route path="/nosotros/certificaciones" element={<Navigate to="/corporativo/certificaciones" replace />} />

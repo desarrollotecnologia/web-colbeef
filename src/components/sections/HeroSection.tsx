@@ -40,12 +40,12 @@ export function HeroSection() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Banner central */}
+      {/* Banner inferior */}
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="absolute top-[38%] sm:top-1/3 left-0 right-0 z-10 flex justify-center px-4"
+        className="absolute bottom-14 sm:bottom-16 md:bottom-20 left-0 right-0 z-10 flex justify-center px-4"
       >
         <div className="bg-colbeef-green/90 backdrop-blur-sm px-4 sm:px-6 md:px-12 py-2.5 sm:py-3 md:py-4 max-w-[95vw]">
           <p className="text-white text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.15em] sm:tracking-[0.25em] uppercase text-center">

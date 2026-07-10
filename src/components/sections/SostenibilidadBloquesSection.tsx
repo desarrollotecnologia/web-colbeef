@@ -9,7 +9,7 @@ export function SostenibilidadBloquesSection() {
         <AnimatedSection
           key={bloque.id}
           className={`py-12 md:py-16 lg:py-20 ${
-            index % 2 === 0 ? 'bg-colbeef-green-pale/40' : 'bg-white'
+            index % 2 === 0 ? 'bg-[#d4edda]' : 'bg-white'
           }`}
         >
           <div className="max-w-7xl mx-auto px-4 md:px-8">

@@ -3,7 +3,7 @@ export const navLinks = [
   { label: 'PRODUCTOS', href: '/productos' },
   { label: 'SERVICIOS', href: '/servicios', dropdownOnly: true },
   { label: 'SOSTENIBILIDAD', href: '/sostenibilidad' },
-  { label: 'CORPORATIVO', href: '/corporativo' },
+  { label: 'CORPORATIVO', href: '/corporativo', dropdownOnly: true },
   { label: 'CONTACTO', href: '/contacto' },
 ] as const
 
@@ -14,6 +14,7 @@ export const dropdownOnlyNavHrefs = new Set<string>(
 )
 
 export const defaultServiceHref = '/servicios/pesaje-de-ganado'
+export const defaultCorporativoHref = '/corporativo/filosofia'
 
 export const navDropdowns: Record<string, { label: string; href: string }[]> = {
   '/productos': [
@@ -27,7 +28,6 @@ export const navDropdowns: Record<string, { label: string; href: string }[]> = {
     { label: 'Porcionado', href: '/servicios/porcionado' },
   ],
   '/corporativo': [
-    { label: 'Nosotros', href: '/corporativo/nosotros' },
     { label: 'Filosofía', href: '/corporativo/filosofia' },
     { label: 'Historia', href: '/corporativo/historia' },
     { label: 'Certificaciones', href: '/corporativo/certificaciones' },

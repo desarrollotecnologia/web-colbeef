@@ -6,6 +6,7 @@ const asset = assetUrl
 
 export const brand = {
   logo: asset('/assets/brand/logo-colbeef-transparent.png'),
+  logoWhite: asset('/assets/brand/logo-white-transparent.png'),
 } as const
 
 export const icons = {
@@ -64,6 +65,7 @@ export const corporativo = {
   filosofia: {
     banner: asset('/assets/corporativo/filosofia/banner-filosofia.png'),
     bannerFamilia: asset('/assets/corporativo/filosofia/banner-familia.png'),
+    familiaColbeef: asset('/assets/corporativo/filosofia/familia-colbeef.png'),
     fondoValores: asset('/assets/corporativo/filosofia/fondo-valores.png'),
     valoresIconos: asset('/assets/corporativo/filosofia/valores-iconos.png'),
     botonMision: asset('/assets/corporativo/filosofia/boton-mision.png'),

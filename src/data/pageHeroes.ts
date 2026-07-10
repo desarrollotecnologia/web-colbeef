@@ -24,12 +24,6 @@ export const subproductosHero: PageHeroContent = {
   features: 'Canales • Vísceras • Subproductos • Estándares de exportación',
 }
 
-export const nosotrosHero: PageHeroContent = {
-  badge: 'NOSOTROS',
-  headline: 'Líderes en la industria cárnica colombiana.',
-  features: 'Calidad • Inocuidad • Sostenibilidad • Innovación tecnológica',
-}
-
 export const historiaHero: PageHeroContent = {
   badge: 'HISTORIA',
   headline: 'Más de una década impulsando el sector cárnico.',
@@ -84,7 +78,6 @@ export function heroFromTitle(title: string, headline: string, features: string)
 }
 
 export const corporativoHeroByLabel: Record<string, PageHeroContent> = {
-  Nosotros: nosotrosHero,
   Historia: historiaHero,
   Filosofía: filosofiaHero,
   Certificaciones: certificacionesHero,

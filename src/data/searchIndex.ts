@@ -1,4 +1,4 @@
-import { defaultServiceHref } from './navigation'
+import { defaultCorporativoHref, defaultServiceHref } from './navigation'
 import { productCategories, beefCuts, desposteSections } from './products'
 import { servicePages, complementaryServices, serviciosPageContent } from './services'
 import { navLinks, footerProducts, footerServices, aboutParagraphs, certificationText } from './site'
@@ -42,7 +42,11 @@ export const searchIndex: SearchEntry[] = [
       link.href,
       link.label,
       `Página ${link.label} de Colbeef`,
-      link.href === '/servicios' ? defaultServiceHref : link.href,
+      link.href === '/servicios'
+        ? defaultServiceHref
+        : link.href === '/corporativo'
+          ? defaultCorporativoHref
+          : link.href,
     ),
   ),
   entry('home-about', 'Quiénes somos', aboutParagraphs.join(' '), '/'),
@@ -70,9 +74,9 @@ export const searchIndex: SearchEntry[] = [
   ),
   ...footerProducts.map((p) => entry(`fp-${p}`, p, 'Productos Colbeef', '/productos')),
   ...footerServices.map((s) => entry(`fs-${s}`, s, 'Servicios Colbeef', defaultServiceHref)),
-  entry('nosotros', 'Nosotros', somosContent.boldParagraphs.join(' '), '/corporativo/nosotros', 'somos historia'),
+  entry('nosotros', 'Nosotros', somosContent.boldParagraphs.join(' '), '/corporativo/filosofia', 'somos historia'),
   ...somosContent.paragraphs.map((p, i) =>
-    entry(`somos-${i}`, 'Somos Colbeef', p, '/corporativo/nosotros'),
+    entry(`somos-${i}`, 'Somos Colbeef', p, '/corporativo/filosofia'),
   ),
   ...nosotrosDropdown.map((item) =>
     entry(item.href, item.label, `Sección ${item.label} — Corporativo`, item.href),
