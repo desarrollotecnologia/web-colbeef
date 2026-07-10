@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react'
 import { beefCuts, desposteSections } from '../../data/products'
 import { images } from '../../data/assets'
 import { cortesHero } from '../../data/pageHeroes'
+import { CortesMapSection } from '../../components/productos/CortesMapSection'
 import { AnimatedSection } from '../../components/ui/AnimatedSection'
 import { PageHero } from '../../components/ui/PageHero'
 import { BrandIcon } from '../../components/ui/BrandIcon'
@@ -10,6 +11,8 @@ export function CortesPage() {
   return (
     <>
       <PageHero image={images.desposteTrabajador} alt="Cortes" content={cortesHero} />
+
+      <CortesMapSection />
 
       <AnimatedSection className="py-16 bg-colbeef-green-darker">
         <div className="max-w-7xl mx-auto px-4 md:px-8">

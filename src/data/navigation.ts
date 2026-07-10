@@ -1,6 +1,6 @@
 export const navLinks = [
   { label: 'INICIO', href: '/' },
-  { label: 'PRODUCTOS', href: '/productos' },
+  { label: 'PRODUCTOS', href: '/productos', dropdownOnly: true },
   { label: 'SERVICIOS', href: '/servicios', dropdownOnly: true },
   { label: 'SOSTENIBILIDAD', href: '/sostenibilidad' },
   { label: 'CORPORATIVO', href: '/corporativo', dropdownOnly: true },
@@ -15,6 +15,7 @@ export const dropdownOnlyNavHrefs = new Set<string>(
 
 export const defaultServiceHref = '/servicios/pesaje-de-ganado'
 export const defaultCorporativoHref = '/corporativo/filosofia'
+export const defaultProductosHref = '/productos/cortes'
 
 export const navDropdowns: Record<string, { label: string; href: string }[]> = {
   '/productos': [

@@ -43,6 +43,9 @@ export const images = {
   corte3: asset('/images/cortes/corte-3.jpg'),
   corte4: asset('/images/cortes/corte-4.jpg'),
   corte5: asset('/images/cortes/corte-5.jpg'),
+  cortesMapaBase: asset('/assets/images/cortes/cortes-mapa-base.jpg'),
+  cortesMapaOverlay: asset('/assets/images/cortes/cortes-mapa-overlay.jpg'),
+  corteFichaEjemplo: asset('/assets/images/cortes/fichas/corte-ejemplo.png'),
 } as const
 
 export const carouselCuts = [

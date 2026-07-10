@@ -51,7 +51,7 @@ export function Footer() {
             <ul className="space-y-2">
               {footerProducts.map((item) => (
                 <li key={item}>
-                  <Link to="/productos" className="text-white/65 text-sm hover:text-white transition-colors">
+                  <Link to="/productos/cortes" className="text-white/65 text-sm hover:text-white transition-colors">
                     {item}
                   </Link>
                 </li>

@@ -1,4 +1,4 @@
-import { defaultCorporativoHref, defaultServiceHref } from './navigation'
+import { defaultCorporativoHref, defaultProductosHref, defaultServiceHref } from './navigation'
 import { productCategories, beefCuts, desposteSections } from './products'
 import { servicePages, complementaryServices, serviciosPageContent } from './services'
 import { navLinks, footerProducts, footerServices, aboutParagraphs, certificationText } from './site'
@@ -47,7 +47,9 @@ export const searchIndex: SearchEntry[] = [
         ? defaultServiceHref
         : link.href === '/corporativo'
           ? defaultCorporativoHref
-          : link.href,
+          : link.href === '/productos'
+            ? defaultProductosHref
+            : link.href,
     ),
   ),
   entry('home-about', 'Quiénes somos', aboutParagraphs.join(' '), '/'),
@@ -73,7 +75,7 @@ export const searchIndex: SearchEntry[] = [
   ...beefCuts.traseros.map((cut) =>
     entry(`cut-tra-${cut}`, cut, 'Corte trasero bovino', '/productos/cortes', 'desposte cortes'),
   ),
-  ...footerProducts.map((p) => entry(`fp-${p}`, p, 'Productos Colbeef', '/productos')),
+  ...footerProducts.map((p) => entry(`fp-${p}`, p, 'Productos Colbeef', '/productos/cortes')),
   ...footerServices.map((s) => entry(`fs-${s}`, s, 'Servicios Colbeef', defaultServiceHref)),
   entry('nosotros', 'Nosotros', somosContent.boldParagraphs.join(' '), '/corporativo/filosofia', 'somos historia'),
   ...somosContent.paragraphs.map((p, i) =>
