@@ -1,5 +1,6 @@
-import { servicePages, complementaryServices, serviciosPageContent } from './services'
+import { defaultServiceHref } from './navigation'
 import { productCategories, beefCuts, desposteSections } from './products'
+import { servicePages, complementaryServices, serviciosPageContent } from './services'
 import { navLinks, footerProducts, footerServices, aboutParagraphs, certificationText } from './site'
 import {
   nosotrosDropdown,
@@ -37,7 +38,12 @@ function entry(
 
 export const searchIndex: SearchEntry[] = [
   ...navLinks.map((link) =>
-    entry(link.href, link.label, `Página ${link.label} de Colbeef`, link.href),
+    entry(
+      link.href,
+      link.label,
+      `Página ${link.label} de Colbeef`,
+      link.href === '/servicios' ? defaultServiceHref : link.href,
+    ),
   ),
   entry('home-about', 'Quiénes somos', aboutParagraphs.join(' '), '/'),
   entry('home-cert', 'Certificaciones', certificationText, '/'),
@@ -45,10 +51,10 @@ export const searchIndex: SearchEntry[] = [
     entry(`service-page-${slug}`, s.shortTitle, s.description, `/servicios/${slug}`, s.title),
   ),
   ...complementaryServices.map((s) =>
-    entry(`comp-${s.id}`, s.shortTitle, s.description, '/servicios', s.tags.join(' ')),
+    entry(`comp-${s.id}`, s.shortTitle, s.description, s.href, s.tags.join(' ')),
   ),
   ...serviciosPageContent.map((s, i) =>
-    entry(`serv-content-${i}`, s.title, s.description, '/servicios'),
+    entry(`serv-content-${i}`, s.title, s.description, defaultServiceHref),
   ),
   ...productCategories.map((p) =>
     entry(`product-${p.id}`, p.title, p.description, `/productos/${p.id === 'canales' ? 'subproductos' : p.id}`),
@@ -63,7 +69,7 @@ export const searchIndex: SearchEntry[] = [
     entry(`cut-tra-${cut}`, cut, 'Corte trasero bovino', '/productos/cortes', 'desposte cortes'),
   ),
   ...footerProducts.map((p) => entry(`fp-${p}`, p, 'Productos Colbeef', '/productos')),
-  ...footerServices.map((s) => entry(`fs-${s}`, s, 'Servicios Colbeef', '/servicios')),
+  ...footerServices.map((s) => entry(`fs-${s}`, s, 'Servicios Colbeef', defaultServiceHref)),
   entry('nosotros', 'Nosotros', somosContent.boldParagraphs.join(' '), '/corporativo/nosotros', 'somos historia'),
   ...somosContent.paragraphs.map((p, i) =>
     entry(`somos-${i}`, 'Somos Colbeef', p, '/corporativo/nosotros'),

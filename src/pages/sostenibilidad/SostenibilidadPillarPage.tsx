@@ -1,5 +1,6 @@
 import { Navigate, useParams } from 'react-router-dom'
 import { corporativo } from '../../data/assets'
+import { getSostenibilidadPillarHero } from '../../data/pageHeroes'
 import { sostenibilidadContent } from '../../data/nosotros'
 import { navDropdowns } from '../../data/navigation'
 import { NosotrosHero } from '../../components/nosotros/NosotrosHero'
@@ -37,7 +38,11 @@ export function SostenibilidadPillarPage() {
 
   return (
     <>
-      <NosotrosHero image={corporativo.sostenibilidad.banner} label={config.label} />
+      <NosotrosHero
+        image={corporativo.sostenibilidad.banner}
+        label={config.label}
+        content={getSostenibilidadPillarHero(config.label, pillar.description)}
+      />
 
       <AnimatedSection className="py-16 md:py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 md:px-8">

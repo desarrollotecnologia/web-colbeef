@@ -1,4 +1,4 @@
-export const horecaEmail = 'jefe.mercadeo@colbeef.com'
+export const horecaEmail = 'desarrollo.tecnologia@colbeef.com'
 
 export const horecaIntroText =
   'Sabemos que cada cocina requiere productos consistentes, entregas puntuales y un proveedor que responda con eficiencia. Por eso desarrollamos soluciones personalizadas que mejoran el rendimiento, optimizan los costos operativos y garantizan una experiencia superior para sus clientes.'

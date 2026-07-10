@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Award, Send, Shield, Snowflake, Truck } from 'lucide-react'
 import { images } from '../../data/assets'
 import {
+  horecaEmail,
   horecaBusinessTypes,
   horecaConsumptionOptions,
   horecaFeatures,
@@ -12,7 +13,7 @@ import {
   type HorecaFormData,
 } from '../../data/horeca'
 import { locationLabel } from '../../data/site'
-import { submitHorecaForm } from '../../utils/submitHorecaForm'
+import { buildHorecaMailtoBody, submitHorecaForm } from '../../utils/submitHorecaForm'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 import { Logo } from '../ui/Logo'
 
@@ -88,10 +89,12 @@ export function HorecaSection() {
       setStatus('success')
       setForm(emptyForm)
       setPrivacyAccepted(false)
-    } catch {
+    } catch (error) {
       setStatus('error')
       setErrorMessage(
-        'No pudimos enviar tu solicitud en este momento. Intenta de nuevo o escríbenos a jefe.mercadeo@colbeef.com',
+        error instanceof Error
+          ? error.message
+          : `No pudimos enviar tu solicitud en este momento. Intenta de nuevo o escríbenos a ${horecaEmail}`,
       )
     }
   }
@@ -412,9 +415,15 @@ export function HorecaSection() {
                 </div>
 
                 {status === 'error' && errorMessage && (
-                  <p className="text-colbeef-red text-sm text-center" role="alert">
-                    {errorMessage}
-                  </p>
+                  <div className="rounded-lg border border-colbeef-red/20 bg-red-50 px-4 py-3 text-center space-y-2" role="alert">
+                    <p className="text-colbeef-red text-sm">{errorMessage}</p>
+                    <a
+                      href={`mailto:${horecaEmail}?subject=${encodeURIComponent(`Solicitud canal HORECA — ${form.empresa || 'Colbeef'}`)}&body=${encodeURIComponent(buildHorecaMailtoBody(form))}`}
+                      className="inline-block text-colbeef-green text-sm font-semibold underline"
+                    >
+                      Enviar por correo manualmente
+                    </a>
+                  </div>
                 )}
               </form>
             )}

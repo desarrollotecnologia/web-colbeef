@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { images } from '../data/assets'
+import { serviciosHero } from '../data/pageHeroes'
 import { servicePages, serviciosPageContent } from '../data/services'
 import { navDropdowns } from '../data/navigation'
 import { AnimatedSection, FadeIn } from '../components/ui/AnimatedSection'
@@ -10,7 +11,7 @@ import { PageHero } from '../components/ui/PageHero'
 export function ServiciosPage() {
   return (
     <>
-      <PageHero image={images.beneficioLavado} label="Servicios" />
+      <PageHero image={images.beneficioLavado} alt="Servicios" content={serviciosHero} />
 
       <AnimatedSection className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-8">

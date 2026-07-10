@@ -1,5 +1,10 @@
 import { icons, images } from './assets'
+import type { PageHeroContent } from '../types/pageHero'
 
+const pesajeHeroImage = '/assets/images/servicios/pesaje-ganado.jpg'
+const beneficioHeroImage = '/assets/images/servicios/beneficio-hero.jpg'
+
+export type ServiceHeroContent = PageHeroContent
 export interface Service {
   id: string
   title: string
@@ -9,6 +14,8 @@ export interface Service {
   icon: string
   href: string
   video?: string
+  heroImage?: string
+  hero?: ServiceHeroContent
 }
 
 export const mainServices: Service[] = [
@@ -19,6 +26,12 @@ export const mainServices: Service[] = [
     description:
       'Garantizamos un proceso de recepción y pesaje de ganado respaldado por básculas certificadas y verificadas diariamente, asegurando precisión, confiabilidad y transparencia en cada operación.',
     image: images.panoramica,
+    heroImage: pesajeHeroImage,
+    hero: {
+      badge: 'PESAJE DE GANADO',
+      headline: 'La calidad comienza desde el origen.',
+      features: 'Infraestructura especializada • Bienestar Animal • Pesaje Certificado',
+    },
     icon: icons.ganado,
     href: '/servicios/pesaje-de-ganado',
   },
@@ -29,6 +42,12 @@ export const mainServices: Service[] = [
     description:
       'Producción en línea equipada con capacidad para procesar hasta 75 reses por hora, con capacidad de almacenamiento de más de 1000 canales.',
     image: images.beneficioLavado,
+    heroImage: beneficioHeroImage,
+    hero: {
+      badge: 'BENEFICIO',
+      headline: 'Procesamiento eficiente y certificado.',
+      features: 'Hasta 75 reses por hora • Almacenamiento • Calidad e inocuidad',
+    },
     icon: icons.beneficio,
     href: '/servicios/beneficio',
   },
@@ -39,6 +58,11 @@ export const mainServices: Service[] = [
     description:
       'Planta equipada para procesar 180 canales por turno, con capacidad de almacenamiento de 75 toneladas refrigeradas y 7 toneladas congeladas.',
     image: images.desposteTrabajador,
+    hero: {
+      badge: 'DESPOSTE',
+      headline: 'Precisión y capacidad en cada turno.',
+      features: '180 canales por turno • Refrigeración • Congelación',
+    },
     icon: icons.desposte,
     href: '/servicios/desposte',
   },
@@ -49,6 +73,11 @@ export const mainServices: Service[] = [
     description:
       'Procesamiento de diferentes cortes empacados en termoformado o al vacío de acuerdo a las necesidades de su negocio.',
     image: images.lineaProcesamiento,
+    hero: {
+      badge: 'PORCIONADO',
+      headline: 'Cortes listos para su negocio.',
+      features: 'Termoformado • Empaque al vacío • Soluciones a medida',
+    },
     icon: icons.porcionado,
     href: '/servicios/porcionado',
   },
@@ -79,7 +108,7 @@ export const complementaryServices: ComplementaryService[] = [
       'Con los nuevos modelos de comercialización de productos cárnicos las plantas de beneficio deben garantizar el abastecimiento de ganado bovino con los más altos estándares de calidad.',
     image: images.img5280,
     icon: icons.ganado,
-    href: '/servicios',
+    href: '/servicios/pesaje-de-ganado',
   },
   {
     id: 'congelacion',
@@ -90,7 +119,7 @@ export const complementaryServices: ComplementaryService[] = [
       'Los cuartos de conservación de producto congelado cuentan con modernos sistemas que garantizan temperaturas de -18 grados y permiten asegurar la calidad del producto.',
     image: images.canales,
     icon: icons.desposte,
-    href: '/servicios',
+    href: '/servicios/beneficio',
   },
 ]
 
@@ -99,6 +128,16 @@ export const servicePages: Record<string, Service> = {
   beneficio: mainServices.find((s) => s.id === 'beneficio')!,
   desposte: mainServices.find((s) => s.id === 'desposte')!,
   porcionado: mainServices.find((s) => s.id === 'porcionado')!,
+}
+
+export function getServiceHeroContent(service: Service): PageHeroContent {
+  if (service.hero) return service.hero
+
+  return {
+    badge: service.title,
+    headline: service.shortTitle,
+    features: service.description,
+  }
 }
 
 export const serviceTabs = ['PESAJE', 'PLANILLAJE', 'CORRALES PESAJE', 'ASESORÍAS']

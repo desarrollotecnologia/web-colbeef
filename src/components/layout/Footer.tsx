@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
+import { footerServiciosNav } from '../../data/navigation'
 import {
   contactInfo,
   footerNosotros,
   footerProducts,
-  footerServices,
   socialLinks,
 } from '../../data/site'
 import { FadeIn } from '../ui/AnimatedSection'
@@ -79,10 +79,10 @@ export function Footer() {
               Servicios
             </h4>
             <ul className="space-y-2">
-              {footerServices.map((item) => (
-                <li key={item}>
-                  <Link to="/servicios" className="text-white/65 text-sm hover:text-white transition-colors">
-                    {item}
+              {footerServiciosNav.map((item) => (
+                <li key={item.href}>
+                  <Link to={item.href} className="text-white/65 text-sm hover:text-white transition-colors">
+                    {item.label}
                   </Link>
                 </li>
               ))}

@@ -1,11 +1,19 @@
 export const navLinks = [
   { label: 'INICIO', href: '/' },
   { label: 'PRODUCTOS', href: '/productos' },
-  { label: 'SERVICIOS', href: '/servicios' },
+  { label: 'SERVICIOS', href: '/servicios', dropdownOnly: true },
   { label: 'SOSTENIBILIDAD', href: '/sostenibilidad' },
   { label: 'CORPORATIVO', href: '/corporativo' },
   { label: 'CONTACTO', href: '/contacto' },
 ] as const
+
+export type NavLink = (typeof navLinks)[number]
+
+export const dropdownOnlyNavHrefs = new Set<string>(
+  navLinks.filter((link) => 'dropdownOnly' in link && link.dropdownOnly).map((link) => link.href),
+)
+
+export const defaultServiceHref = '/servicios/pesaje-de-ganado'
 
 export const navDropdowns: Record<string, { label: string; href: string }[]> = {
   '/productos': [
@@ -39,5 +47,8 @@ export const footerSostenibilidad = navDropdowns['/sostenibilidad']
 
 export function isNavActive(pathname: string, href: string) {
   if (href === '/') return pathname === '/'
+  if (dropdownOnlyNavHrefs.has(href)) {
+    return pathname.startsWith(`${href}/`)
+  }
   return pathname === href || pathname.startsWith(`${href}/`)
 }

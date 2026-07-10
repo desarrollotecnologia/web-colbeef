@@ -1,11 +1,21 @@
+import type { PageHeroContent } from '../../types/pageHero'
+import { corporativoHeroByLabel } from '../../data/pageHeroes'
 import { PageHero } from '../ui/PageHero'
 
 interface NosotrosHeroProps {
   image: string
   label: string
-  alt?: string
+  content?: PageHeroContent
 }
 
-export function NosotrosHero({ image, label }: NosotrosHeroProps) {
-  return <PageHero image={image} label={label} showCategories={false} />
+export function NosotrosHero({ image, label, content }: NosotrosHeroProps) {
+  const heroContent =
+    content ??
+    corporativoHeroByLabel[label] ?? {
+      badge: label.toUpperCase(),
+      headline: label,
+      features: '',
+    }
+
+  return <PageHero image={image} alt={label} content={heroContent} />
 }

@@ -1,45 +1,39 @@
 import { motion } from 'framer-motion'
-import { CategoryTiles } from './CategoryTiles'
-import { HeroPageLabel } from './HeroPageLabel'
+import type { PageHeroContent } from '../../types/pageHero'
 
 interface PageHeroProps {
   image: string
-  label: string
-  banner?: string
-  showCategories?: boolean
+  alt: string
+  content: PageHeroContent
 }
 
-export function PageHero({
-  image,
-  label,
-  banner,
-  showCategories = true,
-}: PageHeroProps) {
+export function PageHero({ image, alt, content }: PageHeroProps) {
   return (
-    <section className="relative h-[50vh] min-h-[360px] sm:min-h-[400px] md:min-h-[420px] max-h-[600px] overflow-hidden pt-header">
-      <img src={image} alt={label} className="absolute inset-0 w-full h-full object-cover" />
-      <div className="absolute inset-0 overlay-hero" />
+    <section className="relative h-[52vh] min-h-[380px] sm:min-h-[420px] md:min-h-[480px] max-h-[620px] overflow-hidden pt-header">
+      <img src={image} alt={alt} className="absolute inset-0 w-full h-full object-cover object-center" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/15" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/20" />
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="absolute bottom-0 left-0 z-10 max-w-[95vw]"
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className="relative z-10 h-full max-w-7xl mx-auto px-4 md:px-8 flex items-center"
       >
-        <HeroPageLabel label={label} />
-      </motion.div>
+        <div className="max-w-2xl lg:max-w-3xl">
+          <span className="inline-block bg-colbeef-green text-white text-[10px] sm:text-xs font-bold tracking-[0.18em] uppercase px-4 py-2 mb-4 sm:mb-5">
+            {content.badge}
+          </span>
 
-      {banner && (
-        <p className="absolute top-[38%] sm:top-1/3 left-1/2 -translate-x-1/2 text-white text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.3em] uppercase z-10 px-4 text-center max-w-[90vw]">
-          {banner}
-        </p>
-      )}
+          <h1 className="text-white font-bold text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-tight mb-4 sm:mb-5">
+            {content.headline}
+          </h1>
 
-      {showCategories && (
-        <div className="absolute bottom-6 sm:bottom-8 right-4 sm:right-6 md:right-12 z-10 hidden sm:block">
-          <CategoryTiles />
+          <p className="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl">
+            {content.features}
+          </p>
         </div>
-      )}
+      </motion.div>
     </section>
   )
 }

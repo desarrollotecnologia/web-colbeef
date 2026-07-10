@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { navDropdowns, navLinks, isNavActive } from '../../data/navigation'
+import { navDropdowns, navLinks, isNavActive, dropdownOnlyNavHrefs } from '../../data/navigation'
 import { socialLinks } from '../../data/site'
 import { Logo } from '../ui/Logo'
 import { HeaderSearch } from './HeaderSearch'
@@ -59,6 +59,11 @@ export function Header() {
             const children = navDropdowns[link.href]
 
             if (children) {
+              const isDropdownOnly = dropdownOnlyNavHrefs.has(link.href)
+              const triggerClassName = `flex items-center gap-1 text-[10px] xl:text-xs font-semibold tracking-[0.12em] uppercase transition-colors relative pb-1 ${
+                isActive ? 'text-colbeef-green' : 'text-colbeef-green/80 hover:text-colbeef-green'
+              }`
+
               return (
                 <div
                   key={link.href}
@@ -66,25 +71,45 @@ export function Header() {
                   onMouseEnter={() => setOpenDropdown(link.href)}
                   onMouseLeave={() => setOpenDropdown(null)}
                 >
-                  <Link
-                    to={link.href}
-                    className={`flex items-center gap-1 text-[10px] xl:text-xs font-semibold tracking-[0.12em] uppercase transition-colors relative pb-1 ${
-                      isActive ? 'text-colbeef-green' : 'text-colbeef-green/80 hover:text-colbeef-green'
-                    }`}
-                  >
-                    {link.label}
-                    <ChevronDown
-                      className={`w-3 h-3 opacity-60 transition-transform duration-200 ${
-                        openDropdown === link.href ? 'rotate-180' : ''
-                      }`}
-                    />
-                    {isActive && (
-                      <motion.span
-                        layoutId="nav-underline"
-                        className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-colbeef-red"
+                  {isDropdownOnly ? (
+                    <button
+                      type="button"
+                      aria-expanded={openDropdown === link.href}
+                      aria-haspopup="true"
+                      onClick={() =>
+                        setOpenDropdown(openDropdown === link.href ? null : link.href)
+                      }
+                      className={triggerClassName}
+                    >
+                      {link.label}
+                      <ChevronDown
+                        className={`w-3 h-3 opacity-60 transition-transform duration-200 ${
+                          openDropdown === link.href ? 'rotate-180' : ''
+                        }`}
                       />
-                    )}
-                  </Link>
+                      {isActive && (
+                        <motion.span
+                          layoutId="nav-underline"
+                          className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-colbeef-red"
+                        />
+                      )}
+                    </button>
+                  ) : (
+                    <Link to={link.href} className={triggerClassName}>
+                      {link.label}
+                      <ChevronDown
+                        className={`w-3 h-3 opacity-60 transition-transform duration-200 ${
+                          openDropdown === link.href ? 'rotate-180' : ''
+                        }`}
+                      />
+                      {isActive && (
+                        <motion.span
+                          layoutId="nav-underline"
+                          className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-colbeef-red"
+                        />
+                      )}
+                    </Link>
+                  )}
 
                   <AnimatePresence>
                     {openDropdown === link.href && (
@@ -180,6 +205,7 @@ export function Header() {
                 const children = navDropdowns[link.href]
 
                 if (children) {
+                  const isDropdownOnly = dropdownOnlyNavHrefs.has(link.href)
                   const isOpen = mobileOpenMenu === link.href
                   return (
                     <div key={link.href} className="border-b border-gray-50">
@@ -187,6 +213,7 @@ export function Header() {
                         type="button"
                         onClick={() => setMobileOpenMenu(isOpen ? null : link.href)}
                         className="w-full flex items-center justify-between py-3 text-sm font-semibold tracking-widest text-colbeef-green uppercase"
+                        aria-expanded={isOpen}
                       >
                         {link.label}
                         <ChevronDown
@@ -199,6 +226,7 @@ export function Header() {
                             <Link
                               key={child.href}
                               to={child.href}
+                              onClick={() => isDropdownOnly && setIsMobileOpen(false)}
                               className="block py-2 text-xs font-semibold text-colbeef-green uppercase tracking-wider"
                             >
                               {child.label}

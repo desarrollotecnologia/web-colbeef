@@ -1,5 +1,6 @@
 import { productCategories } from '../../data/products'
 import { images } from '../../data/assets'
+import { subproductosHero } from '../../data/pageHeroes'
 import { AnimatedSection, FadeIn } from '../../components/ui/AnimatedSection'
 import { PageHero } from '../../components/ui/PageHero'
 
@@ -12,8 +13,8 @@ export function SubproductosPage() {
     <>
       <PageHero
         image={images.comercializacion}
-        label="Subproductos"
-        showCategories={false}
+        alt="Subproductos"
+        content={subproductosHero}
       />
 
       <AnimatedSection className="py-16 md:py-24 bg-white">

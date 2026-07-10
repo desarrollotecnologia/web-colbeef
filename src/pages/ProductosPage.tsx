@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { productCategories } from '../data/products'
 import { images } from '../data/assets'
+import { productosHero } from '../data/pageHeroes'
 import { aboutParagraphs } from '../data/site'
 import { navDropdowns } from '../data/navigation'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
@@ -16,7 +17,7 @@ export function ProductosPage() {
 
   return (
     <>
-      <PageHero image={images.lineaProcesamiento} label="Productos" />
+      <PageHero image={images.lineaProcesamiento} alt="Productos" content={productosHero} />
 
       <AnimatedSection className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-8 text-center">
