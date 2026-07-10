@@ -11,6 +11,7 @@ import {
   gobiernoCorporativo,
   valoresCorporativos,
 } from './nosotros'
+import { pqrContent, trabajeContent } from './contacto'
 
 export interface SearchEntry {
   id: string
@@ -131,6 +132,15 @@ export const searchIndex: SearchEntry[] = [
     gobiernoCorporativo.reportes.join(' '),
   ),
   entry('contacto', 'Contacto', 'Información de contacto Colbeef Floridablanca', '/contacto', 'teléfono email'),
+  entry('contacto-pqr', 'PQR', pqrContent.description, '/contacto/pqr', 'peticiones quejas reclamos'),
+  entry(
+    'contacto-trabaje',
+    'Trabaje con nosotros',
+    trabajeContent.description,
+    '/contacto/trabaje-con-nosotros',
+    'empleo hoja de vida',
+  ),
+
 ]
 
 function normalize(text: string) {

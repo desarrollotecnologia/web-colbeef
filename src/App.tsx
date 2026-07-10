@@ -12,6 +12,8 @@ import { FilosofiaPage } from './pages/corporativo/FilosofiaPage'
 import { CertificacionesPage } from './pages/corporativo/CertificacionesPage'
 import { GobiernoCorporativoPage } from './pages/corporativo/GobiernoCorporativoPage'
 import { ContactoPage } from './pages/ContactoPage'
+import { PqrPage } from './pages/contacto/PqrPage'
+import { TrabajeConNosotrosPage } from './pages/contacto/TrabajeConNosotrosPage'
 
 const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, '')
 
@@ -40,6 +42,8 @@ export default function App() {
           <Route path="/corporativo/nosotros" element={<Navigate to={defaultCorporativoHref} replace />} />
 
           <Route path="/contacto" element={<ContactoPage />} />
+          <Route path="/contacto/pqr" element={<PqrPage />} />
+          <Route path="/contacto/trabaje-con-nosotros" element={<TrabajeConNosotrosPage />} />
 
           {/* Redirecciones anteriores */}
           <Route path="/nosotros" element={<Navigate to={defaultCorporativoHref} replace />} />

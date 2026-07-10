@@ -33,12 +33,20 @@ export const navDropdowns: Record<string, { label: string; href: string }[]> = {
     { label: 'Certificaciones', href: '/corporativo/certificaciones' },
     { label: 'Gobierno corporativo', href: '/corporativo/gobierno-corporativo' },
   ],
+  '/contacto': [
+    { label: 'PQR', href: '/contacto/pqr' },
+    { label: 'Trabaje con nosotros', href: '/contacto/trabaje-con-nosotros' },
+  ],
 }
 
 export const footerCorporativo = navDropdowns['/corporativo']
 export const footerProductos = navDropdowns['/productos']
 export const footerServiciosNav = navDropdowns['/servicios']
 export const footerSostenibilidad = [{ label: 'Sostenibilidad', href: '/sostenibilidad' }]
+export const footerContacto = [
+  { label: 'Contáctenos', href: '/contacto' },
+  ...navDropdowns['/contacto'],
+]
 
 export function isNavActive(pathname: string, href: string) {
   if (href === '/') return pathname === '/'

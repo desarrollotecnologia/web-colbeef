@@ -78,7 +78,7 @@ export const contactInfo = {
   address: 'Vía Corredor Río Frío Cll 210 N° 9-631, Floridablanca, Santander',
   phone: '(57) (7) - 691 7777',
   email: 'info@colbeef.com',
-  hours: 'Lun - Sab: 8:00 AM - 6:00 PM',
+  hours: 'Lunes a sábado de 7:30 a.m. a 5:00 p.m.',
 }
 
 export const locationLabel = 'FLORIDABLANCA / SANTANDER / COLOMBIA'
