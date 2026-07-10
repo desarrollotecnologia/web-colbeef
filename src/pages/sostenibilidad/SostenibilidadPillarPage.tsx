@@ -2,7 +2,6 @@ import { Navigate, useParams } from 'react-router-dom'
 import { corporativo } from '../../data/assets'
 import { getSostenibilidadPillarHero } from '../../data/pageHeroes'
 import { sostenibilidadContent } from '../../data/nosotros'
-import { navDropdowns } from '../../data/navigation'
 import { NosotrosHero } from '../../components/nosotros/NosotrosHero'
 import { AnimatedSection, FadeIn } from '../../components/ui/AnimatedSection'
 
@@ -24,7 +23,7 @@ const pillarMap: Record<string, { pillarIndex: number; icon: string; label: stri
   },
 }
 
-const validSlugs = navDropdowns['/sostenibilidad'].map((item) => item.href.split('/').pop()!)
+const validSlugs = Object.keys(pillarMap)
 
 export function SostenibilidadPillarPage() {
   const { slug } = useParams<{ slug: string }>()

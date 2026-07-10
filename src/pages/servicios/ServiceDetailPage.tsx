@@ -13,6 +13,7 @@ import { DesposteNivelesSection } from '../../components/sections/DesposteNivele
 import { DesposteValorSection } from '../../components/sections/DesposteValorSection'
 import { PesajeDetailSection } from '../../components/sections/PesajeDetailSection'
 import { PorcionadoDetailSection } from '../../components/sections/PorcionadoDetailSection'
+import { PorcionadoSolucionesSection } from '../../components/sections/PorcionadoSolucionesSection'
 import { AnimatedSection, FadeIn } from '../../components/ui/AnimatedSection'
 import { PageHero } from '../../components/ui/PageHero'
 
@@ -59,7 +60,10 @@ export function ServiceDetailPage() {
           <DesposteValorSection />
         </>
       ) : isPorcionado ? (
-        <PorcionadoDetailSection />
+        <>
+          <PorcionadoDetailSection />
+          <PorcionadoSolucionesSection />
+        </>
       ) : (
         <AnimatedSection className="py-16 md:py-24 bg-white">
           <div className="max-w-4xl mx-auto px-4 md:px-8">

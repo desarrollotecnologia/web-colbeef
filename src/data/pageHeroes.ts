@@ -56,8 +56,9 @@ export const gobiernoHero: PageHeroContent = {
 
 export const sostenibilidadHero: PageHeroContent = {
   badge: 'SOSTENIBILIDAD',
-  headline: 'Compromiso con el medio ambiente y la comunidad.',
-  features: 'Energía renovable • Gestión del agua • Producción responsable',
+  headline: 'Sostenibilidad que se demuestra con acciones',
+  features:
+    'En COLBEEF operamos con responsabilidad, tecnología e innovación para fortalecer una industria cárnica más eficiente y consciente con el medio ambiente',
 }
 
 export const contactoHero: PageHeroContent = {

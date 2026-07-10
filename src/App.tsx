@@ -7,7 +7,6 @@ import { SubproductosPage } from './pages/productos/SubproductosPage'
 import { defaultServiceHref } from './data/navigation'
 import { ServiceDetailPage } from './pages/servicios/ServiceDetailPage'
 import { SostenibilidadIndexPage } from './pages/sostenibilidad/SostenibilidadIndexPage'
-import { SostenibilidadPillarPage } from './pages/sostenibilidad/SostenibilidadPillarPage'
 import { CorporativoNosotrosPage } from './pages/corporativo/CorporativoNosotrosPage'
 import { CorporativoHistoriaPage } from './pages/corporativo/CorporativoHistoriaPage'
 import { FilosofiaPage } from './pages/corporativo/FilosofiaPage'
@@ -32,7 +31,7 @@ export default function App() {
           <Route path="/servicios/:slug" element={<ServiceDetailPage />} />
 
           <Route path="/sostenibilidad" element={<SostenibilidadIndexPage />} />
-          <Route path="/sostenibilidad/:slug" element={<SostenibilidadPillarPage />} />
+          <Route path="/sostenibilidad/:slug" element={<Navigate to="/sostenibilidad" replace />} />
 
           <Route path="/corporativo/nosotros" element={<CorporativoNosotrosPage />} />
           <Route path="/corporativo/historia" element={<CorporativoHistoriaPage />} />

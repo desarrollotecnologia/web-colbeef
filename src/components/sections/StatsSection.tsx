@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { images } from '../../data/assets'
 import { sustainabilityStats } from '../../data/sustainability'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
@@ -57,19 +58,20 @@ export function StatsSection() {
                 {stat.sublabel && (
                   <p className="text-colbeef-gray text-xs mb-2">{stat.sublabel}</p>
                 )}
-                <p className="text-colbeef-gray text-xs leading-relaxed mb-4">
-                  {stat.description}
-                </p>
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-2 bg-colbeef-green text-white text-xs font-semibold tracking-widest uppercase px-5 py-2.5 hover:bg-colbeef-green-dark transition-colors"
-                >
-                  VER MÁS <ArrowRight className="w-3 h-3" />
-                </button>
+                <p className="text-colbeef-gray text-xs leading-relaxed">{stat.description}</p>
               </div>
             </motion.div>
           ))}
         </div>
+
+        <FadeIn className="flex justify-center mt-10">
+          <Link
+            to="/sostenibilidad"
+            className="inline-flex items-center gap-2 bg-colbeef-green text-white text-xs font-semibold tracking-widest uppercase px-6 py-3 hover:bg-colbeef-green-dark transition-colors"
+          >
+            VER MÁS <ArrowRight className="w-4 h-4" />
+          </Link>
+        </FadeIn>
       </div>
     </AnimatedSection>
   )
