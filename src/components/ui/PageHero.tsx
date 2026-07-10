@@ -29,9 +29,11 @@ export function PageHero({ image, alt, content }: PageHeroProps) {
             {content.headline}
           </h1>
 
-          <p className="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl">
-            {content.features}
-          </p>
+          {content.features ? (
+            <p className="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl">
+              {content.features}
+            </p>
+          ) : null}
         </div>
       </motion.div>
     </section>

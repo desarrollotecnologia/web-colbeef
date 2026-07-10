@@ -60,8 +60,8 @@ export const mainServices: Service[] = [
     image: images.desposteTrabajador,
     hero: {
       badge: 'DESPOSTE',
-      headline: 'Precisión y capacidad en cada turno.',
-      features: '180 canales por turno • Refrigeración • Congelación',
+      headline: 'Transformamos cada canal con precisión y rendimiento.',
+      features: '',
     },
     icon: icons.desposte,
     href: '/servicios/desposte',

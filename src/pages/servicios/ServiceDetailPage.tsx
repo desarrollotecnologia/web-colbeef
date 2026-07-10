@@ -2,12 +2,17 @@ import { Navigate, useParams } from 'react-router-dom'
 import { defaultServiceHref } from '../../data/navigation'
 import { getServiceHeroContent, servicePages } from '../../data/services'
 import { BeneficioCalidadCardsSection } from '../../components/sections/BeneficioCalidadCardsSection'
+import { BeneficioConfianzaSection } from '../../components/sections/BeneficioConfianzaSection'
 import { BeneficioDetailSection } from '../../components/sections/BeneficioDetailSection'
 import { BeneficioProcesoSection } from '../../components/sections/BeneficioProcesoSection'
 import { BeneficiosNegocioSection } from '../../components/sections/BeneficiosNegocioSection'
 import { BienestarAnimalSection } from '../../components/sections/BienestarAnimalSection'
 import { CompromisoProcesoSection } from '../../components/sections/CompromisoProcesoSection'
+import { DesposteDetailSection } from '../../components/sections/DesposteDetailSection'
+import { DesposteNivelesSection } from '../../components/sections/DesposteNivelesSection'
+import { DesposteValorSection } from '../../components/sections/DesposteValorSection'
 import { PesajeDetailSection } from '../../components/sections/PesajeDetailSection'
+import { PorcionadoDetailSection } from '../../components/sections/PorcionadoDetailSection'
 import { AnimatedSection, FadeIn } from '../../components/ui/AnimatedSection'
 import { PageHero } from '../../components/ui/PageHero'
 
@@ -22,6 +27,8 @@ export function ServiceDetailPage() {
   const heroImage = service.heroImage ?? service.image
   const isPesaje = slug === 'pesaje-de-ganado'
   const isBeneficio = slug === 'beneficio'
+  const isDesposte = slug === 'desposte'
+  const isPorcionado = slug === 'porcionado'
 
   return (
     <>
@@ -42,8 +49,17 @@ export function ServiceDetailPage() {
         <>
           <BeneficioDetailSection />
           <BeneficioProcesoSection />
+          <BeneficioConfianzaSection />
           <BeneficioCalidadCardsSection />
         </>
+      ) : isDesposte ? (
+        <>
+          <DesposteDetailSection />
+          <DesposteNivelesSection />
+          <DesposteValorSection />
+        </>
+      ) : isPorcionado ? (
+        <PorcionadoDetailSection />
       ) : (
         <AnimatedSection className="py-16 md:py-24 bg-white">
           <div className="max-w-4xl mx-auto px-4 md:px-8">
