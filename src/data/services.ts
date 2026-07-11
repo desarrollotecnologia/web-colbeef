@@ -142,11 +142,6 @@ export function getServiceHeroContent(service: Service): PageHeroContent {
 
 export const serviceTabs = ['PESAJE', 'PLANILLAJE', 'CORRALES PESAJE', 'ASESORÍAS']
 
-export const servicesIntroParagraphs = [
-  'En COLBEEF S.A.S. ofrecemos soluciones integrales para la industria cárnica, respaldadas por tecnología, talento humano especializado y procesos certificados que garantizan calidad, inocuidad, trazabilidad y eficiencia en cada etapa de la cadena productiva.',
-  'Nuestro compromiso es convertirnos en un aliado estratégico para productores, distribuidores, cadenas de supermercados, industrias alimentarias y el sector HORECA, desarrollando servicios que generan mayor productividad, optimizan costos y aseguran productos con los más altos estándares del mercado colombiano.',
-] as const
-
 export const serviciosPageContent = [
   {
     title: 'Beneficio de ganado bovino y bufalino',

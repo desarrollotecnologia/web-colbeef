@@ -9,6 +9,11 @@ export const brand = {
   logoWhite: asset('/assets/brand/logo-white-transparent.png'),
 } as const
 
+export const footerAssets = {
+  asesora: asset('/assets/images/footer/footer-asesora.png'),
+  logoWhite: asset('/assets/images/footer/logo-white-transparent.png'),
+} as const
+
 export const icons = {
   ganado: asset('/assets/icons/ganado.png'),
   beneficio: asset('/assets/icons/beneficio.png'),
@@ -27,6 +32,7 @@ export const icons = {
 
 export const images = {
   panoramica: asset('/assets/images/panoramica-planta.png'),
+  homeAbout: asset('/assets/images/home-about-banner.png'),
   lineaProcesamiento: asset('/assets/images/linea-procesamiento.png'),
   desposteTrabajador: asset('/assets/images/desposte-trabajador.png'),
   beneficioSierra: asset('/assets/images/beneficio-sierra.png'),

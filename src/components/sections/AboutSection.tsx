@@ -8,11 +8,11 @@ export function AboutSection() {
     <AnimatedSection id="nosotros" className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
-          <FadeIn direction="left" className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-auto">
+          <FadeIn direction="left" className="relative aspect-[4/3] sm:aspect-[5/4] lg:aspect-auto lg:min-h-[420px]">
             <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-xl">
               <img
-                src={images.img5280}
-                alt="Proceso de calidad Colbeef"
+                src={images.homeAbout}
+                alt="Planta Colbeef vista aérea"
                 className="w-full h-full object-cover"
               />
             </div>
