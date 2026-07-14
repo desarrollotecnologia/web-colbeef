@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Check, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { serviciosImages } from '../../data/assets'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 
 interface DesposteNivel {
@@ -32,7 +33,7 @@ const niveles: DesposteNivel[] = [
       'Ganglios',
     ],
     result: 'Mayor volumen con mínima intervención.',
-    image: '/assets/images/servicios/desposte-tipo-1.jpg',
+    image: serviciosImages.desposteTipo1,
   },
   {
     id: 'tipo-2',
@@ -50,7 +51,7 @@ const niveles: DesposteNivel[] = [
       'Hematomas',
     ],
     result: 'Postas listas para posteriores procesos de transformación.',
-    image: '/assets/images/servicios/desposte-tipo-2.jpg',
+    image: serviciosImages.desposteTipo2,
   },
   {
     id: 'tipo-3',
@@ -68,7 +69,7 @@ const niveles: DesposteNivel[] = [
       'Ganglios',
     ],
     result: 'Cortes con mejor presentación y menor contenido de tejido conectivo.',
-    image: '/assets/images/servicios/desposte-tipo-3.jpg',
+    image: serviciosImages.desposteTipo3,
   },
   {
     id: 'tipo-4',
@@ -85,7 +86,7 @@ const niveles: DesposteNivel[] = [
       'Alto valor comercial',
     ],
     result: 'Cortes premium listos para comercialización o porcionado.',
-    image: '/assets/images/servicios/desposte-tipo-4.jpg',
+    image: serviciosImages.desposteTipo4,
   },
 ]
 

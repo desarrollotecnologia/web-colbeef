@@ -1,3 +1,5 @@
+import { images } from './assets'
+
 export type CorteGrupo = 'delanteros' | 'traseros'
 
 export interface CorteArea {
@@ -11,7 +13,7 @@ export interface CorteArea {
 }
 
 /** Placeholder hasta reemplazar por foto real de cada corte. */
-export const CORTE_FICHA_EJEMPLO = '/assets/images/cortes/fichas/corte-ejemplo.png'
+export const CORTE_FICHA_EJEMPLO = images.corteFichaEjemplo
 
 export function getCorteFichaImage(area: CorteArea) {
   return area.image ?? CORTE_FICHA_EJEMPLO

@@ -7,7 +7,7 @@ import {
   Recycle,
   ShieldCheck,
 } from 'lucide-react'
-import { icons } from '../../data/assets'
+import { icons, serviciosImages } from '../../data/assets'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 
 const beneficios = [
@@ -19,7 +19,7 @@ const beneficios = [
   { label: 'Procesos higiénicos certificados', icon: Award },
 ] as const
 
-const sectionImage = '/assets/images/servicios/desposte-beneficios.jpg'
+const sectionImage = serviciosImages.desposteBeneficios
 
 export function DesposteValorSection() {
   return (

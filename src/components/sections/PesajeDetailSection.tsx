@@ -1,4 +1,5 @@
 import { Award, Scale, ShieldCheck, Weight } from 'lucide-react'
+import { serviciosImages } from '../../data/assets'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 
 const pesajeIntro =
@@ -11,7 +12,7 @@ const pesajeFeatures = [
   { label: 'Transparencia y trazabilidad', icon: ShieldCheck },
 ] as const
 
-const pesajeSectionImage = '/assets/images/servicios/pesaje-ganado.jpg'
+const pesajeSectionImage = serviciosImages.pesajeGanado
 
 export function PesajeDetailSection() {
   return (

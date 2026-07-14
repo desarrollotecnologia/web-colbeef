@@ -1,8 +1,9 @@
 import { Phone } from 'lucide-react'
+import { serviciosImages } from '../../data/assets'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 import { Button } from '../ui/Button'
 
-const confianzaImage = '/assets/images/servicios/beneficio-confianza.jpg'
+const confianzaImage = serviciosImages.beneficioConfianza
 
 export function BeneficioConfianzaSection() {
   return (

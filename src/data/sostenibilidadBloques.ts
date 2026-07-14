@@ -16,7 +16,7 @@ import {
   UsersRound,
   Zap,
 } from 'lucide-react'
-import { corporativo, images } from './assets'
+import { corporativo, images, serviciosImages } from './assets'
 
 export interface SostenibilidadIndicador {
   label: string
@@ -48,7 +48,7 @@ export const sostenibilidadBloques: SostenibilidadBloque[] = [
       'COLBEEF cuenta con un sistema fotovoltaico conformado por 1.363 paneles solares, diseñado para disminuir el consumo de energía proveniente de fuentes convencionales y aportar a una operación más eficiente.',
       'Esta energía limpia reduce el consumo de fuentes convencionales y evita la emisión de 2.967,8 toneladas de CO2.',
     ],
-    image: '/assets/images/servicios/compromiso-proceso.jpg',
+    image: serviciosImages.compromisoProceso,
     imageAlt: 'Sistema fotovoltaico en instalaciones COLBEEF',
     indicadoresTitle: 'Indicadores',
     indicadores: [

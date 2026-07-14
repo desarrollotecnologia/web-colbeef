@@ -1,6 +1,7 @@
+import { serviciosImages } from '../../data/assets'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 
-const porcionadoSectionImage = '/assets/images/servicios/porcionado-proceso.jpg'
+const porcionadoSectionImage = serviciosImages.porcionadoProceso
 
 export function PorcionadoDetailSection() {
   return (

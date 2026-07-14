@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Check, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { serviciosImages } from '../../data/assets'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 
 interface PorcionadoSolucion {
@@ -18,7 +19,7 @@ const soluciones: PorcionadoSolucion[] = [
     title: 'Porciones listas para cocinar',
     description: 'Ideal para operaciones que requieren rapidez y estandarización.',
     items: ['Carne en sábana', 'Julianas', 'Cubos', 'Goulash'],
-    image: '/assets/images/servicios/porcionado-proceso.jpg',
+    image: serviciosImages.porcionadoProceso,
     accent: 'green',
   },
   {
@@ -37,7 +38,7 @@ const soluciones: PorcionadoSolucion[] = [
       'Bife de Paleta',
       'Asado de Tira',
     ],
-    image: '/assets/images/servicios/desposte-tipo-4.jpg',
+    image: serviciosImages.desposteTipo4,
     accent: 'red',
   },
   {
@@ -45,7 +46,7 @@ const soluciones: PorcionadoSolucion[] = [
     title: 'Gramajes personalizados',
     description: 'Adaptamos cada producto según las especificaciones del cliente.',
     items: ['Peso exacto', 'Espesor definido', 'Empaque personalizado', 'Etiquetado'],
-    image: '/assets/images/servicios/desposte-tipo-2.jpg',
+    image: serviciosImages.desposteTipo2,
     accent: 'green',
   },
   {
@@ -59,7 +60,7 @@ const soluciones: PorcionadoSolucion[] = [
       'Tiempos de entrega óptimos',
       'Pedido exacto',
     ],
-    image: '/assets/images/servicios/beneficio-proceso.jpg',
+    image: serviciosImages.beneficioProceso,
     accent: 'red',
   },
 ]

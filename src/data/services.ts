@@ -1,8 +1,8 @@
-import { icons, images } from './assets'
+import { icons, images, serviciosImages } from './assets'
 import type { PageHeroContent } from '../types/pageHero'
 
-const pesajeHeroImage = '/assets/images/servicios/pesaje-ganado.jpg'
-const beneficioHeroImage = '/assets/images/servicios/beneficio-hero.jpg'
+const pesajeHeroImage = serviciosImages.pesajeGanado
+const beneficioHeroImage = serviciosImages.beneficioHero
 
 export type ServiceHeroContent = PageHeroContent
 export interface Service {

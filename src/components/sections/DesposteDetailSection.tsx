@@ -1,4 +1,5 @@
 import { BadgeCheck, BarChart3, Layers, ScanBarcode } from 'lucide-react'
+import { serviciosImages } from '../../data/assets'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 
 const desposteIntro =
@@ -11,7 +12,7 @@ const desposteFeatures = [
   { label: 'Calidad garantizada', icon: BadgeCheck },
 ] as const
 
-const desposteSectionImage = '/assets/images/servicios/desposte-proceso.jpg'
+const desposteSectionImage = serviciosImages.desposteProceso
 
 export function DesposteDetailSection() {
   return (

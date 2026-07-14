@@ -30,6 +30,22 @@ export const icons = {
   search: asset('/assets/icons/social/search.png'),
 } as const
 
+export const serviciosImages = {
+  pesajeGanado: asset('/assets/images/servicios/pesaje-ganado.jpg'),
+  pesajeBascula: asset('/assets/images/servicios/pesaje-bascula.jpg'),
+  beneficioHero: asset('/assets/images/servicios/beneficio-hero.jpg'),
+  beneficioProceso: asset('/assets/images/servicios/beneficio-proceso.jpg'),
+  beneficioConfianza: asset('/assets/images/servicios/beneficio-confianza.jpg'),
+  compromisoProceso: asset('/assets/images/servicios/compromiso-proceso.jpg'),
+  desposteProceso: asset('/assets/images/servicios/desposte-proceso.jpg'),
+  desposteBeneficios: asset('/assets/images/servicios/desposte-beneficios.jpg'),
+  desposteTipo1: asset('/assets/images/servicios/desposte-tipo-1.jpg'),
+  desposteTipo2: asset('/assets/images/servicios/desposte-tipo-2.jpg'),
+  desposteTipo3: asset('/assets/images/servicios/desposte-tipo-3.jpg'),
+  desposteTipo4: asset('/assets/images/servicios/desposte-tipo-4.jpg'),
+  porcionadoProceso: asset('/assets/images/servicios/porcionado-proceso.jpg'),
+} as const
+
 export const images = {
   panoramica: asset('/assets/images/panoramica-planta.png'),
   homeAbout: asset('/assets/images/home-about-banner.png'),

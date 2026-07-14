@@ -7,6 +7,7 @@ import {
   Maximize2,
   Sun,
 } from 'lucide-react'
+import { serviciosImages } from './assets'
 
 export interface BienestarFeature {
   id: string
@@ -17,8 +18,8 @@ export interface BienestarFeature {
   icon: LucideIcon
 }
 
-const pesajeGanadoImage = '/assets/images/servicios/pesaje-ganado.jpg'
-const pesajeBasculaImage = '/assets/images/servicios/pesaje-bascula.jpg'
+const pesajeGanadoImage = serviciosImages.pesajeGanado
+const pesajeBasculaImage = serviciosImages.pesajeBascula
 
 export const bienestarAnimalContent = {
   label: 'Bienestar animal',
