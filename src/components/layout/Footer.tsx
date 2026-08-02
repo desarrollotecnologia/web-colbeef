@@ -24,7 +24,7 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative bg-colbeef-green-darker text-white overflow-hidden">
+    <footer className="relative bg-colbeef-green-mid text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-10 sm:py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 md:gap-6 lg:gap-12 items-center">
           {/* Contacto — en móvil debajo de la marca */}

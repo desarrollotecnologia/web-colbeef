@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { X } from 'lucide-react'
+import { Lightbulb, X } from 'lucide-react'
 import { images } from '../../data/assets'
 import {
   cortesMapAreas,
+  cortesMapZonas,
+  getAreaCenter,
+  getAreaPoints,
+  getCorteDetalle,
   getCorteFichaImage,
   type CorteGrupo,
 } from '../../data/cortesMap'
-import { assetUrl } from '../../utils/assetUrl'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 
 const grupoLabels: Record<CorteGrupo, string> = {
@@ -20,7 +23,9 @@ export function CortesMapSection() {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
 
   const selected = cortesMapAreas.find((a) => a.id === selectedId) ?? null
+  const detalle = selected ? getCorteDetalle(selected) : null
   const activeId = hoveredId ?? selectedId
+  const activeArea = cortesMapAreas.find((a) => a.id === activeId) ?? null
 
   return (
     <AnimatedSection className="py-12 md:py-16 lg:py-20 bg-white">
@@ -39,39 +44,87 @@ export function CortesMapSection() {
 
         <div className="grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] gap-8 lg:gap-10 items-start">
           <FadeIn>
-            <div className="relative mx-auto w-full max-w-[950px] select-none">
+            <div className="@container relative mx-auto w-full max-w-[950px] select-none">
               <img
-                src={images.cortesMapaBase}
+                src={images.cortesMapaRes}
                 alt="Mapa de cortes bovinos Colbeef"
                 className="block w-full h-auto"
                 draggable={false}
               />
 
+              <svg
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 h-full w-full"
+              >
+                {cortesMapZonas.map((area) => (
+                  <polygon
+                    key={`zona-${area.id}`}
+                    points={getAreaPoints(area)}
+                    fill="rgba(20, 87, 45, 0.14)"
+                    stroke="rgba(20, 87, 45, 0.55)"
+                    strokeWidth={1.25}
+                    vectorEffect="non-scaling-stroke"
+                  />
+                ))}
+
+                {activeArea && (
+                  <polygon
+                    points={getAreaPoints(activeArea)}
+                    fill="rgba(20, 87, 45, 0.62)"
+                    stroke="#ffffff"
+                    strokeWidth={2}
+                    vectorEffect="non-scaling-stroke"
+                    className="transition-opacity duration-200"
+                  />
+                )}
+              </svg>
+
               <div className="absolute inset-0">
-                {cortesMapAreas.map((area) => {
-                  const isActive = activeId === area.id
+                {cortesMapAreas.map((area) => (
+                  <button
+                    key={area.id}
+                    type="button"
+                    aria-label={area.name}
+                    aria-pressed={selectedId === area.id}
+                    onMouseEnter={() => setHoveredId(area.id)}
+                    onMouseLeave={() => setHoveredId(null)}
+                    onFocus={() => setHoveredId(area.id)}
+                    onBlur={() => setHoveredId(null)}
+                    onClick={() => setSelectedId(area.id)}
+                    className="absolute inset-0 cursor-pointer border-0 bg-transparent p-0 focus:outline-none"
+                    style={{
+                      clipPath: area.clipPath,
+                      WebkitClipPath: area.clipPath,
+                    }}
+                  />
+                ))}
+              </div>
+
+              <div className="absolute inset-0 hidden sm:block pointer-events-none">
+                {cortesMapZonas.map((area) => {
+                  const { x, y } = getAreaCenter(area)
+                  const { dx = 0, dy = 0, rotate = 0, scale = 1 } = area.label ?? {}
+                  const isActive = activeArea?.name === area.name
+
                   return (
-                    <button
-                      key={area.id}
-                      type="button"
-                      aria-label={area.name}
-                      aria-pressed={selectedId === area.id}
-                      onMouseEnter={() => setHoveredId(area.id)}
-                      onMouseLeave={() => setHoveredId(null)}
-                      onFocus={() => setHoveredId(area.id)}
-                      onBlur={() => setHoveredId(null)}
-                      onClick={() => setSelectedId(area.id)}
-                      className="absolute inset-0 cursor-pointer border-0 p-0 transition-opacity duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-colbeef-green/60"
+                    <span
+                      key={`label-${area.id}`}
+                      className={`absolute whitespace-nowrap font-bold uppercase leading-none tracking-wide transition-colors duration-200 ${
+                        isActive
+                          ? 'text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)]'
+                          : 'text-colbeef-green-darker drop-shadow-[0_1px_2px_rgba(255,255,255,0.9)]'
+                      }`}
                       style={{
-                        clipPath: area.clipPath,
-                        WebkitClipPath: area.clipPath,
-                        opacity: isActive ? 1 : 0,
-                        backgroundImage: `url(${images.cortesMapaOverlay})`,
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center center',
-                        backgroundSize: '100% 100%',
+                        left: `${x + dx}%`,
+                        top: `${y + dy}%`,
+                        fontSize: `${1.6 * scale}cqw`,
+                        transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
                       }}
-                    />
+                    >
+                      {area.name}
+                    </span>
                   )
                 })}
               </div>
@@ -98,11 +151,11 @@ export function CortesMapSection() {
                     <X className="w-4 h-4" />
                   </button>
 
-                  <div className="relative aspect-[4/3] bg-colbeef-dark overflow-hidden">
+                  <div className="relative aspect-[4/3] bg-black overflow-hidden">
                     <img
-                      src={assetUrl(getCorteFichaImage(selected))}
+                      src={getCorteFichaImage(selected)}
                       alt={selected.name}
-                      className="absolute inset-0 w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-contain"
                     />
                     <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/55 to-transparent" />
                   </div>
@@ -114,9 +167,32 @@ export function CortesMapSection() {
                     <h3 className="text-colbeef-dark text-xl sm:text-2xl font-bold tracking-wide">
                       {selected.name}
                     </h3>
-                    <p className="text-colbeef-gray text-sm mt-2 leading-relaxed">
-                      Seleccione otra zona del mapa para cambiar esta ficha, o ciérrela con la X.
-                    </p>
+
+                    {detalle ? (
+                      <>
+                        <div className="flex flex-wrap gap-2 mt-3">
+                          <span className="rounded-full bg-colbeef-green-pale px-3 py-1 text-[11px] font-semibold text-colbeef-green">
+                            {detalle.categoria}
+                          </span>
+                          <span className="rounded-full border border-colbeef-green/25 px-3 py-1 text-[11px] font-semibold text-colbeef-green">
+                            Terneza: {detalle.terneza}
+                          </span>
+                        </div>
+
+                        <p className="text-colbeef-gray text-sm mt-3 leading-relaxed">
+                          {detalle.descripcion}
+                        </p>
+
+                        <div className="mt-4 flex items-start gap-2 rounded-lg bg-colbeef-cream p-3">
+                          <Lightbulb className="w-4 h-4 text-colbeef-gold shrink-0 mt-0.5" />
+                          <p className="text-colbeef-dark text-xs leading-relaxed">{detalle.tip}</p>
+                        </div>
+                      </>
+                    ) : (
+                      <p className="text-colbeef-gray text-sm mt-2 leading-relaxed">
+                        Seleccione otra zona del mapa para cambiar esta ficha, o ciérrela con la X.
+                      </p>
+                    )}
                   </div>
                 </motion.article>
               )}

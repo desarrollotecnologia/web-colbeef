@@ -74,13 +74,38 @@ export const desposteSections = [
   'CORTES DELANTEROS',
 ]
 
+export interface QualitySectionBlock {
+  label: string
+  title: string
+  description: string
+}
+
 export const qualityPillars = [
   {
     id: 'calidad',
     category: 'Calidad',
     title: 'LA CALIDAD COMO PROMESA DE VALOR',
-    description:
-      'Texto de ejemplo: en Colbeef la calidad no es un discurso, es una promesa respaldada por procesos certificados, controles rigurosos y un equipo comprometido con la excelencia en cada producto.',
+    description: '',
+    sections: [
+      {
+        label: 'HACCP (Hazard Analysis and Critical Control Points)',
+        title: 'Control en cada punto crítico',
+        description:
+          'Aplicamos el sistema HACCP para identificar, prevenir y controlar los riesgos físicos, químicos y biológicos en cada etapa del proceso, garantizando que solo lleguen a tu mesa productos verificados y seguros.',
+      },
+      {
+        label: 'ISO 22000',
+        title: 'Gestión integral de la inocuidad',
+        description:
+          'Certificados bajo la norma ISO 22000, el estándar internacional que asegura un sistema de gestión sólido, trazable y en mejora continua a lo largo de toda nuestra cadena de producción.',
+      },
+      {
+        label: 'INVIMA',
+        title: 'Respaldo sanitario nacional',
+        description:
+          'Contamos con la vigilancia y aprobación del Instituto Nacional de Vigilancia de Medicamentos y Alimentos, garantía de que cumplimos con la normativa colombiana en materia de seguridad alimentaria.',
+      },
+    ] as QualitySectionBlock[],
     image: corporativo.certificaciones.todosCertificados,
     badge: icons.badgeLideres,
   },
@@ -89,7 +114,7 @@ export const qualityPillars = [
     category: 'Producción',
     title: 'CUIDADOS EN EL CONSUMO DE LA CARNE',
     description:
-      'Texto de ejemplo: promovemos buenas prácticas en el manejo, almacenamiento y consumo de la carne, acompañando a nuestros clientes con información clara y productos que cumplen los más altos estándares.',
+      'Promovemos buenas prácticas en el manejo, almacenamiento y consumo de la carne, acompañando a nuestros clientes con información clara y productos que cumplen los más altos estándares.',
     image: images.img5282,
     badge: icons.badgePlanta,
   },
@@ -99,7 +124,7 @@ export const qualityPillars = [
     title: 'PAÍSES A LOS QUE EXPORTAMOS',
     description:
       'Seguimos apostando por prestar un servicio de exportación de carne de excelente calidad, generando confianza en nuestra capacidad de producción y permitiendo que más personas puedan disfrutar de los excelentes productos colombianos.',
-    image: images.panoramica,
+    image: images.mapaExportacion,
     badge: icons.badgeExpertos,
   },
 ]

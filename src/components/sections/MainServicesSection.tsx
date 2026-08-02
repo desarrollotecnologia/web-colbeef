@@ -6,7 +6,7 @@ import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 
 export function MainServicesSection() {
   return (
-    <AnimatedSection className="py-12 sm:py-16 md:py-20 bg-colbeef-green-darker">
+    <AnimatedSection className="py-12 sm:py-16 md:py-20 bg-[#157925]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <FadeIn className="mb-6 sm:mb-8">
           <h2 className="text-white text-lg sm:text-2xl md:text-3xl font-bold tracking-wide uppercase">
@@ -43,7 +43,7 @@ export function MainServicesSection() {
 
               <Link
                 to={service.href}
-                className="mt-3 bg-colbeef-green text-white text-[11px] sm:text-xs font-semibold tracking-widest uppercase py-2.5 sm:py-3 text-center hover:bg-colbeef-green-light transition-colors flex items-center justify-center gap-2"
+                className="mt-3 bg-[#C9D5D7]/85 text-[#263136] text-[11px] sm:text-xs font-semibold tracking-widest uppercase py-2.5 sm:py-3 text-center hover:bg-[#C9D5D7] transition-colors flex items-center justify-center gap-2 backdrop-blur-[2px]"
               >
                 VER MÁS <ArrowRight className="w-4 h-4" />
               </Link>

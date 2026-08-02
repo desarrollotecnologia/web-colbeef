@@ -12,10 +12,8 @@ import {
   horecaProductOptions,
   type HorecaFormData,
 } from '../../data/horeca'
-import { locationLabel } from '../../data/site'
 import { buildHorecaMailtoBody, submitHorecaForm } from '../../utils/submitHorecaForm'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
-import { Logo } from '../ui/Logo'
 
 const featureIcons = [Shield, Snowflake, Award, Truck]
 
@@ -102,23 +100,14 @@ export function HorecaSection() {
   return (
     <AnimatedSection className="bg-white">
       <FadeIn>
-        <div className="w-full bg-colbeef-green-darker overflow-hidden">
+        <div className="w-full bg-colbeef-green-dark overflow-hidden">
           <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] min-h-[420px] lg:min-h-[480px]">
             <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16 py-8 md:py-10 lg:py-12 flex flex-col justify-center items-start">
               <div className="w-full max-w-xl lg:max-w-2xl">
-                <Logo size="md" className="mb-6" />
-
-                <p className="text-white/60 text-[10px] font-bold tracking-[0.2em] uppercase mb-3">
-                  {locationLabel}
-                </p>
-
-                <h2 className="text-white text-xl sm:text-2xl md:text-3xl font-bold uppercase leading-tight mb-2">
-                  Soluciones cárnicas para el canal
+                <h2 className="text-white text-xl sm:text-2xl md:text-3xl font-bold uppercase leading-tight mb-4">
+                  Soluciones cárnicas para cualquier tipo de canal
                 </h2>
-                <p className="text-colbeef-green-light text-3xl sm:text-4xl md:text-5xl font-bold uppercase mb-4">
-                  Horeca
-                </p>
-                <p className="text-white/75 text-sm md:text-base leading-relaxed mb-8">
+                <p className="text-white/80 text-sm md:text-base leading-relaxed mb-8">
                   Calidad, rendimiento y servicio para hoteles, restaurantes, cafeterías y catering de alto nivel.
                 </p>
 
@@ -129,10 +118,10 @@ export function HorecaSection() {
                     return (
                       <div
                         key={feature.id}
-                        className="flex items-start gap-2 sm:gap-3 rounded-xl bg-white/5 border border-white/10 p-3 sm:p-4"
+                        className="flex items-start gap-2 sm:gap-3 rounded-xl bg-white/10 border border-white/20 p-3 sm:p-4 shadow-sm"
                       >
-                        <Icon className="w-5 h-5 text-colbeef-green-light shrink-0 mt-0.5" />
-                        <span className="text-white text-[10px] sm:text-xs font-semibold uppercase leading-snug">
+                        <Icon className="w-5 h-5 text-white shrink-0 mt-0.5" />
+                        <span className="text-white/90 text-[10px] sm:text-xs font-semibold uppercase leading-snug">
                           {feature.label}
                         </span>
                       </div>
@@ -148,7 +137,7 @@ export function HorecaSection() {
                 alt="Chef profesional preparando carne premium Colbeef"
                 className="absolute inset-0 w-full h-full object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-colbeef-green-darker via-colbeef-green-darker/50 to-transparent lg:from-colbeef-green-darker/95 lg:via-colbeef-green-darker/25 lg:to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-colbeef-green-dark from-[8%] via-colbeef-green-dark/55 via-[45%] to-transparent to-[92%]" />
             </div>
           </div>
         </div>
@@ -159,7 +148,7 @@ export function HorecaSection() {
           <div>
             <div className="mb-5 md:mb-6">
               <h3 className="text-colbeef-green text-lg sm:text-xl font-bold uppercase tracking-wide mb-2 md:mb-3">
-                Solicita información para el canal Horeca
+                Solicita información para tu negocio
               </h3>
               <p className="text-colbeef-gray text-xs sm:text-sm leading-relaxed max-w-4xl">
                 {horecaIntroText}
@@ -385,34 +374,53 @@ export function HorecaSection() {
                 </fieldset>
 
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pt-1">
-                  <label className="flex items-start gap-2.5 cursor-pointer lg:max-w-2xl">
+                  <label
+                    className={`flex items-start gap-2.5 cursor-pointer lg:max-w-2xl rounded-lg p-2 -m-2 transition-colors ${
+                      status === 'error' && !privacyAccepted ? 'bg-red-50 ring-1 ring-colbeef-red/30' : ''
+                    }`}
+                  >
                     <input
                       type="checkbox"
                       required
+                      name="privacy"
                       checked={privacyAccepted}
-                      onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                      onChange={(e) => {
+                        setPrivacyAccepted(e.target.checked)
+                        if (e.target.checked && status === 'error') {
+                          setStatus('idle')
+                          setErrorMessage('')
+                        }
+                      }}
                       className="w-4 h-4 mt-0.5 accent-colbeef-green shrink-0"
+                      aria-required="true"
                     />
                     <span className="text-xs sm:text-sm text-colbeef-gray leading-snug">
                       Autorizo el tratamiento de mis datos personales conforme a la{' '}
                       <Link to="/corporativo/gobierno-corporativo" className="text-colbeef-green font-semibold underline">
                         Política de Tratamiento de Datos de COLBEEF
                       </Link>
-                      .
+                      . <span className="text-colbeef-red">*</span>
                     </span>
                   </label>
 
                   <motion.button
                     type="submit"
-                    disabled={status === 'loading'}
-                    whileHover={{ scale: status === 'loading' ? 1 : 1.02 }}
-                    whileTap={{ scale: status === 'loading' ? 1 : 0.98 }}
-                    className="w-full lg:w-auto lg:min-w-[220px] shrink-0 bg-colbeef-green text-white py-2.5 px-6 text-sm font-semibold tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-colbeef-green-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed rounded-lg shadow-lg shadow-colbeef-green/15"
+                    disabled={status === 'loading' || !privacyAccepted}
+                    title={!privacyAccepted ? 'Debes autorizar el tratamiento de datos para enviar' : undefined}
+                    whileHover={{ scale: status === 'loading' || !privacyAccepted ? 1 : 1.02 }}
+                    whileTap={{ scale: status === 'loading' || !privacyAccepted ? 1 : 0.98 }}
+                    className="w-full lg:w-auto lg:min-w-[220px] shrink-0 bg-colbeef-green text-white py-2.5 px-6 text-sm font-semibold tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-colbeef-green-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded-lg shadow-lg shadow-colbeef-green/15"
                   >
                     {status === 'loading' ? 'Enviando...' : 'Enviar solicitud'}
                     <Send className="w-4 h-4" />
                   </motion.button>
                 </div>
+
+                {!privacyAccepted && (
+                  <p className="text-colbeef-gray text-xs -mt-1">
+                    Marca la casilla de autorización de datos para poder enviar la solicitud.
+                  </p>
+                )}
 
                 {status === 'error' && errorMessage && (
                   <div className="rounded-lg border border-colbeef-red/20 bg-red-50 px-4 py-3 text-center space-y-2" role="alert">

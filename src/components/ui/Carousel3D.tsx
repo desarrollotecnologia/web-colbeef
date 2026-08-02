@@ -15,7 +15,7 @@ export function Carousel3D({ items }: Carousel3DProps) {
 
   return (
     <div
-      className="carousel-3d-scene relative mx-auto w-full max-w-6xl"
+      className="carousel-3d-scene relative z-0 mx-auto w-full max-w-6xl"
       aria-label="Carrusel de cortes premium"
     >
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">

@@ -1,8 +1,8 @@
 import { ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { images } from '../../data/assets'
 import { environmentalPolicy } from '../../data/sustainability'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
-import { Logo } from '../ui/Logo'
 
 export function EnvironmentalPolicySection() {
   return (
@@ -19,15 +19,12 @@ export function EnvironmentalPolicySection() {
               <p className="text-white font-bold text-sm tracking-wider uppercase mb-3">
                 Política Ambiental
               </p>
-              <button
-                type="button"
-                className="bg-colbeef-gold text-colbeef-dark text-xs font-bold px-4 py-2 flex items-center gap-2 hover:bg-yellow-400 transition-colors"
+              <Link
+                to="/sostenibilidad"
+                className="bg-colbeef-gold text-colbeef-dark text-xs font-bold px-4 py-2 inline-flex items-center gap-2 hover:bg-yellow-400 transition-colors"
               >
                 VER MÁS <ArrowRight className="w-3 h-3" />
-              </button>
-            </div>
-            <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 hidden sm:block">
-              <Logo variant="white" size="sm" />
+              </Link>
             </div>
           </FadeIn>
 

@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react'
 
 interface ButtonProps {
   children: ReactNode
-  variant?: 'primary' | 'outline' | 'ghost' | 'white'
+  variant?: 'primary' | 'greenLight' | 'outline' | 'ghost' | 'white'
   size?: 'sm' | 'md' | 'lg'
   className?: string
   onClick?: () => void
@@ -17,6 +17,8 @@ interface ButtonProps {
 const variants = {
   primary:
     'bg-colbeef-green text-white hover:bg-colbeef-green-dark border border-colbeef-green',
+  greenLight:
+    'bg-colbeef-green-light text-white hover:bg-colbeef-green border border-colbeef-green-light',
   outline:
     'bg-white text-colbeef-green border-2 border-colbeef-green hover:bg-colbeef-green-pale',
   ghost:

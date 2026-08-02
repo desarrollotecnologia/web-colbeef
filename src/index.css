@@ -2,6 +2,7 @@
 
 @theme {
   --color-colbeef-green: #1a823d;
+  --color-colbeef-green-mid: #14572d;
   --color-colbeef-green-dark: #0d3d1f;
   --color-colbeef-green-darker: #052412;
   --color-colbeef-green-light: #2e9d52;
@@ -121,45 +122,46 @@ body {
 }
 
 .carousel-3d-scene {
-  --carousel-card-w: clamp(150px, 38vw, 320px);
-  --carousel-card-h: clamp(195px, 49vw, 410px);
-  --carousel-radius: clamp(185px, 44vw, 460px);
+  /* Fichas más horizontales (~4:3), sin quedar tan altas ni tan cuadradas */
+  --carousel-card-w: clamp(180px, 48vw, 360px);
+  --carousel-card-h: clamp(118px, 31vw, 232px);
+  --carousel-radius: clamp(200px, 48vw, 480px);
   --carousel-duration: 32s;
-  height: clamp(260px, 58vmin, 560px);
+  height: clamp(170px, 35vmin, 320px);
   perspective: clamp(800px, 90vw, 1400px);
   perspective-origin: 50% 42%;
 }
 
 @media (min-width: 480px) {
   .carousel-3d-scene {
-    --carousel-card-w: clamp(175px, 34vw, 320px);
-    --carousel-card-h: clamp(225px, 44vw, 410px);
-    --carousel-radius: clamp(210px, 40vw, 460px);
+    --carousel-card-w: clamp(210px, 42vw, 360px);
+    --carousel-card-h: clamp(138px, 27vw, 232px);
+    --carousel-radius: clamp(230px, 44vw, 480px);
   }
 }
 
 @media (min-width: 768px) {
   .carousel-3d-scene {
-    --carousel-card-w: clamp(220px, 28vw, 320px);
-    --carousel-card-h: clamp(285px, 36vw, 410px);
-    --carousel-radius: clamp(270px, 34vw, 460px);
+    --carousel-card-w: clamp(260px, 34vw, 360px);
+    --carousel-card-h: clamp(170px, 22vw, 232px);
+    --carousel-radius: clamp(300px, 38vw, 480px);
   }
 }
 
 @media (min-width: 1024px) {
   .carousel-3d-scene {
-    --carousel-card-w: clamp(260px, 22vw, 320px);
-    --carousel-card-h: clamp(335px, 28vw, 410px);
-    --carousel-radius: clamp(320px, 28vw, 460px);
+    --carousel-card-w: clamp(300px, 28vw, 360px);
+    --carousel-card-h: clamp(195px, 18vw, 232px);
+    --carousel-radius: clamp(360px, 32vw, 480px);
   }
 }
 
 @media (min-width: 1536px) {
   .carousel-3d-scene {
-    --carousel-card-w: 320px;
-    --carousel-card-h: 410px;
-    --carousel-radius: 460px;
-    height: 560px;
+    --carousel-card-w: 360px;
+    --carousel-card-h: 232px;
+    --carousel-radius: 480px;
+    height: 320px;
   }
 }
 

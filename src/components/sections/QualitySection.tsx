@@ -1,21 +1,52 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { certificationLogos } from '../../data/assets'
 import { qualityPillars } from '../../data/products'
-import { certificationText } from '../../data/site'
 import { AnimatedSection } from '../ui/AnimatedSection'
 
+function CertLogosPanel() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center gap-4 sm:gap-6 md:gap-8 px-5 sm:px-8 py-6 md:py-10 bg-colbeef-green-dark">
+      {certificationLogos.map((logo) => (
+        <img
+          key={logo.alt}
+          src={logo.src}
+          alt={logo.alt}
+          className="h-24 sm:h-28 md:h-32 lg:h-36 w-auto max-w-[28%] object-contain brightness-0 invert drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]"
+        />
+      ))}
+    </div>
+  )
+}
+
+function CertLogosStrip() {
+  return (
+    <div className="flex items-center gap-2 xl:gap-3 shrink-0">
+      {certificationLogos.map((logo) => (
+        <img
+          key={logo.alt}
+          src={logo.src}
+          alt=""
+          className="h-7 xl:h-9 w-auto object-contain brightness-0 invert opacity-70"
+        />
+      ))}
+    </div>
+  )
+}
+
 export function QualitySection() {
-  const [active, setActive] = useState(2)
+  const [active, setActive] = useState(0)
 
   const setActivePanel = (index: number) => setActive(index)
 
   return (
-    <AnimatedSection className="bg-white px-4 sm:px-6 md:px-8 pt-10 md:pt-14 lg:pt-16">
+    <AnimatedSection className="bg-white px-4 sm:px-6 md:px-8 py-10 md:py-14 lg:py-16">
       <div className="max-w-[1640px] mx-auto bg-colbeef-green overflow-hidden rounded-2xl xl:rounded-3xl">
-        <div className="grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] xl:grid-cols-[minmax(0,1.8fr)_minmax(0,2.2fr)] min-h-[520px] lg:min-h-[700px] xl:min-h-[780px] 2xl:min-h-[860px]">
-          <div className="flex flex-col gap-3 lg:gap-4 px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 py-5 lg:py-6 xl:py-8 min-h-[300px] lg:min-h-0">
+        <div className="grid lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:min-h-[600px] xl:min-h-[680px]">
+          <div className="flex flex-col gap-3 lg:gap-4 px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 py-5 lg:py-6 xl:py-8">
             {qualityPillars.map((pillar, i) => {
               const isActive = active === i
+              const sections = 'sections' in pillar ? pillar.sections : undefined
 
               return (
                 <motion.button
@@ -25,31 +56,53 @@ export function QualitySection() {
                   onMouseEnter={() => setActivePanel(i)}
                   onFocus={() => setActivePanel(i)}
                   onClick={() => setActivePanel(i)}
-                  className={`w-full text-left rounded-xl bg-white transition-shadow duration-300 overflow-hidden ${
-                    isActive ? 'shadow-lg flex-[2.5] min-h-[160px] lg:min-h-[220px]' : 'flex-1 min-h-[72px] lg:min-h-[96px] hover:shadow-md'
+                  className={`w-full text-left rounded-xl bg-white overflow-hidden transition-shadow duration-300 ${
+                    isActive
+                      ? 'shadow-lg flex-none'
+                      : 'flex-1 min-h-[68px] sm:min-h-[76px] lg:min-h-[88px] hover:shadow-md'
                   }`}
                   aria-expanded={isActive}
                 >
-                  <div className="p-4 sm:p-5 h-full flex flex-col">
-                    <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-colbeef-green/60 mb-1">
+                  <div className="p-4 sm:p-5 md:p-6 h-full flex flex-col">
+                    <p className="text-xs sm:text-sm font-extrabold tracking-[0.18em] uppercase text-colbeef-green mb-1.5">
                       {pillar.category}
                     </p>
-                    <h3 className="text-colbeef-green font-bold text-xs sm:text-sm md:text-base xl:text-lg leading-snug">
+                    <h3 className="text-colbeef-green font-bold text-sm sm:text-base md:text-lg xl:text-xl leading-snug">
                       {pillar.title}
                     </h3>
 
                     <AnimatePresence initial={false}>
                       {isActive && (
-                        <motion.p
-                          key="description"
+                        <motion.div
+                          key="content"
                           initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                          animate={{ opacity: 1, height: 'auto', marginTop: 12 }}
+                          animate={{ opacity: 1, height: 'auto', marginTop: 14 }}
                           exit={{ opacity: 0, height: 0, marginTop: 0 }}
                           transition={{ duration: 0.35, ease: 'easeOut' }}
-                          className="text-colbeef-gray text-xs sm:text-sm leading-relaxed overflow-hidden"
+                          className="overflow-hidden"
                         >
-                          {pillar.description}
-                        </motion.p>
+                          {sections ? (
+                            <div className="space-y-5 pr-1">
+                              {sections.map((block) => (
+                                <div key={block.label}>
+                                  <p className="text-[11px] sm:text-xs font-extrabold tracking-wide uppercase text-colbeef-green mb-0.5">
+                                    {block.label}
+                                  </p>
+                                  <p className="text-colbeef-green font-bold text-xs sm:text-sm mb-1.5">
+                                    {block.title}
+                                  </p>
+                                  <p className="text-colbeef-gray text-xs sm:text-sm leading-relaxed">
+                                    {block.description}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-colbeef-gray text-xs sm:text-sm leading-relaxed">
+                              {pillar.description}
+                            </p>
+                          )}
+                        </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
@@ -59,18 +112,32 @@ export function QualitySection() {
           </div>
 
           <div className="flex flex-col gap-3 lg:gap-4 px-4 sm:px-6 md:px-8 lg:pr-8 xl:pr-10 py-5 lg:py-6 xl:py-8 lg:pl-0 pt-0 lg:pt-6 min-h-[220px] lg:min-h-0">
-            <div className="lg:hidden relative h-52 sm:h-60 rounded-xl overflow-hidden">
-              <img
-                src={qualityPillars[active].image}
-                alt={qualityPillars[active].title}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/10" />
+            <div className="lg:hidden relative h-48 sm:h-60 md:h-72 rounded-xl overflow-hidden">
+              {qualityPillars[active].id === 'calidad' ? (
+                <CertLogosPanel />
+              ) : (
+                <>
+                  <img
+                    src={qualityPillars[active].image}
+                    alt={qualityPillars[active].title}
+                    className={`absolute inset-0 w-full h-full ${
+                      qualityPillars[active].id === 'exportacion'
+                        ? 'object-contain bg-colbeef-green'
+                        : 'object-cover'
+                    }`}
+                  />
+                  {qualityPillars[active].id !== 'exportacion' && (
+                    <div className="absolute inset-0 bg-black/10" />
+                  )}
+                </>
+              )}
             </div>
 
             <div className="hidden lg:flex flex-col gap-3 lg:gap-4 flex-1 min-h-0">
               {qualityPillars.map((pillar, i) => {
                 const isActive = active === i
+                const isMap = pillar.id === 'exportacion'
+                const isCerts = pillar.id === 'calidad'
 
                 return (
                   <motion.button
@@ -84,32 +151,49 @@ export function QualitySection() {
                       isActive
                         ? 'flex-[2.5] min-h-[240px] xl:min-h-[280px] shadow-lg'
                         : 'flex-1 min-h-[88px] xl:min-h-[104px] hover:opacity-95'
-                    }`}
+                    } ${isMap && isActive ? 'bg-colbeef-green' : ''}`}
                     aria-label={pillar.title}
                   >
-                    <img
-                      src={pillar.image}
-                      alt={pillar.title}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                    <div
-                      className={`absolute inset-0 transition-colors duration-300 ${
-                        isActive ? 'bg-black/10' : 'bg-colbeef-green-darker/45'
-                      }`}
-                    />
-
-                    {!isActive && (
-                      <div className="absolute inset-0 flex items-center px-4 xl:px-6">
-                        <span className="text-white text-[10px] sm:text-xs xl:text-sm font-bold tracking-wider uppercase drop-shadow">
-                          {pillar.title}
-                        </span>
-                      </div>
-                    )}
-
-                    {pillar.id === 'exportacion' && isActive && (
-                      <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 bg-black/50 text-white/80 text-[10px] italic px-2 py-1 rounded">
-                        * Mapa de exportación — reemplazar con imagen oficial
-                      </div>
+                    {isCerts ? (
+                      isActive ? (
+                        <CertLogosPanel />
+                      ) : (
+                        <>
+                          <div className="absolute inset-0 bg-colbeef-green-dark" />
+                          <div className="absolute inset-0 flex items-center justify-between gap-3 px-4 xl:px-6">
+                            <span className="min-w-0 text-white text-[10px] sm:text-xs xl:text-sm font-bold tracking-wider uppercase leading-snug drop-shadow">
+                              {pillar.title}
+                            </span>
+                            <CertLogosStrip />
+                          </div>
+                        </>
+                      )
+                    ) : (
+                      <>
+                        <img
+                          src={pillar.image}
+                          alt={pillar.title}
+                          className={`absolute inset-0 w-full h-full ${
+                            isMap && isActive ? 'object-contain' : 'object-cover'
+                          }`}
+                        />
+                        <div
+                          className={`absolute inset-0 transition-colors duration-300 ${
+                            isMap && isActive
+                              ? 'bg-transparent'
+                              : isActive
+                                ? 'bg-black/10'
+                                : 'bg-colbeef-green-darker/45'
+                          }`}
+                        />
+                        {!isActive && (
+                          <div className="absolute inset-0 flex items-center px-4 xl:px-6">
+                            <span className="text-white text-[10px] sm:text-xs xl:text-sm font-bold tracking-wider uppercase drop-shadow">
+                              {pillar.title}
+                            </span>
+                          </div>
+                        )}
+                      </>
                     )}
                   </motion.button>
                 )
@@ -117,12 +201,6 @@ export function QualitySection() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="max-w-[1640px] mx-auto px-4 md:px-8 py-8 md:py-10">
-        <p className="text-colbeef-gray text-xs text-center max-w-4xl mx-auto leading-relaxed">
-          {certificationText}
-        </p>
       </div>
     </AnimatedSection>
   )

@@ -65,10 +65,19 @@ export const images = {
   corte3: asset('/images/cortes/corte-3.jpg'),
   corte4: asset('/images/cortes/corte-4.jpg'),
   corte5: asset('/images/cortes/corte-5.jpg'),
-  cortesMapaBase: asset('/assets/images/cortes/cortes-mapa-base.jpg'),
-  cortesMapaOverlay: asset('/assets/images/cortes/cortes-mapa-overlay.jpg'),
+  cortesMapaRes: asset('/assets/images/cortes/cortes-mapa-res.jpg'),
   corteFichaEjemplo: asset('/assets/images/cortes/fichas/corte-ejemplo.png'),
+  mapaExportacion: asset('/assets/images/mapa-exportacion.png'),
+  certHaccp: asset('/assets/images/certificaciones/haccp-transparent.png'),
+  certIso22000: asset('/assets/images/certificaciones/iso-22000-transparent.png'),
+  certInvima: asset('/assets/images/certificaciones/invima-transparent.png'),
 } as const
+
+export const certificationLogos = [
+  { src: images.certHaccp, alt: 'HACCP' },
+  { src: images.certIso22000, alt: 'ISO 22000' },
+  { src: images.certInvima, alt: 'INVIMA' },
+] as const
 
 export const carouselCuts = [
   { src: images.corte1, alt: 'Corte premium Colbeef 1' },
