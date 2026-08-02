@@ -12,7 +12,7 @@ const pesajeFeatures = [
   { label: 'Transparencia y trazabilidad', icon: ShieldCheck },
 ] as const
 
-const pesajeSectionImage = serviciosImages.pesajeGanado
+const pesajeSectionImage = serviciosImages.pesajeDetalle
 
 export function PesajeDetailSection() {
   return (

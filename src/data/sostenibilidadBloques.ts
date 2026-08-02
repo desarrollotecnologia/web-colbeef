@@ -70,8 +70,8 @@ export const sostenibilidadBloques: SostenibilidadBloque[] = [
       'Por esta razón contamos con una Planta de Tratamiento de Aguas Residuales (PTAR) diseñada para tratar las aguas generadas durante nuestros procesos industriales antes de su disposición final, conforme a la normativa ambiental vigente.',
       'Nuestra gestión busca optimizar el uso del recurso hídrico, fortalecer el control de nuestros procesos y promover una operación responsable con el entorno.',
     ],
-    image: corporativo.sostenibilidad.gestionAgua,
-    imageAlt: 'Gestión responsable del agua en COLBEEF',
+    image: corporativo.sostenibilidad.ptar,
+    imageAlt: 'Planta de Tratamiento de Aguas Residuales (PTAR) de COLBEEF',
     indicadoresTitle: 'Beneficios',
     indicadores: [
       { label: 'Gestión responsable del recurso hídrico', icon: Droplets },
@@ -92,7 +92,7 @@ export const sostenibilidadBloques: SostenibilidadBloque[] = [
       'Trabajamos de manera articulada con colaboradores, proveedores, organizaciones sociales e instituciones para generar oportunidades de desarrollo y fortalecer el bienestar de las comunidades donde tenemos presencia.',
       'Impulsamos iniciativas enfocadas en el fortalecimiento del empleo, la seguridad alimentaria, la formación y el acompañamiento a diferentes programas sociales.',
     ],
-    image: corporativo.sostenibilidad.compromisoComunidad,
+    image: corporativo.sostenibilidad.comunidad,
     imageAlt: 'Compromiso de COLBEEF con la comunidad',
     indicadoresTitle: 'Nuestras líneas de acción',
     indicadores: [

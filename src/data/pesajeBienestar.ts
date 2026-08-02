@@ -18,9 +18,6 @@ export interface BienestarFeature {
   icon: LucideIcon
 }
 
-const pesajeGanadoImage = serviciosImages.pesajeGanado
-const pesajeBasculaImage = serviciosImages.pesajeBascula
-
 export const bienestarAnimalContent = {
   label: 'Bienestar animal',
   title: 'Infraestructura diseñada para su bienestar',
@@ -33,7 +30,7 @@ export const bienestarAnimalContent = {
       title: 'Espacio adecuado',
       description:
         'Capacidad de almacenamiento de 2 m² por animal. Espacio correcto para manifestar su comportamiento normal y fácil movimiento.',
-      image: pesajeGanadoImage,
+      image: serviciosImages.pesajeBienestar01,
       icon: Maximize2,
     },
     {
@@ -42,7 +39,7 @@ export const bienestarAnimalContent = {
       title: 'Agua potable a voluntad',
       description:
         'Agua en condiciones de potabilización disponible para el consumo de los animales, reduciendo el estrés y cumpliendo la primera libertad: libres de hambre y sed.',
-      image: pesajeGanadoImage,
+      image: serviciosImages.pesajeBienestar02,
       icon: Droplets,
     },
     {
@@ -51,7 +48,7 @@ export const bienestarAnimalContent = {
       title: 'Diseño espina de pescado',
       description:
         'Corrales con ángulos de 60°, que permiten la normal movilidad de los animales y evita amontonamientos dentro de los mismos.',
-      image: pesajeBasculaImage,
+      image: serviciosImages.pesajeBienestar03,
       icon: CornerDownRight,
     },
     {
@@ -60,7 +57,7 @@ export const bienestarAnimalContent = {
       title: 'Escalinatas seguras',
       description:
         'Rampas y escalinatas diseñadas para facilitar el ingreso y movimiento del ganado, reduciendo el riesgo de caídas y lesiones.',
-      image: pesajeGanadoImage,
+      image: serviciosImages.pesajeBienestar04,
       icon: Layers,
     },
     {
@@ -69,7 +66,7 @@ export const bienestarAnimalContent = {
       title: 'Pisos antideslizantes',
       description:
         'Superficies con acabado antideslizante que garantizan estabilidad y seguridad durante el tránsito de los animales.',
-      image: pesajeGanadoImage,
+      image: serviciosImages.pesajeBienestar05,
       icon: Grid3x3,
     },
     {
@@ -78,7 +75,7 @@ export const bienestarAnimalContent = {
       title: 'Polisombras',
       description:
         'Coberturas que protegen al ganado del sol directo, mejorando su confort y bienestar durante la estancia en corrales.',
-      image: pesajeGanadoImage,
+      image: serviciosImages.pesajeBienestar06,
       icon: Sun,
     },
   ] satisfies BienestarFeature[],

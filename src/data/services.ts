@@ -1,7 +1,7 @@
 import { icons, images, serviciosImages } from './assets'
 import type { PageHeroContent } from '../types/pageHero'
 
-const pesajeHeroImage = serviciosImages.pesajeGanado
+const pesajeHeroImage = serviciosImages.pesajeBanner
 const beneficioHeroImage = serviciosImages.beneficioHero
 
 export type ServiceHeroContent = PageHeroContent
