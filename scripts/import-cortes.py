@@ -53,14 +53,31 @@ def read_rows(xlsx: Path) -> list[dict]:
     return rows
 
 
-def export_photo(folder: Path, slug: str) -> str | None:
+def pick_photo(folder: Path) -> Path | None:
+    """Prefiere una toma horizontal para que la ficha no deje bandas negras."""
     photos = sorted(p for p in folder.iterdir() if p.suffix.lower() in {'.jpg', '.jpeg', '.png'})
     if not photos:
         return None
 
+    horizontales: list[Path] = []
+    verticales: list[Path] = []
+
+    for photo in photos:
+        with Image.open(photo) as img:
+            img = ImageOps.exif_transpose(img)
+            (horizontales if img.width >= img.height else verticales).append(photo)
+
+    return (horizontales or verticales)[0]
+
+
+def export_photo(folder: Path, slug: str) -> str | None:
+    photo = pick_photo(folder)
+    if photo is None:
+        return None
+
     destination = OUT_IMAGES / f'{slug}.jpg'
 
-    with Image.open(photos[0]) as img:
+    with Image.open(photo) as img:
         img = ImageOps.exif_transpose(img).convert('RGB')
 
         if img.width > MAX_WIDTH:

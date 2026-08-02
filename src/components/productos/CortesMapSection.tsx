@@ -9,6 +9,7 @@ import {
   getAreaPoints,
   getCorteDetalle,
   getCorteFichaImage,
+  type CorteArea,
   type CorteGrupo,
 } from '../../data/cortesMap'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
@@ -16,6 +17,29 @@ import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 const grupoLabels: Record<CorteGrupo, string> = {
   delanteros: 'Cortes delanteros',
   traseros: 'Cortes traseros',
+}
+
+function ActiveCutLabel({ area }: { area: CorteArea }) {
+  const { x, y } = getAreaCenter(area)
+  const { dx = 0, dy = 0, rotate = 0, scale = 1 } = area.label ?? {}
+
+  return (
+    <motion.span
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.16 }}
+      className="absolute whitespace-nowrap font-bold uppercase leading-none tracking-wide text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)]"
+      style={{
+        left: `${x + dx}%`,
+        top: `${y + dy}%`,
+        fontSize: `${1.85 * scale}cqw`,
+        transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
+      }}
+    >
+      {area.name}
+    </motion.span>
+  )
 }
 
 export function CortesMapSection() {
@@ -38,7 +62,7 @@ export function CortesMapSection() {
             Seleccione un corte
           </h2>
           <p className="text-colbeef-gray text-sm mt-3 max-w-2xl mx-auto">
-            Pase el cursor o toque una zona del animal. Al seleccionarla verá la ficha del corte.
+            Pase el cursor o toque una zona del animal: verá el nombre del corte y su ficha al seleccionarlo.
           </p>
         </FadeIn>
 
@@ -102,31 +126,12 @@ export function CortesMapSection() {
                 ))}
               </div>
 
-              <div className="absolute inset-0 hidden sm:block pointer-events-none">
-                {cortesMapZonas.map((area) => {
-                  const { x, y } = getAreaCenter(area)
-                  const { dx = 0, dy = 0, rotate = 0, scale = 1 } = area.label ?? {}
-                  const isActive = activeArea?.name === area.name
-
-                  return (
-                    <span
-                      key={`label-${area.id}`}
-                      className={`absolute whitespace-nowrap font-bold uppercase leading-none tracking-wide transition-colors duration-200 ${
-                        isActive
-                          ? 'text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)]'
-                          : 'text-colbeef-green-darker drop-shadow-[0_1px_2px_rgba(255,255,255,0.9)]'
-                      }`}
-                      style={{
-                        left: `${x + dx}%`,
-                        top: `${y + dy}%`,
-                        fontSize: `${1.6 * scale}cqw`,
-                        transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
-                      }}
-                    >
-                      {area.name}
-                    </span>
-                  )
-                })}
+              <div className="absolute inset-0 pointer-events-none">
+                <AnimatePresence mode="wait">
+                  {activeArea && (
+                    <ActiveCutLabel key={activeArea.id} area={activeArea} />
+                  )}
+                </AnimatePresence>
               </div>
             </div>
           </FadeIn>
