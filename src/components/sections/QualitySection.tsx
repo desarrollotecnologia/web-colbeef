@@ -6,13 +6,13 @@ import { AnimatedSection } from '../ui/AnimatedSection'
 
 function CertLogosPanel() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-4 sm:gap-6 md:gap-8 px-5 sm:px-8 py-6 md:py-10 bg-colbeef-green-dark">
+    <div className="absolute inset-0 flex items-center justify-center gap-4 sm:gap-6 md:gap-8 px-5 sm:px-8 py-6 md:py-10 bg-[#C9D5D7]">
       {certificationLogos.map((logo) => (
         <img
           key={logo.alt}
           src={logo.src}
           alt={logo.alt}
-          className="h-24 sm:h-28 md:h-32 lg:h-36 w-auto max-w-[28%] object-contain brightness-0 invert drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]"
+          className="h-24 sm:h-28 md:h-32 lg:h-36 w-auto max-w-[28%] object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.12)]"
         />
       ))}
     </div>
@@ -27,7 +27,7 @@ function CertLogosStrip() {
           key={logo.alt}
           src={logo.src}
           alt=""
-          className="h-7 xl:h-9 w-auto object-contain brightness-0 invert opacity-70"
+          className="h-7 xl:h-9 w-auto object-contain opacity-80"
         />
       ))}
     </div>
@@ -41,7 +41,7 @@ export function QualitySection() {
 
   return (
     <AnimatedSection className="bg-white px-4 sm:px-6 md:px-8 py-10 md:py-14 lg:py-16">
-      <div className="max-w-[1640px] mx-auto bg-colbeef-green overflow-hidden rounded-2xl xl:rounded-3xl">
+      <div className="max-w-[1640px] mx-auto bg-[#546B74] overflow-hidden rounded-2xl xl:rounded-3xl">
         <div className="grid lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:min-h-[600px] xl:min-h-[680px]">
           <div className="flex flex-col gap-3 lg:gap-4 px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 py-5 lg:py-6 xl:py-8">
             {qualityPillars.map((pillar, i) => {
@@ -159,9 +159,9 @@ export function QualitySection() {
                         <CertLogosPanel />
                       ) : (
                         <>
-                          <div className="absolute inset-0 bg-colbeef-green-dark" />
+                          <div className="absolute inset-0 bg-[#C9D5D7]" />
                           <div className="absolute inset-0 flex items-center justify-between gap-3 px-4 xl:px-6">
-                            <span className="min-w-0 text-white text-[10px] sm:text-xs xl:text-sm font-bold tracking-wider uppercase leading-snug drop-shadow">
+                            <span className="min-w-0 text-[#263136] text-[10px] sm:text-xs xl:text-sm font-bold tracking-wider uppercase leading-snug">
                               {pillar.title}
                             </span>
                             <CertLogosStrip />
