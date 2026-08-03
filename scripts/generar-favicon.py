@@ -1,4 +1,4 @@
-"""Regenera favicons de Colbeef con buena calidad y rutas listas para GitHub Pages."""
+"""Regenera favicons desde el logo oficial de Colbeef."""
 
 from __future__ import annotations
 
@@ -9,26 +9,26 @@ from PIL import Image, ImageOps
 
 REPO = Path(__file__).resolve().parents[1]
 OUT = REPO / "public"
-
-CANDIDATES = [
-    REPO / "public/assets/brand/logo-favicon-source.png",
-    REPO / "public/assets/brand/logo-colbeef-transparent.png",
-]
+LOGO = REPO / "public/assets/brand/logo-colbeef-transparent.png"
 
 
 def load_logo() -> Image.Image:
-    origen = next((p for p in CANDIDATES if p.exists()), None)
-    if origen is None:
-        raise FileNotFoundError("No se encontró el logo fuente para favicon")
+    if not LOGO.exists():
+        raise FileNotFoundError(f"No se encontró el logo: {LOGO}")
 
-    im = ImageOps.exif_transpose(Image.open(origen)).convert("RGBA")
-    arr = np.asarray(im.convert("RGB")).astype(int)
-    mask = (arr < 248).any(axis=-1)
+    im = ImageOps.exif_transpose(Image.open(LOGO)).convert("RGBA")
+    arr = np.asarray(im)
+    alpha = arr[:, :, 3]
+    rgb = arr[:, :, :3].astype(int)
+    # Contenido: píxeles visibles (no fondo negro/transparente)
+    mask = (alpha > 20) & ((rgb > 25).any(axis=-1))
     ys, xs = np.nonzero(mask)
+    if len(xs) == 0:
+        raise ValueError("El logo no tiene contenido visible")
     return im.crop((int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1))
 
 
-def make_square(src: Image.Image, size: int, pad_ratio: float = 0.14) -> Image.Image:
+def make_square(src: Image.Image, size: int, pad_ratio: float = 0.12) -> Image.Image:
     canvas = Image.new("RGBA", (size, size), (255, 255, 255, 255))
     max_inner = int(size * (1 - 2 * pad_ratio))
     w, h = src.size
@@ -43,6 +43,7 @@ def make_square(src: Image.Image, size: int, pad_ratio: float = 0.14) -> Image.I
 
 def main() -> None:
     cropped = load_logo()
+    print("origen", LOGO.name)
     print("logo", cropped.size)
 
     sizes = {
@@ -59,16 +60,10 @@ def main() -> None:
         make_square(cropped, size).convert("RGB").save(path, "PNG", optimize=True)
         print(f"{name}: {path.stat().st_size} B")
 
-    icons = [make_square(cropped, s).convert("RGBA") for s in (16, 32, 48, 64)]
+    # ICO multi-size de Pillow a veces queda vacío; un 32px sólido es confiable
     ico = OUT / "favicon.ico"
-    icons[0].save(
-        ico,
-        format="ICO",
-        sizes=[(16, 16), (32, 32), (48, 48), (64, 64)],
-        append_images=icons[1:],
-    )
+    make_square(cropped, 32).convert("RGBA").save(ico, format="ICO", sizes=[(32, 32)])
     print(f"favicon.ico: {ico.stat().st_size} B")
-    # Sin favicon.svg: el cache del SVG de Vite es muy persistente.
 
 
 if __name__ == "__main__":
