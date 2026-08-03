@@ -14,6 +14,8 @@ export function SomosSection() {
               <img
                 src={corporativo.nosotros.foto1}
                 alt="Planta Colbeef"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[280px] md:h-[400px] object-cover"
               />
             </div>

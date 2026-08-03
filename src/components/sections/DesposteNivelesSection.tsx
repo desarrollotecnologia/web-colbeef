@@ -140,6 +140,8 @@ function NivelCard({ nivel, index }: { nivel: DesposteNivel; index: number }) {
           <img
             src={nivel.image}
             alt={nivel.title}
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>

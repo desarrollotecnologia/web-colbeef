@@ -27,6 +27,8 @@ export function SostenibilidadBloquesSection() {
                   <img
                     src={bloque.image}
                     alt={bloque.imageAlt}
+                    loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 h-full w-full object-cover object-center"
                   />
                 </div>

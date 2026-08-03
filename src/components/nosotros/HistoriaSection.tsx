@@ -142,6 +142,8 @@ export function HistoriaSection() {
               <motion.img
                 src={corporativo.nosotros.banner}
                 alt="Planta Colbeef"
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover"
                 initial={{ scale: 1.08 }}
                 whileInView={{ scale: 1 }}

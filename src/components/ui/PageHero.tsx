@@ -10,7 +10,13 @@ interface PageHeroProps {
 export function PageHero({ image, alt, content }: PageHeroProps) {
   return (
     <section className="relative h-[52vh] min-h-[380px] sm:min-h-[420px] md:min-h-[480px] max-h-[620px] overflow-hidden pt-header">
-      <img src={image} alt={alt} className="absolute inset-0 w-full h-full object-cover object-center" />
+      <img
+        src={image}
+        alt={alt}
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
       <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/15" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/20" />
 

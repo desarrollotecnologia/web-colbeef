@@ -32,6 +32,8 @@ export function CertificacionesNosotrosSection() {
               <img
                 src={images.certIso22000}
                 alt="Certificación ISO 22000"
+                loading="lazy"
+                decoding="async"
                 className="w-full max-w-[200px] sm:max-w-[220px] mx-auto h-auto object-contain"
               />
             </FadeIn>
@@ -69,6 +71,8 @@ export function CertificacionesNosotrosSection() {
               <img
                 src={images.certHaccp}
                 alt="Certificación HACCP"
+                loading="lazy"
+                decoding="async"
                 className="w-full max-w-[200px] sm:max-w-[220px] mx-auto h-auto object-contain"
               />
             </FadeIn>
@@ -99,6 +103,8 @@ export function CertificacionesNosotrosSection() {
                 <img
                   src={corporativo.certificaciones.politicasCalidad}
                   alt="Políticas de calidad"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-[280px] md:h-[360px] object-cover"
                 />
                 <div className="absolute bottom-4 left-4 bg-colbeef-green/90 text-white px-5 py-3 rounded-xl">

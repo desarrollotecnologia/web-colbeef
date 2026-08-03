@@ -39,6 +39,8 @@ export function BienestarAnimalSection() {
                       <img
                         src={feature.image}
                         alt={feature.title}
+                        loading="lazy"
+                        decoding="async"
                         className="absolute inset-0 h-full w-full object-cover object-center"
                       />
                     </div>

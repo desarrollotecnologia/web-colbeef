@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Fuentes duplicadas (no van al deploy)
+public/assets/corporativo-src/
