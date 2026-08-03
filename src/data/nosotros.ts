@@ -18,7 +18,7 @@ export const somosContent = {
     'En COLBEEF trabajamos día a día para fortalecer el desarrollo sostenible del sector agroindustrial, generando valor para nuestros clientes, proveedores, colaboradores y comunidades, con una visión enfocada en la excelencia, la innovación y el crecimiento responsable.',
   ],
   highlight:
-    'Líder en innovación, inocuidad alimentaria, sostenibilidad y exportación de carne bovina y bufalina, con una visión enfocada en la excelencia, la innovación y el crecimiento responsable.',
+    'Nos proyectamos como una organización líder en innovación, inocuidad alimentaria, sostenibilidad y exportación de carne bovina y bufalina, impulsando una gestión orientada a la excelencia operacional, la mejora continua, la innovación estratégica y el crecimiento responsable, generando valor para nuestros clientes, colaboradores, aliados y la región.',
 }
 
 export const historiaTimeline = [
@@ -26,7 +26,7 @@ export const historiaTimeline = [
     year: '2006',
     title: 'Nace el proyecto empresarial',
     description:
-      'Impulsado por SUREXGAN S.A.S. Creación de Plaza de Ferias y Planta de Sacrificio El Contento S.A.',
+      'Inicia una nueva apuesta empresarial para fortalecer la cadena ganadera y promover el desarrollo económico y productivo de la región.',
     variant: 'green' as const,
   },
   {
@@ -36,28 +36,28 @@ export const historiaTimeline = [
     variant: 'white' as const,
   },
   {
-    year: '2013-2015',
+    year: '2013-2018',
     title: 'Inicio de operaciones',
     description:
       'La planta entra oficialmente en funcionamiento. Certificación INVIMA y HACCP con cumplimiento de estándares nacionales e internacionales.',
     variant: 'green' as const,
   },
   {
-    year: 'PTAR',
+    year: '2021',
     title: 'Planta de Tratamiento de Aguas Residuales',
     description:
       'Implementación de la PTAR para el tratamiento y reutilización responsable del recurso hídrico en nuestros procesos.',
     variant: 'white' as const,
   },
   {
-    year: '2021',
+    year: '2022',
     title: 'Energía renovable',
     description:
       'Instalación del sistema fotovoltaico de 729 kWp para fortalecer la sostenibilidad y eficiencia energética.',
     variant: 'green' as const,
   },
   {
-    year: '2022-2024',
+    year: '2023-2025',
     title: 'Consolidación exportadora',
     description: 'Habilitación para mercados internacionales y fortalecimiento de la cadena cárnica.',
     variant: 'white' as const,
@@ -150,13 +150,33 @@ export const sostenibilidadContent = {
 export const certificacionesContent = {
   title: 'Certificaciones',
   subtitle: 'Nuestras habilitaciones',
-  invima: {
-    title: 'Inspección permanente INVIMA',
-    paragraphs: [
-      'El Frigorífico Colbeef S.A.S. es la segunda planta de beneficio bovino y bufalino en ser certificada por el INVIMA bajo Decreto 1500 de 2007 y certificada HACCP por la misma norma, logrando así el cumplimiento de los estándares sanitarios internacionales.',
-      'Contamos con inspección permanente del INVIMA, verificando la inocuidad de nuestros productos mediante un seguimiento exhaustivo a cada proceso. Estamos certificados para el beneficio de bovinos mediante el Rito HALAL, procedimiento requerido dentro de la cultura musulmana.',
-      'Esto nos permite producir carne certificada bajo este estándar, ampliando nuestras capacidades de comercialización.',
+  iso22000: {
+    title: 'Certificación ISO 22000',
+    intro:
+      'Contamos con la certificación ISO 22000, estándar internacional que integra los principios de gestión de calidad y control de inocuidad alimentaria a lo largo de toda la cadena de producción.',
+    compromisoLabel: 'Esta certificación respalda nuestro compromiso con:',
+    items: [
+      'Identificación y control de peligros alimentarios.',
+      'Trazabilidad en los procesos productivos.',
+      'Cumplimiento de requisitos legales y regulatorios.',
+      'Mejora continua del sistema de gestión.',
+      'Protección de la salud y seguridad del consumidor.',
     ],
+  },
+  haccp: {
+    title: 'HACCP',
+    intro:
+      'COLBEEF cuenta con un sistema HACCP, reconocido internacionalmente como una de las herramientas más efectivas para garantizar la inocuidad de los alimentos mediante la identificación, evaluación y control de peligros biológicos, químicos y físicos.',
+    compromisoLabel: 'Nuestro sistema HACCP permite:',
+    items: [
+      'Identificar los peligros potenciales en cada etapa del proceso.',
+      'Establecer puntos críticos de control (PCC).',
+      'Definir límites críticos y medidas de monitoreo.',
+      'Implementar acciones correctivas oportunas.',
+      'Verificar continuamente la eficacia del sistema.',
+    ],
+    closing:
+      'Esta certificación fortalece nuestra capacidad para atender mercados nacionales e internacionales, cumpliendo con exigentes estándares de seguridad alimentaria para la industria cárnica.',
   },
   sections: [
     {
@@ -171,7 +191,7 @@ export const certificacionesContent = {
     },
   ],
   politicaCalidad:
-    'La compañía se compromete a garantizar la calidad e inocuidad de los productos en el marco del Decreto 1500 de 2007; así mismo a promover la calidad de las personas, procesos y productos, asegurando la confianza y satisfacción de las necesidades permanentes de nuestros clientes, mediante nuestra cultura organizacional, trazabilidad, el uso de alta tecnología, principios de bienestar animal y la preservación del medio ambiente.',
+    'Garantizamos productos inocuos y confiables mediante procesos eficientes, el cumplimiento de los requisitos aplicables y la mejora continua, orientando nuestra gestión a la satisfacción de nuestros clientes y al crecimiento sostenible de la organización.',
   politicaAmbiental:
     'La compañía se encuentra comprometida con el manejo ambiental responsable, la prevención de la contaminación y el control de los impactos ambientales asociados a sus procesos, cumpliendo con la legislación ambiental vigente y realizando cada una de sus actividades con el propósito de alcanzar un desarrollo sostenible bajo las Buenas Prácticas Ambientales.',
 }

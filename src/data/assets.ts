@@ -132,6 +132,7 @@ export const corporativo = {
   certificaciones: {
     banner: asset('/assets/corporativo/certificaciones/banner-certificados.png'),
     bannerPoliticaAmbiental: asset('/assets/corporativo/certificaciones/banner-politica-ambiental.png'),
+    politicasCalidad: asset('/assets/corporativo/certificaciones/politicas-calidad.jpg'),
     todosCertificados: asset('/assets/corporativo/certificaciones/todos-certificados.png'),
     invima: asset('/assets/corporativo/certificaciones/invima-sello.png'),
     tituloHabilitaciones: asset('/assets/corporativo/certificaciones/titulo-habilitaciones.png'),

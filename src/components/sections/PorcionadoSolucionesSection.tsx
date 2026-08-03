@@ -6,24 +6,25 @@ import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 
 interface PorcionadoSolucion {
   id: string
+  number: string
   title: string
   description: string
   items: string[]
   image: string
-  accent: 'green' | 'red'
 }
 
 const soluciones: PorcionadoSolucion[] = [
   {
     id: 'porciones',
+    number: '01',
     title: 'Porciones listas para cocinar',
     description: 'Ideal para operaciones que requieren rapidez y estandarización.',
     items: ['Carne en sábana', 'Julianas', 'Cubos', 'Goulash'],
     image: serviciosImages.porcionadoProceso,
-    accent: 'green',
   },
   {
     id: 'premium',
+    number: '02',
     title: 'Cortes Premium',
     description: 'Transformamos las postas en cortes de alto valor gastronómico.',
     items: [
@@ -39,18 +40,18 @@ const soluciones: PorcionadoSolucion[] = [
       'Asado de Tira',
     ],
     image: serviciosImages.desposteTipo4,
-    accent: 'red',
   },
   {
     id: 'gramajes',
+    number: '03',
     title: 'Gramajes personalizados',
     description: 'Adaptamos cada producto según las especificaciones del cliente.',
     items: ['Peso exacto', 'Espesor definido', 'Empaque personalizado', 'Etiquetado'],
     image: serviciosImages.desposteTipo2,
-    accent: 'green',
   },
   {
     id: 'picking',
+    number: '04',
     title: 'Picking y Alistamiento',
     description:
       'Cada pedido es preparado bajo un proceso organizado y controlado que asegura la correcta selección, consolidación y despacho de los productos.',
@@ -61,22 +62,8 @@ const soluciones: PorcionadoSolucion[] = [
       'Pedido exacto',
     ],
     image: serviciosImages.beneficioProceso,
-    accent: 'red',
   },
 ]
-
-const accentStyles = {
-  green: {
-    border: 'border-colbeef-green',
-    title: 'text-colbeef-green group-hover:text-colbeef-green-light',
-    check: 'text-colbeef-green group-hover:text-colbeef-green-light',
-  },
-  red: {
-    border: 'border-[#8B1E2D]',
-    title: 'text-[#C43B4E] group-hover:text-[#E85A6B]',
-    check: 'text-[#C43B4E] group-hover:text-[#E85A6B]',
-  },
-} as const
 
 function SolucionCard({
   solucion,
@@ -85,32 +72,41 @@ function SolucionCard({
   solucion: PorcionadoSolucion
   index: number
 }) {
-  const accent = accentStyles[solucion.accent]
-
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.08, duration: 0.4 }}
-      className={`group flex h-full w-full flex-col overflow-hidden rounded-xl border-2 bg-[#111111] shadow-lg transition-colors duration-300 hover:bg-[#1a1a1a] ${accent.border}`}
+      className="group flex h-full w-full flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-md transition-colors duration-300 hover:bg-colbeef-green-darker hover:border-colbeef-green-darker"
     >
       <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <h3
-          className={`mb-3 min-h-[2.75rem] text-sm sm:text-base font-bold uppercase leading-snug transition-colors duration-300 ${accent.title}`}
-        >
-          {solucion.title}
-        </h3>
+        <div className="mb-4 flex min-h-[3.25rem] items-start gap-3">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-colbeef-green text-sm font-bold text-white transition-colors duration-300 group-hover:bg-white group-hover:text-colbeef-green-darker">
+            {solucion.number}
+          </span>
+          <div>
+            <h3 className="text-sm sm:text-base font-bold uppercase leading-snug text-colbeef-green transition-colors duration-300 group-hover:text-white">
+              {solucion.title}
+            </h3>
+          </div>
+        </div>
 
-        <p className="mb-4 min-h-[3.75rem] text-xs sm:text-sm leading-relaxed text-white/75 transition-colors duration-300 group-hover:text-white/90">
+        <p className="mb-4 min-h-[3.5rem] text-xs sm:text-sm leading-relaxed text-colbeef-gray transition-colors duration-300 group-hover:text-white/80">
           {solucion.description}
         </p>
 
-        <ul className="mb-5 min-h-[11.5rem] space-y-1.5 sm:min-h-[12.5rem]">
+        <p className="mb-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-colbeef-green transition-colors duration-300 group-hover:text-colbeef-green-light">
+          Incluye
+        </p>
+        <ul className="mb-5 min-h-[12.5rem] space-y-1.5 sm:min-h-[13.5rem]">
           {solucion.items.map((item) => (
-            <li key={item} className="flex items-start gap-2 text-xs sm:text-sm text-white/90">
+            <li
+              key={item}
+              className="flex items-start gap-2 text-xs sm:text-sm text-colbeef-dark transition-colors duration-300 group-hover:text-white/90"
+            >
               <Check
-                className={`mt-0.5 h-3.5 w-3.5 shrink-0 transition-colors duration-300 ${accent.check}`}
+                className="mt-0.5 h-3.5 w-3.5 shrink-0 text-colbeef-green transition-colors duration-300 group-hover:text-colbeef-green-light"
                 strokeWidth={2.5}
               />
               <span>{item}</span>
@@ -169,14 +165,21 @@ export function PorcionadoSolucionesSection() {
   }, [])
 
   return (
-    <AnimatedSection className="py-12 md:py-16 lg:py-20 bg-[#0a0a0a]">
+    <AnimatedSection className="py-12 md:py-16 lg:py-20 bg-[#f3f4f6]">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <FadeIn className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-          <h2 className="text-white text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide leading-tight mb-4">
-            Soluciones de porcionado diseñadas{' '}
-            <span className="text-colbeef-green">para su operación</span>
-          </h2>
-          <p className="text-white/75 text-sm md:text-base leading-relaxed">
+        <FadeIn className="mb-10 md:mb-12">
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <span className="hidden sm:block h-px flex-1 max-w-[120px] bg-colbeef-green/30" />
+            <div className="flex items-center gap-3">
+              <span className="h-1.5 w-1.5 rotate-45 bg-colbeef-green" />
+              <h2 className="text-colbeef-green text-lg sm:text-xl md:text-2xl font-bold uppercase tracking-wide text-center leading-tight">
+                Soluciones de porcionado diseñadas para su operación
+              </h2>
+              <span className="h-1.5 w-1.5 rotate-45 bg-colbeef-green" />
+            </div>
+            <span className="hidden sm:block h-px flex-1 max-w-[120px] bg-colbeef-green/30" />
+          </div>
+          <p className="text-center text-colbeef-gray text-sm md:text-base leading-relaxed max-w-3xl mx-auto">
             Nuestro servicio garantiza precisión, eficiencia y una presentación uniforme en cada
             entrega.
           </p>
@@ -206,7 +209,7 @@ export function PorcionadoSolucionesSection() {
           <button
             type="button"
             onClick={() => goTo(activeIndex - 1)}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full border border-white/25 bg-black/50 text-white flex items-center justify-center"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full border border-colbeef-green/30 bg-white text-colbeef-green shadow-sm flex items-center justify-center"
             aria-label="Anterior"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -214,7 +217,7 @@ export function PorcionadoSolucionesSection() {
           <button
             type="button"
             onClick={() => goTo(activeIndex + 1)}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full border border-white/25 bg-black/50 text-white flex items-center justify-center"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full border border-colbeef-green/30 bg-white text-colbeef-green shadow-sm flex items-center justify-center"
             aria-label="Siguiente"
           >
             <ChevronRight className="w-5 h-5" />
@@ -227,7 +230,7 @@ export function PorcionadoSolucionesSection() {
                 type="button"
                 onClick={() => goTo(index)}
                 className={`h-2 rounded-full transition-all ${
-                  index === activeIndex ? 'w-6 bg-colbeef-green' : 'w-2 bg-white/30'
+                  index === activeIndex ? 'w-6 bg-colbeef-green' : 'w-2 bg-colbeef-green/30'
                 }`}
                 aria-label={`Ir a ${solucion.title}`}
               />

@@ -12,7 +12,7 @@ export function BeneficioDetailSection() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-stretch">
           <FadeIn className="flex flex-col justify-center">
-            <h2 className="text-colbeef-green text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide leading-tight mb-5 md:mb-6">
+            <h2 className="text-black text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide leading-tight mb-5 md:mb-6">
               Beneficio
             </h2>
 

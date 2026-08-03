@@ -39,7 +39,7 @@ export const filosofiaHero: PageHeroContent = {
 export const certificacionesHero: PageHeroContent = {
   badge: 'CERTIFICACIONES',
   headline: 'Respaldados por los más altos estándares.',
-  features: 'INVIMA • HACCP • Trazabilidad • Cumplimiento normativo',
+  features: 'ISO 22000 • HACCP • Cumplimiento normativo',
 }
 
 export const gobiernoHero: PageHeroContent = {

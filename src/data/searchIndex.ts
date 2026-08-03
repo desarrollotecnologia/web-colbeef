@@ -101,11 +101,27 @@ export const searchIndex: SearchEntry[] = [
     entry(`sost-${p.id}`, p.title, p.description, '/sostenibilidad', 'sostenibilidad ambiental'),
   ),
   entry(
-    'cert-invima',
-    certificacionesContent.invima.title,
-    certificacionesContent.invima.paragraphs.join(' '),
+    'cert-iso22000',
+    certificacionesContent.iso22000.title,
+    [
+      certificacionesContent.iso22000.intro,
+      certificacionesContent.iso22000.compromisoLabel,
+      ...certificacionesContent.iso22000.items,
+    ].join(' '),
     '/corporativo/certificaciones',
-    'invima haccp certificaciones',
+    'iso 22000 inocuidad certificaciones',
+  ),
+  entry(
+    'cert-haccp',
+    certificacionesContent.haccp.title,
+    [
+      certificacionesContent.haccp.intro,
+      certificacionesContent.haccp.compromisoLabel,
+      ...certificacionesContent.haccp.items,
+      certificacionesContent.haccp.closing,
+    ].join(' '),
+    '/corporativo/certificaciones',
+    'haccp inocuidad certificaciones',
   ),
   entry(
     'cert-pol',
