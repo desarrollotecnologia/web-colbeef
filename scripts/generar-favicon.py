@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import base64
-import io
 from pathlib import Path
 
 import numpy as np
@@ -70,19 +68,7 @@ def main() -> None:
         append_images=icons[1:],
     )
     print(f"favicon.ico: {ico.stat().st_size} B")
-
-    png64 = make_square(cropped, 64).convert("RGBA")
-    buf = io.BytesIO()
-    png64.save(buf, format="PNG")
-    b64 = base64.b64encode(buf.getvalue()).decode("ascii")
-    svg = (
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">\n'
-        f'  <image href="data:image/png;base64,{b64}" width="64" height="64"/>\n'
-        "</svg>\n"
-    )
-    svg_path = OUT / "favicon.svg"
-    svg_path.write_text(svg, encoding="utf-8")
-    print(f"favicon.svg: {svg_path.stat().st_size} B")
+    # Sin favicon.svg: el cache del SVG de Vite es muy persistente.
 
 
 if __name__ == "__main__":
