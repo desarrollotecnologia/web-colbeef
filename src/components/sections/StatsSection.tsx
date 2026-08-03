@@ -7,10 +7,10 @@ import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 import { AnimatedCounter } from '../ui/AnimatedCounter'
 
 const statImages = [
-  images.panoramica,
-  images.lineaProcesamiento,
-  images.img5280,
-  images.img5289,
+  images.impacto1,
+  images.impacto2,
+  images.impacto3,
+  images.impacto4,
 ]
 
 const statIcons = [Leaf, TreePine, Sun, Zap] as const
@@ -47,18 +47,19 @@ export function StatsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+                whileHover={{ y: -6 }}
+                className="group rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-lg hover:shadow-colbeef-green/10 transition-shadow duration-300"
               >
                 <div className="relative h-40 sm:h-44 overflow-hidden">
                   <img
                     src={statImages[i]}
                     alt={stat.label}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                   />
                 </div>
 
                 <div className="relative px-5 pt-8 pb-5 text-center">
-                  <div className="absolute left-1/2 -top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-colbeef-green text-white flex items-center justify-center shadow-md ring-4 ring-white">
+                  <div className="absolute left-1/2 -top-5 -translate-x-1/2 w-10 h-10 rounded-full bg-colbeef-green text-white flex items-center justify-center shadow-md ring-4 ring-white transition-transform duration-300 group-hover:scale-110">
                     <Icon className="w-5 h-5" strokeWidth={2} aria-hidden />
                   </div>
 
