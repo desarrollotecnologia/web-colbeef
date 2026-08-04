@@ -1,4 +1,9 @@
-const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+import { trabajeEmail } from '../data/contacto'
+import { horecaEmail } from '../data/horeca'
+
+const trabajeAccessKey = import.meta.env.VITE_WEB3FORMS_TRABAJE_ACCESS_KEY
+const horecaAccessKey = import.meta.env.VITE_WEB3FORMS_HORECA_ACCESS_KEY
+const fallbackAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
 
 export type ContactFormPayload = {
   kind: 'contacto' | 'pqr' | 'trabaje'
@@ -17,10 +22,21 @@ function subjectFor(kind: ContactFormPayload['kind']) {
   return 'Contacto — Colbeef'
 }
 
+function accessKeyFor(kind: ContactFormPayload['kind']) {
+  if (kind === 'trabaje') return trabajeAccessKey || fallbackAccessKey
+  // Temporal: PQR usa la misma clave que Solicitud de negocio
+  if (kind === 'pqr') return horecaAccessKey || fallbackAccessKey
+  return fallbackAccessKey || horecaAccessKey
+}
+
 export async function submitContactForm(data: ContactFormPayload, file?: File | null): Promise<void> {
+  const accessKey = accessKeyFor(data.kind)
+
   if (!accessKey) {
     throw new Error(
-      'Falta configurar el envío del formulario. Agrega VITE_WEB3FORMS_ACCESS_KEY en el entorno.',
+      data.kind === 'trabaje'
+        ? `Falta configurar el envío. Crea una clave en web3forms.com con ${trabajeEmail} y agrégala como VITE_WEB3FORMS_TRABAJE_ACCESS_KEY.`
+        : `Falta configurar el envío. Agrega VITE_WEB3FORMS_HORECA_ACCESS_KEY (PQR usa por ahora el mismo destino que Solicitud de negocio).`,
     )
   }
 
@@ -29,6 +45,14 @@ export async function submitContactForm(data: ContactFormPayload, file?: File | 
   formData.append('subject', subjectFor(data.kind))
   formData.append('from_name', data.nombre)
   formData.append('email', data.email)
+  formData.append('replyto', data.email)
+
+  if (data.kind === 'trabaje') {
+    formData.append('to', trabajeEmail)
+  } else if (data.kind === 'pqr') {
+    formData.append('to', horecaEmail)
+  }
+
   formData.append(
     'message',
     [

@@ -1,6 +1,7 @@
 import { horecaEmail, type HorecaFormData } from '../data/horeca'
 
-const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+const accessKey =
+  import.meta.env.VITE_WEB3FORMS_HORECA_ACCESS_KEY || import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
 
 function buildMessage(data: HorecaFormData): string {
   const productos =
@@ -37,7 +38,7 @@ export function buildHorecaMailtoBody(data: HorecaFormData): string {
 async function submitWithWeb3Forms(data: HorecaFormData): Promise<void> {
   if (!accessKey) {
     throw new Error(
-      `Falta configurar el envío del formulario. Crea una clave en web3forms.com con ${horecaEmail} y agrégala como VITE_WEB3FORMS_ACCESS_KEY.`,
+      `Falta configurar el envío del formulario. Crea una clave en web3forms.com con ${horecaEmail} y agrégala como VITE_WEB3FORMS_HORECA_ACCESS_KEY.`,
     )
   }
 
