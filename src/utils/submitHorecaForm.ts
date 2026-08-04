@@ -3,35 +3,30 @@ import { horecaEmail, type HorecaFormData } from '../data/horeca'
 const accessKey =
   import.meta.env.VITE_WEB3FORMS_HORECA_ACCESS_KEY || import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
 
-function buildMessage(data: HorecaFormData): string {
-  const productos =
-    data.productos.length > 0
-      ? data.productos
-          .map((p) => (p === 'Otro' && data.productoOtro ? `Otro: ${data.productoOtro}` : p))
-          .join(', ')
-      : '—'
+function tipoNegocioLabel(data: HorecaFormData): string {
+  if (data.tipoNegocio === 'Otro') return `Otro: ${data.tipoNegocioOtro || '—'}`
+  return data.tipoNegocio || '—'
+}
 
-  return [
-    `Empresa: ${data.empresa}`,
-    `Cargo: ${data.cargo || '—'}`,
-    `Tipo de negocio: ${
-      data.tipoNegocio === 'Otro'
-        ? `Otro: ${data.tipoNegocioOtro || '—'}`
-        : data.tipoNegocio || '—'
-    }`,
-    `Ciudad: ${data.ciudad}`,
-    `Departamento: ${data.departamento || '—'}`,
-    `Teléfono / WhatsApp: ${data.telefono}`,
-    `Consumo mensual aproximado: ${data.consumoMensual || '—'}`,
-    `Productos o servicios de interés: ${productos}`,
-  ].join('\n')
+function productosLabel(data: HorecaFormData): string {
+  if (data.productos.length === 0) return '—'
+  return data.productos
+    .map((p) => (p === 'Otro' && data.productoOtro ? `Otro: ${data.productoOtro}` : p))
+    .join(', ')
 }
 
 export function buildHorecaMailtoBody(data: HorecaFormData): string {
   return [
     `Nombre completo: ${data.nombre}`,
-    buildMessage(data),
+    `Empresa: ${data.empresa}`,
+    `Cargo: ${data.cargo || '—'}`,
+    `Tipo de negocio: ${tipoNegocioLabel(data)}`,
+    `Ciudad: ${data.ciudad}`,
+    `Departamento: ${data.departamento || '—'}`,
+    `Teléfono / WhatsApp: ${data.telefono}`,
     `Correo electrónico: ${data.email}`,
+    `Consumo mensual aproximado: ${data.consumoMensual || '—'}`,
+    `Productos o servicios de interés: ${productosLabel(data)}`,
   ].join('\n')
 }
 
@@ -42,6 +37,8 @@ async function submitWithWeb3Forms(data: HorecaFormData): Promise<void> {
     )
   }
 
+  // Campos con etiquetas en español: Web3Forms las muestra tal cual en el correo.
+  // No enviamos "message" con el resumen ni "to" (ya va al correo de la access key).
   const response = await fetch('https://api.web3forms.com/submit', {
     method: 'POST',
     headers: {
@@ -51,28 +48,18 @@ async function submitWithWeb3Forms(data: HorecaFormData): Promise<void> {
     body: JSON.stringify({
       access_key: accessKey,
       subject: `Solicitud canal HORECA — ${data.empresa}`,
-      from_name: data.nombre,
+      from_name: 'Colbeef Web · Canal HORECA',
       name: data.nombre,
       email: data.email,
       replyto: data.email,
-      to: horecaEmail,
-      message: buildMessage(data),
-      empresa: data.empresa,
-      cargo: data.cargo || '—',
-      tipo_negocio:
-        data.tipoNegocio === 'Otro'
-          ? `Otro: ${data.tipoNegocioOtro || '—'}`
-          : data.tipoNegocio || '—',
-      ciudad: data.ciudad,
-      departamento: data.departamento || '—',
-      telefono: data.telefono,
-      consumo_mensual: data.consumoMensual || '—',
-      productos_interes:
-        data.productos.length > 0
-          ? data.productos
-              .map((p) => (p === 'Otro' && data.productoOtro ? `Otro: ${data.productoOtro}` : p))
-              .join(', ')
-          : '—',
+      Empresa: data.empresa,
+      Cargo: data.cargo || '—',
+      'Tipo de negocio': tipoNegocioLabel(data),
+      Ciudad: data.ciudad,
+      Departamento: data.departamento || '—',
+      'Teléfono / WhatsApp': data.telefono,
+      'Consumo mensual aproximado': data.consumoMensual || '—',
+      'Productos o servicios de interés': productosLabel(data),
     }),
   })
 

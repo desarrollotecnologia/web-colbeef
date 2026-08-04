@@ -1,5 +1,4 @@
 import { trabajeEmail } from '../data/contacto'
-import { horecaEmail } from '../data/horeca'
 
 const trabajeAccessKey = import.meta.env.VITE_WEB3FORMS_TRABAJE_ACCESS_KEY
 const horecaAccessKey = import.meta.env.VITE_WEB3FORMS_HORECA_ACCESS_KEY
@@ -20,6 +19,12 @@ function subjectFor(kind: ContactFormPayload['kind']) {
   if (kind === 'pqr') return 'PQR — Colbeef'
   if (kind === 'trabaje') return 'Trabaje con nosotros — Colbeef'
   return 'Contacto — Colbeef'
+}
+
+function fromNameFor(kind: ContactFormPayload['kind']) {
+  if (kind === 'pqr') return 'Colbeef Web · PQR'
+  if (kind === 'trabaje') return 'Colbeef Web · Trabaje con nosotros'
+  return 'Colbeef Web · Contacto'
 }
 
 function accessKeyFor(kind: ContactFormPayload['kind']) {
@@ -43,32 +48,24 @@ export async function submitContactForm(data: ContactFormPayload, file?: File | 
   const formData = new FormData()
   formData.append('access_key', accessKey)
   formData.append('subject', subjectFor(data.kind))
-  formData.append('from_name', data.nombre)
+  formData.append('from_name', fromNameFor(data.kind))
+  formData.append('name', data.nombre)
   formData.append('email', data.email)
   formData.append('replyto', data.email)
 
+  // Campos ordenados con etiquetas claras (sin duplicar en "message")
+  formData.append('Teléfono', data.telefono?.trim() || '—')
+
   if (data.kind === 'trabaje') {
-    formData.append('to', trabajeEmail)
-  } else if (data.kind === 'pqr') {
-    formData.append('to', horecaEmail)
+    formData.append('Cargo al que aspira', data.cargo?.trim() || '—')
+    formData.append('Hoja de vida', data.archivoNombre || (file ? file.name : 'Sin archivo'))
   }
 
-  formData.append(
-    'message',
-    [
-      `Tipo: ${data.kind}`,
-      `Nombre: ${data.nombre}`,
-      `Email: ${data.email}`,
-      `Teléfono: ${data.telefono || '—'}`,
-      data.codigoRes ? `Código de la res: ${data.codigoRes}` : null,
-      data.cargo ? `Cargo al que aspira: ${data.cargo}` : null,
-      data.archivoNombre ? `Archivo: ${data.archivoNombre}` : null,
-      '',
-      data.mensaje,
-    ]
-      .filter(Boolean)
-      .join('\n'),
-  )
+  if (data.kind === 'pqr' && data.codigoRes) {
+    formData.append('Código de la res', data.codigoRes)
+  }
+
+  formData.append('Mensaje', data.mensaje?.trim() || '—')
 
   if (file) {
     formData.append('attachment', file)
