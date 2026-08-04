@@ -33,9 +33,8 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_WEB3FORMS_TRABAJE_ACCESS_KEY: ${{ secrets.VITE_WEB3FORMS_TRABAJE_ACCESS_KEY }}
-          VITE_WEB3FORMS_HORECA_ACCESS_KEY: ${{ secrets.VITE_WEB3FORMS_HORECA_ACCESS_KEY }}
-          VITE_WEB3FORMS_ACCESS_KEY: ${{ secrets.VITE_WEB3FORMS_ACCESS_KEY }}
+          VITE_WEB3FORMS_TRABAJE_ACCESS_KEY: ${{ secrets.TRABAJE_CON_NOSOTROS }}
+          VITE_WEB3FORMS_HORECA_ACCESS_KEY: ${{ secrets.SOLICITUD_DE_NEGOCIO }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
