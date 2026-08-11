@@ -35,31 +35,27 @@ jobs:
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
-      # Login OK. La ruta remota depende del "Directorio" de la cuenta FTP en cPanel.
-      # Si la cuenta ya apunta a sitio-nuevo → FTP_SERVER_DIR=./
+      # La cuenta FTP ya entra en su carpeta (chroot).
+      # Por eso "cd sitio-nuevo" falla: esa carpeta no existe DENTRO del jail.
+      # Subimos al directorio actual tras el login (pwd).
       - name: Deploy via FTPS (lftp + netrc)
         env:
           FTP_HOST: ftp.frigorificoriofrio.com
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
-          FTP_DIR: ${{ secrets.FTP_SERVER_DIR }}
         run: |
           set -euo pipefail
 
           FTP_USER="$(printf '%s' "$FTP_USER" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
           FTP_PASS="$(printf '%s' "$FTP_PASS" | tr -d '\r\n')"
-          FTP_DIR="$(printf '%s' "$FTP_DIR" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
-          # Quitar slash inicial: /public_html/... falla en cuentas enjauladas
-          FTP_DIR="${FTP_DIR#/}"
 
-          if [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ] || [ -z "$FTP_DIR" ]; then
-            echo "Faltan secrets FTP_USERNAME / FTP_PASSWORD / FTP_SERVER_DIR"
+          if [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
+            echo "Faltan secrets FTP_USERNAME / FTP_PASSWORD"
             exit 1
           fi
 
           echo "Host: $FTP_HOST"
           echo "User length: ${#FTP_USER}"
-          echo "Remote dir (normalized): $FTP_DIR"
 
           umask 077
           printf 'machine %s\nlogin %s\npassword %s\n' "$FTP_HOST" "$FTP_USER" "$FTP_PASS" > "$HOME/.netrc"
@@ -74,10 +70,12 @@ jobs:
             set ftp:ssl-protect-data true;
             set ssl:verify-certificate no;
             open ftp://${FTP_HOST}:21;
+            echo '=== Directorio actual de la cuenta FTP ===';
             pwd;
             ls;
-            cd ${FTP_DIR};
-            pwd;
+            echo '=== Subiendo dist/ al directorio actual ===';
             mirror -R --verbose --parallel=2 ./dist/ .;
+            echo '=== Contenido tras subida ===';
+            ls;
             bye
           "
