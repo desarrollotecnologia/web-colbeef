@@ -34,18 +34,39 @@ jobs:
           VITE_WEB3FORMS_TRABAJE_ACCESS_KEY: ${{ secrets.TRABAJE_CON_NOSOTROS }}
           VITE_WEB3FORMS_HORECA_ACCESS_KEY: ${{ secrets.SOLICITUD_DE_NEGOCIO }}
 
-      # Host real del hosting (DNS verificado):
-      #   ftp.frigorificoriofrio.com → 107.180.27.234
-      #   OJO: "frigorificofrio.com" (sin "rio") NO existe → ENOTFOUND
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
-        with:
-          server: ftp.frigorificoriofrio.com
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          local-dir: ./dist/
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          dangerous-clean-slate: false
-          timeout: 120000
+      # GoDaddy exige FTPS explícito. FTP plano → 530.
+      # SamKirkland FTPS desde GHA suele dar timeout; lftp es más estable.
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Deploy via FTPS (lftp)
+        env:
+          FTP_HOST: ftp.frigorificoriofrio.com
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_DIR: ${{ secrets.FTP_SERVER_DIR }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${FTP_USER}" ] || [ -z "${FTP_PASS}" ] || [ -z "${FTP_DIR}" ]; then
+            echo "Faltan secrets: FTP_USERNAME, FTP_PASSWORD o FTP_SERVER_DIR"
+            exit 1
+          fi
+
+          echo "Host: ${FTP_HOST}"
+          echo "User: ${FTP_USER}"
+          echo "Remote dir: ${FTP_DIR}"
+
+          lftp -c "
+            set cmd:fail-exit yes;
+            set net:timeout 60;
+            set net:max-retries 3;
+            set ftp:passive-mode true;
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate no;
+            open -u '${FTP_USER}','${FTP_PASS}' -p 21 ftp://${FTP_HOST};
+            cd ${FTP_DIR};
+            mirror -R --verbose --parallel=2 --exclude-glob .git* ./dist/ .;
+            bye
+          "
