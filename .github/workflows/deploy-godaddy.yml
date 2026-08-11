@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Carpeta de prueba (no toca el WordPress en la raíz de colbeef.com):
+      # Carpeta de prueba (no toca el WordPress):
       # URL: https://colbeef.com/sitio-nuevo/
       - name: Build (subcarpeta de prueba)
         run: npm run build
@@ -34,14 +34,15 @@ jobs:
           VITE_WEB3FORMS_TRABAJE_ACCESS_KEY: ${{ secrets.TRABAJE_CON_NOSOTROS }}
           VITE_WEB3FORMS_HORECA_ACCESS_KEY: ${{ secrets.SOLICITUD_DE_NEGOCIO }}
 
+      # Host real del hosting (DNS verificado):
+      #   ftp.frigorificoriofrio.com → 107.180.27.234
+      #   OJO: "frigorificofrio.com" (sin "rio") NO existe → ENOTFOUND
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          server: ftp.frigorificoriofrio.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # FTP plano: desde GitHub Actions el FTPS a GoDaddy suele dar timeout.
-          # Antes con ftp sí conectaba (el 530 era usuario/clave).
           protocol: ftp
           port: 21
           local-dir: ./dist/
