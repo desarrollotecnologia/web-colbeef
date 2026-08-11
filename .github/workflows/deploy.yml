@@ -33,6 +33,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
+          VITE_BASE_PATH: /web-colbeef/
           VITE_WEB3FORMS_TRABAJE_ACCESS_KEY: ${{ secrets.TRABAJE_CON_NOSOTROS }}
           VITE_WEB3FORMS_HORECA_ACCESS_KEY: ${{ secrets.SOLICITUD_DE_NEGOCIO }}
 
