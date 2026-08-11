@@ -40,10 +40,11 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # GoDaddy / cPanel: FTPS explícito en puerto 21
-          protocol: ftps
+          # FTP plano: desde GitHub Actions el FTPS a GoDaddy suele dar timeout.
+          # Antes con ftp sí conectaba (el 530 era usuario/clave).
+          protocol: ftp
           port: 21
           local-dir: ./dist/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
           dangerous-clean-slate: false
-          timeout: 60000
+          timeout: 120000
