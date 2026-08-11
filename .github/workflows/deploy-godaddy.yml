@@ -35,10 +35,9 @@ jobs:
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
-      # La cuenta FTP ya entra en su carpeta (chroot).
-      # Por eso "cd sitio-nuevo" falla: esa carpeta no existe DENTRO del jail.
-      # Subimos al directorio actual tras el login (pwd).
-      - name: Deploy via FTPS (lftp + netrc)
+      # No usar ~/.netrc: contraseñas con @ ! rompen el parseo.
+      # Login al directorio home de la cuenta (sin cd).
+      - name: Deploy via FTPS (lftp)
         env:
           FTP_HOST: ftp.frigorificoriofrio.com
           FTP_USER: ${{ secrets.FTP_USERNAME }}
@@ -56,26 +55,21 @@ jobs:
 
           echo "Host: $FTP_HOST"
           echo "User length: ${#FTP_USER}"
+          echo "Pass length: ${#FTP_PASS}"
 
-          umask 077
-          printf 'machine %s\nlogin %s\npassword %s\n' "$FTP_HOST" "$FTP_USER" "$FTP_PASS" > "$HOME/.netrc"
-          chmod 600 "$HOME/.netrc"
-
-          lftp -c "
-            set cmd:fail-exit yes;
-            set net:timeout 60;
-            set net:max-retries 2;
-            set ftp:passive-mode true;
-            set ftp:ssl-force true;
-            set ftp:ssl-protect-data true;
-            set ssl:verify-certificate no;
-            open ftp://${FTP_HOST}:21;
-            echo '=== Directorio actual de la cuenta FTP ===';
-            pwd;
-            ls;
-            echo '=== Subiendo dist/ al directorio actual ===';
-            mirror -R --verbose --parallel=2 ./dist/ .;
-            echo '=== Contenido tras subida ===';
-            ls;
-            bye
-          "
+          # Script lftp por stdin (heredoc) para no romper caracteres especiales
+          lftp -f /dev/stdin <<EOF
+          set cmd:fail-exit yes
+          set net:timeout 60
+          set net:max-retries 2
+          set ftp:passive-mode true
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate no
+          open -u "${FTP_USER}","${FTP_PASS}" -p 21 ftp://${FTP_HOST}
+          pwd
+          ls
+          mirror -R --verbose --parallel=2 ./dist/ .
+          ls
+          bye
+          EOF
