@@ -25,8 +25,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Carpeta de prueba (no toca el WordPress):
-      # URL: https://colbeef.com/sitio-nuevo/
       - name: Build (subcarpeta de prueba)
         run: npm run build
         env:
@@ -34,12 +32,12 @@ jobs:
           VITE_WEB3FORMS_TRABAJE_ACCESS_KEY: ${{ secrets.TRABAJE_CON_NOSOTROS }}
           VITE_WEB3FORMS_HORECA_ACCESS_KEY: ${{ secrets.SOLICITUD_DE_NEGOCIO }}
 
-      # GoDaddy exige FTPS explícito. FTP plano → 530.
-      # SamKirkland FTPS desde GHA suele dar timeout; lftp es más estable.
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
-      - name: Deploy via FTPS (lftp)
+      # Login OK. La ruta remota depende del "Directorio" de la cuenta FTP en cPanel.
+      # Si la cuenta ya apunta a sitio-nuevo → FTP_SERVER_DIR=./
+      - name: Deploy via FTPS (lftp + netrc)
         env:
           FTP_HOST: ftp.frigorificoriofrio.com
           FTP_USER: ${{ secrets.FTP_USERNAME }}
@@ -48,25 +46,38 @@ jobs:
         run: |
           set -euo pipefail
 
-          if [ -z "${FTP_USER}" ] || [ -z "${FTP_PASS}" ] || [ -z "${FTP_DIR}" ]; then
-            echo "Faltan secrets: FTP_USERNAME, FTP_PASSWORD o FTP_SERVER_DIR"
+          FTP_USER="$(printf '%s' "$FTP_USER" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+          FTP_PASS="$(printf '%s' "$FTP_PASS" | tr -d '\r\n')"
+          FTP_DIR="$(printf '%s' "$FTP_DIR" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+          # Quitar slash inicial: /public_html/... falla en cuentas enjauladas
+          FTP_DIR="${FTP_DIR#/}"
+
+          if [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ] || [ -z "$FTP_DIR" ]; then
+            echo "Faltan secrets FTP_USERNAME / FTP_PASSWORD / FTP_SERVER_DIR"
             exit 1
           fi
 
-          echo "Host: ${FTP_HOST}"
-          echo "User: ${FTP_USER}"
-          echo "Remote dir: ${FTP_DIR}"
+          echo "Host: $FTP_HOST"
+          echo "User length: ${#FTP_USER}"
+          echo "Remote dir (normalized): $FTP_DIR"
+
+          umask 077
+          printf 'machine %s\nlogin %s\npassword %s\n' "$FTP_HOST" "$FTP_USER" "$FTP_PASS" > "$HOME/.netrc"
+          chmod 600 "$HOME/.netrc"
 
           lftp -c "
             set cmd:fail-exit yes;
             set net:timeout 60;
-            set net:max-retries 3;
+            set net:max-retries 2;
             set ftp:passive-mode true;
             set ftp:ssl-force true;
             set ftp:ssl-protect-data true;
             set ssl:verify-certificate no;
-            open -u '${FTP_USER}','${FTP_PASS}' -p 21 ftp://${FTP_HOST};
+            open ftp://${FTP_HOST}:21;
+            pwd;
+            ls;
             cd ${FTP_DIR};
-            mirror -R --verbose --parallel=2 --exclude-glob .git* ./dist/ .;
+            pwd;
+            mirror -R --verbose --parallel=2 ./dist/ .;
             bye
           "
