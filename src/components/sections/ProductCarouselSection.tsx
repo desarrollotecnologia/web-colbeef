@@ -12,10 +12,10 @@ export function ProductCarouselSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
         <FadeIn className="text-center mb-4 md:mb-5">
           <h2 className="text-2xl md:text-3xl font-bold text-white uppercase">
-            Nuestros cortes premium
+            Nuestros cortes
           </h2>
           <p className="text-white/60 text-sm md:text-base max-w-2xl mx-auto mt-2 leading-relaxed">
-            Calidad, frescura y excelencia en cada pieza. Descubre la selección que nos distingue en el mercado nacional e internacional.
+            Nuestros cortes, calidad desde el origen, frescura garantizada y procesos bajo estrictos estándares de inocuidad. Una selección de cortes que destaca por su consistencia, rendimiento y excelencia para el mercado nacional e internacional
           </p>
         </FadeIn>
 
