@@ -4,7 +4,6 @@ import { Lightbulb, X } from 'lucide-react'
 import { images } from '../../data/assets'
 import {
   cortesMapAreas,
-  cortesMapZonas,
   getAreaCenter,
   getAreaPoints,
   getCorteDetalle,
@@ -29,11 +28,11 @@ function ActiveCutLabel({ area }: { area: CorteArea }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.16 }}
-      className="absolute whitespace-nowrap font-bold uppercase leading-none tracking-wide text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)]"
+      className="absolute whitespace-nowrap font-bold uppercase leading-none tracking-wide text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.65)]"
       style={{
         left: `${x + dx}%`,
         top: `${y + dy}%`,
-        fontSize: `${1.85 * scale}cqw`,
+        fontSize: `${1.7 * scale}cqw`,
         transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
       }}
     >
@@ -62,7 +61,8 @@ export function CortesMapSection() {
             Seleccione un corte
           </h2>
           <p className="text-colbeef-gray text-sm mt-3 max-w-2xl mx-auto">
-            Pase el cursor o toque una zona del animal: verá el nombre del corte y su ficha al seleccionarlo.
+            Pase el cursor o toque una zona del animal: verá el nombre del corte y su ficha al
+            seleccionarlo. Más adelante asignaremos la foto de cada corte.
           </p>
         </FadeIn>
 
@@ -82,27 +82,21 @@ export function CortesMapSection() {
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 h-full w-full"
               >
-                {cortesMapZonas.map((area) => (
-                  <polygon
-                    key={`zona-${area.id}`}
-                    points={getAreaPoints(area)}
-                    fill="rgba(20, 87, 45, 0.14)"
-                    stroke="rgba(20, 87, 45, 0.55)"
-                    strokeWidth={1.25}
-                    vectorEffect="non-scaling-stroke"
-                  />
-                ))}
+                {cortesMapAreas.map((area) => {
+                  const isActive = activeId === area.id
 
-                {activeArea && (
-                  <polygon
-                    points={getAreaPoints(activeArea)}
-                    fill="rgba(20, 87, 45, 0.62)"
-                    stroke="#ffffff"
-                    strokeWidth={2}
-                    vectorEffect="non-scaling-stroke"
-                    className="transition-opacity duration-200"
-                  />
-                )}
+                  return (
+                    <polygon
+                      key={`zona-${area.id}`}
+                      points={getAreaPoints(area)}
+                      fill={isActive ? 'rgba(196, 18, 28, 0.88)' : 'rgba(196, 18, 28, 0.72)'}
+                      stroke={isActive ? '#ffffff' : 'rgba(255, 248, 242, 0.92)'}
+                      strokeWidth={isActive ? 2.1 : 1.15}
+                      vectorEffect="non-scaling-stroke"
+                      className="transition-[fill,stroke-width] duration-200"
+                    />
+                  )
+                })}
               </svg>
 
               <div className="absolute inset-0">

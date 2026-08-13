@@ -114,7 +114,7 @@ export const cortesDetalle: CorteDetalle[] = [
   },
   {
     slug: 'chata',
-    nombre: 'Chata',
+    nombre: 'Chatas',
     categoria: 'Asar/Plancha',
     terneza: 'Alta',
     descripcion: 'Corte plano de la zona lumbar.',
@@ -203,11 +203,11 @@ export const cortesDetalle: CorteDetalle[] = [
     imagen: null,
   },
   {
-    slug: 'sobrebarriga',
-    nombre: 'Sobrebarriga',
+    slug: 'falda',
+    nombre: 'Falda',
     categoria: 'Sudar/Asar',
     terneza: 'Media',
-    descripcion: 'Corte plano y fibroso, típico colombiano.',
+    descripcion: 'Corte plano y fibroso de la zona abdominal, típico colombiano.',
     tip: 'Se suda primero y luego se asa: técnica tradicional.',
     imagen: null,
   },
@@ -240,7 +240,7 @@ export const cortesDetalle: CorteDetalle[] = [
   },
   {
     slug: 'morro',
-    nombre: 'Morro',
+    nombre: 'Morrillo',
     categoria: 'Sopa',
     terneza: 'Baja',
     descripcion: 'Corte del hocico, usado en preparaciones tradicionales.',

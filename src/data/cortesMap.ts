@@ -93,7 +93,7 @@ export const cortesMapAreas: CorteArea[] = [
   {
     id: 'area-2',
     slug: 'cadera-con-cola',
-    name: 'Cadera con cola',
+    name: 'Cadera',
     detalle: 'cadera',
     label: { dx: 0.5, dy: 2, scale: 0.85 },
     grupo: 'traseros',
@@ -102,7 +102,8 @@ export const cortesMapAreas: CorteArea[] = [
   {
     id: 'area-3',
     slug: 'lomo-angosto',
-    name: 'Lomo angosto',
+    name: 'Chatas',
+    detalle: 'chata',
     grupo: 'traseros',
     clipPath: 'polygon(28.48% 8.24%,34.75% 10.49%,47.56% 15.33%,48.3% 31.49%,32.07% 23.25%)',
   },
@@ -117,7 +118,7 @@ export const cortesMapAreas: CorteArea[] = [
   {
     id: 'area-5',
     slug: 'morro',
-    name: 'Morro',
+    name: 'Morrillo',
     detalle: 'morro',
     label: { scale: 0.9 },
     grupo: 'delanteros',
@@ -203,9 +204,9 @@ export const cortesMapAreas: CorteArea[] = [
   },
   {
     id: 'area-14',
-    slug: 'sobrebarriga-delgada',
-    name: 'Sobrebarriga delgada',
-    detalle: 'sobrebarriga',
+    slug: 'falda',
+    name: 'Falda',
+    detalle: 'falda',
     label: { dx: 1, dy: 3, scale: 0.75 },
     grupo: 'delanteros',
     clipPath:
@@ -242,7 +243,7 @@ export const cortesMapAreas: CorteArea[] = [
   {
     id: 'area-18',
     slug: 'paletero-externo',
-    name: 'Paletero externo',
+    name: 'Paletero',
     detalle: 'paletero',
     label: { rotate: 90, scale: 0.62 },
     grupo: 'delanteros',
@@ -281,7 +282,7 @@ export const cortesMapAreas: CorteArea[] = [
   {
     id: 'area-22',
     slug: 'murillo-trasero',
-    name: 'Murillo trasero',
+    name: 'Murillo',
     detalle: 'murillo',
     label: { dx: 2.5, dy: -1, scale: 0.8 },
     grupo: 'traseros',
@@ -291,7 +292,7 @@ export const cortesMapAreas: CorteArea[] = [
   {
     id: 'area-23',
     slug: 'murillo-delantero',
-    name: 'Murillo delantero',
+    name: 'Murillo',
     detalle: 'murillo-delantero',
     label: { dx: -1, dy: -1.5, scale: 0.8 },
     grupo: 'delanteros',
