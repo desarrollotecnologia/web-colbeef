@@ -1,21 +1,19 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Award, Send, Shield, Snowflake, Truck } from 'lucide-react'
+import { Check, Send } from 'lucide-react'
 import { images } from '../../data/assets'
 import {
   horecaEmail,
   horecaBusinessTypes,
   horecaConsumptionOptions,
   horecaFeatures,
-  horecaIntroText,
+  horecaIntroParagraphs,
   horecaProductOptions,
   type HorecaFormData,
 } from '../../data/horeca'
 import { buildHorecaMailtoBody, submitHorecaForm } from '../../utils/submitHorecaForm'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
-
-const featureIcons = [Shield, Snowflake, Award, Truck]
 
 const emptyForm: HorecaFormData = {
   nombre: '',
@@ -105,28 +103,24 @@ export function HorecaSection() {
             <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16 py-8 md:py-10 lg:py-12 flex flex-col justify-center items-start">
               <div className="w-full max-w-xl lg:max-w-2xl">
                 <h2 className="text-white text-xl sm:text-2xl md:text-3xl font-bold uppercase leading-tight mb-4">
-                  Soluciones cárnicas para cualquier tipo de canal
+                  Soluciones cárnicas para todos los canales de negocio
                 </h2>
                 <p className="text-white/80 text-sm md:text-base leading-relaxed mb-8">
-                  Calidad, rendimiento y servicio para hoteles, restaurantes, cafeterías y catering de alto nivel.
+                  Calidad, rendimiento y respaldo para hoteles, restaurantes, cafeterías, catering, supermercados, distribuidores e industria alimentaria.
                 </p>
 
-                <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                  {horecaFeatures.map((feature, i) => {
-                    const Icon = featureIcons[i]
-
-                    return (
-                      <div
-                        key={feature.id}
-                        className="flex items-start gap-2 sm:gap-3 rounded-xl bg-white/10 border border-white/20 p-3 sm:p-4 shadow-sm"
-                      >
-                        <Icon className="w-5 h-5 text-white shrink-0 mt-0.5" />
-                        <span className="text-white/90 text-[10px] sm:text-xs font-semibold uppercase leading-snug">
-                          {feature.label}
-                        </span>
-                      </div>
-                    )
-                  })}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                  {horecaFeatures.map((feature) => (
+                    <div
+                      key={feature.id}
+                      className="flex items-start gap-2.5 rounded-xl bg-white/10 border border-white/20 px-3 py-2.5 sm:px-4 sm:py-3 shadow-sm"
+                    >
+                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0 mt-0.5" strokeWidth={2.5} />
+                      <span className="text-white/90 text-[11px] sm:text-xs font-semibold leading-snug">
+                        {feature.label}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -148,11 +142,13 @@ export function HorecaSection() {
           <div>
             <div className="mb-5 md:mb-6">
               <h3 className="text-colbeef-green text-lg sm:text-xl font-bold uppercase tracking-wide mb-2 md:mb-3">
-                Solicita información para tu negocio
+                Solicite información para su negocio
               </h3>
-              <p className="text-colbeef-gray text-xs sm:text-sm leading-relaxed max-w-4xl">
-                {horecaIntroText}
-              </p>
+              <div className="space-y-3 text-colbeef-gray text-xs sm:text-sm leading-relaxed max-w-4xl">
+                {horecaIntroParagraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
             </div>
 
             {status === 'success' ? (

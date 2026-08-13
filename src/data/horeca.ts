@@ -1,13 +1,18 @@
 export const horecaEmail = 'jefe.mercadeo@colbeef.com'
 
-export const horecaIntroText =
-  'Sabemos que cada cocina requiere productos consistentes, entregas puntuales y un proveedor que responda con eficiencia. Por eso desarrollamos soluciones personalizadas que mejoran el rendimiento, optimizan los costos operativos y garantizan una experiencia superior para sus clientes.'
+export const horecaIntroParagraphs = [
+  'Las empresas del sector alimentario necesitan productos consistentes, abastecimiento confiable y un aliado que garantice eficiencia operativa. Las soluciones cárnicas integrales permiten optimizar procesos, mejorar el rendimiento de los productos, reducir costos operativos y asegurar una experiencia de calidad para el consumidor final.',
+  'Un portafolio diseñado para adaptarse a las necesidades de distintos canales de comercialización, con altos estándares de inocuidad, trazabilidad y servicio.',
+] as const
 
 export const horecaFeatures = [
-  { id: 'calidad', label: 'Calidad garantizada' },
-  { id: 'frio', label: 'Cadena de frío garantizada' },
-  { id: 'invima', label: 'Certificación INVIMA' },
-  { id: 'entregas', label: 'Entregas puntuales' },
+  { id: 'rendimiento', label: 'Rendimiento superior por corte' },
+  { id: 'trazabilidad', label: 'Trazabilidad y control de origen' },
+  { id: 'frio', label: 'Cadena de frío certificada' },
+  { id: 'invima', label: 'Respaldo INVIMA' },
+  { id: 'abastecimiento', label: 'Abastecimiento continuo y puntual' },
+  { id: 'atencion', label: 'Atención especializada' },
+  { id: 'iso', label: 'Certificación Icontec ISO 22000' },
 ] as const
 
 export const horecaBusinessTypes = [

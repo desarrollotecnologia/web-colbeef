@@ -29,13 +29,9 @@ export function EnvironmentalPolicySection() {
           </FadeIn>
 
           <FadeIn direction="right" delay={0.15} className="p-8 md:p-12 flex items-center">
-            <div>
-              <p className="text-white font-bold text-lg md:text-xl leading-relaxed mb-4">
-                Se encuentra comprometida con el manejo ambiental responsable, la prevención de la
-                contaminación y el control de los impactos ambientales asociados a sus procesos,
-              </p>
-              <p className="text-white/70 text-sm leading-relaxed">{environmentalPolicy}</p>
-            </div>
+            <p className="text-white/85 text-sm md:text-base leading-relaxed">
+              {environmentalPolicy}
+            </p>
           </FadeIn>
         </div>
       </div>

@@ -91,12 +91,6 @@ export function ContactoPage() {
                   {contactInfo.address}
                 </p>
                 <p>
-                  <span className="font-semibold text-colbeef-dark">
-                    {contactoContent.phoneLabel}:
-                  </span>{' '}
-                  {contactInfo.phone}
-                </p>
-                <p>
                   <span className="font-semibold text-colbeef-dark">Email:</span>{' '}
                   <a
                     href={`mailto:${contactInfo.email}`}

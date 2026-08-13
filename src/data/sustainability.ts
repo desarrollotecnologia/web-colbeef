@@ -59,7 +59,7 @@ export const sustainabilityFeatures = [
 ]
 
 export const environmentalPolicy =
-  'Se encuentra comprometida con el manejo ambiental responsable, la prevención de la contaminación y el control de los impactos ambientales asociados a sus procesos, cumpliendo con la legislación ambiental vigente y realizando cada una de sus actividades con el propósito de alcanzar un desarrollo sostenible bajo las buenas prácticas ambientales.'
+  'En Colbeef S.A.S. asumimos el compromiso de gestionar responsablemente nuestros impactos ambientales, prevenir la contaminación y promover prácticas sostenibles en cada etapa de nuestra operación. Actuamos en cumplimiento de la normatividad ambiental vigente, impulsando el uso eficiente de los recursos y la mejora continua de nuestros procesos, con el objetivo de contribuir al desarrollo sostenible y fortalecer una cultura de responsabilidad ambiental.'
 
 export const sostenibilidadPageSlugs = ['energia-solar', 'ptar', 'comunidad'] as const
 

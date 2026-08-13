@@ -36,14 +36,6 @@ export function Footer() {
               <p className="max-w-xs mx-auto md:mx-0 md:max-w-none">
                 {contactInfo.address}
               </p>
-              <p>
-                <a
-                  href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
-                  className="text-white hover:text-white/80 transition-colors"
-                >
-                  {contactInfo.phone}
-                </a>
-              </p>
               <a
                 href={`mailto:${contactInfo.email}`}
                 className="block text-white hover:text-white/80 transition-colors break-all"
