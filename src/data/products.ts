@@ -120,7 +120,7 @@ export const qualityPillars = [
   },
   {
     id: 'exportacion',
-    category: 'Santander / Colombia',
+    category: 'Exportaciones',
     title: 'PAÍSES A LOS QUE EXPORTAMOS',
     description:
       'Seguimos apostando por prestar un servicio de exportación de carne de excelente calidad, generando confianza en nuestra capacidad de producción y permitiendo que más personas puedan disfrutar de los excelentes productos colombianos.',

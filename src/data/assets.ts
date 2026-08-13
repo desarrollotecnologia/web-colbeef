@@ -80,14 +80,14 @@ export const images = {
   impacto2: asset('/assets/images/impacto/impacto-2.jpg'),
   impacto3: asset('/assets/images/impacto/impacto-3.jpg'),
   impacto4: asset('/assets/images/impacto/impacto-4.jpg'),
-  certHaccp: asset('/assets/images/certificaciones/haccp-transparent.png'),
-  certIso22000: asset('/assets/images/certificaciones/iso-22000-transparent.png'),
+  certHaccp: asset('/assets/images/certificaciones/icontec-haccp-ntc-5830.png'),
+  certIso22000: asset('/assets/images/certificaciones/icontec-iso-22000.png'),
   certInvima: asset('/assets/images/certificaciones/invima-transparent.png'),
 } as const
 
 export const certificationLogos = [
-  { src: images.certHaccp, alt: 'HACCP' },
-  { src: images.certIso22000, alt: 'ISO 22000' },
+  { src: images.certHaccp, alt: 'ICONTEC HACCP NTC 5830' },
+  { src: images.certIso22000, alt: 'ICONTEC ISO 22000' },
   { src: images.certInvima, alt: 'INVIMA' },
 ] as const
 
