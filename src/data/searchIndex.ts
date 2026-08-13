@@ -63,9 +63,9 @@ export const searchIndex: SearchEntry[] = [
   ...serviciosPageContent.map((s, i) =>
     entry(`serv-content-${i}`, s.title, s.description, defaultServiceHref),
   ),
-  ...productCategories.map((p) =>
-    entry(`product-${p.id}`, p.title, p.description, `/productos/${p.id === 'canales' ? 'subproductos' : p.id}`),
-  ),
+  ...productCategories
+    .filter((p) => p.id === 'cortes')
+    .map((p) => entry(`product-${p.id}`, p.title, p.description, `/productos/${p.id}`)),
   ...desposteSections.map((title, i) =>
     entry(`desposte-${i}`, title, 'Cortes y desposte bovino Colbeef', '/productos/cortes', title),
   ),

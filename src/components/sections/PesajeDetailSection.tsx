@@ -6,8 +6,8 @@ const pesajeIntro =
   'En COLBEEF entendemos que la excelencia de un producto cárnico depende de la forma en que se desarrolla cada etapa del proceso. Por eso, hemos diseñado una operación que combina bienestar animal, pesaje certificado, trazabilidad e infraestructura especializada, garantizando confianza para productores, comercializadores e industria.'
 
 const pesajeFeatures = [
-  { label: 'Básculas Tru-Test', icon: Scale },
-  { label: 'Certificación ONAC', icon: Award },
+  { label: 'Báscula alto desempeño', icon: Scale },
+  { label: 'Certificación de respaldo', icon: Award },
   { label: 'Verificación diaria 500 Kg', icon: Weight },
   { label: 'Transparencia y trazabilidad', icon: ShieldCheck },
 ] as const

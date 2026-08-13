@@ -2,7 +2,6 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/layout/Layout'
 import { HomePage } from './pages/HomePage'
 import { CortesPage } from './pages/productos/CortesPage'
-import { SubproductosPage } from './pages/productos/SubproductosPage'
 import { defaultCorporativoHref, defaultProductosHref, defaultServiceHref } from './data/navigation'
 import { ServiceDetailPage } from './pages/servicios/ServiceDetailPage'
 import { SostenibilidadIndexPage } from './pages/sostenibilidad/SostenibilidadIndexPage'
@@ -25,7 +24,7 @@ export default function App() {
 
           <Route path="/productos" element={<Navigate to={defaultProductosHref} replace />} />
           <Route path="/productos/cortes" element={<CortesPage />} />
-          <Route path="/productos/subproductos" element={<SubproductosPage />} />
+          <Route path="/productos/subproductos" element={<Navigate to={defaultProductosHref} replace />} />
 
           <Route path="/servicios" element={<Navigate to={defaultServiceHref} replace />} />
           <Route path="/servicios/:slug" element={<ServiceDetailPage />} />

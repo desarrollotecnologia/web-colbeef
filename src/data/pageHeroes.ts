@@ -9,7 +9,7 @@ export const serviciosHero: PageHeroContent = {
 export const productosHero: PageHeroContent = {
   badge: 'PRODUCTOS',
   headline: 'Soluciones cárnicas para cada necesidad.',
-  features: 'Cortes premium • Subproductos • Calidad certificada • Trazabilidad',
+  features: 'Cortes • Calidad certificada • Trazabilidad',
 }
 
 export const cortesHero: PageHeroContent = {

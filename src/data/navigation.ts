@@ -20,7 +20,6 @@ export const defaultProductosHref = '/productos/cortes'
 export const navDropdowns: Record<string, { label: string; href: string }[]> = {
   '/productos': [
     { label: 'Cortes', href: '/productos/cortes' },
-    { label: 'Subproductos', href: '/productos/subproductos' },
   ],
   '/servicios': [
     { label: 'Pesaje de ganado', href: '/servicios/pesaje-de-ganado' },

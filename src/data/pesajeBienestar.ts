@@ -20,7 +20,7 @@ export interface BienestarFeature {
 
 export const bienestarAnimalContent = {
   label: 'Bienestar animal',
-  title: 'Infraestructura diseñada para su bienestar',
+  title: 'Infraestructura moderna orientada al bienestar animal',
   intro:
     'Nuestras instalaciones cumplen altos estándares de bienestar animal, reduciendo el estrés, previniendo lesiones y asegurando la calidad del producto final.',
   features: [

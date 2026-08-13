@@ -24,7 +24,7 @@ export const beneficiosNegocioContent = {
     },
     {
       id: 'calidad',
-      label: 'Calidad superior',
+      label: 'Calidad desde el origen',
       icon: Award,
     },
     {

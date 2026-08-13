@@ -7,7 +7,7 @@ import {
   Recycle,
   ShieldCheck,
 } from 'lucide-react'
-import { icons, serviciosImages } from '../../data/assets'
+import { serviciosImages } from '../../data/assets'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 
 const beneficios = [
@@ -26,19 +26,12 @@ export function DesposteValorSection() {
     <AnimatedSection className="py-12 md:py-16 lg:py-20 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid lg:grid-cols-[1.05fr_1.1fr_0.95fr] gap-10 lg:gap-8 xl:gap-10 items-center">
-          <FadeIn className="relative">
-            <img
-              src={icons.ganado}
-              alt=""
-              aria-hidden
-              className="pointer-events-none absolute -bottom-6 -left-4 w-40 sm:w-52 opacity-[0.07] select-none"
-            />
-
-            <h2 className="relative text-colbeef-green text-xl sm:text-2xl md:text-[1.65rem] font-bold uppercase tracking-wide leading-tight mb-5 md:mb-6">
+          <FadeIn>
+            <h2 className="text-colbeef-green text-xl sm:text-2xl md:text-[1.65rem] font-bold uppercase tracking-wide leading-tight mb-5 md:mb-6">
               Un proceso que maximiza el valor de cada canal
             </h2>
 
-            <div className="relative space-y-4 text-colbeef-gray text-sm md:text-base leading-relaxed">
+            <div className="space-y-4 text-colbeef-gray text-sm md:text-base leading-relaxed">
               <p>
                 El desposte es una etapa fundamental dentro de la cadena de procesamiento cárnico.
                 Consiste en separar cuidadosamente la estructura ósea del tejido muscular para
