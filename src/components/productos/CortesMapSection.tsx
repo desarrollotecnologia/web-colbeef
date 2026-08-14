@@ -21,6 +21,7 @@ const grupoLabels: Record<CorteGrupo, string> = {
 function ActiveCutLabel({ area }: { area: CorteArea }) {
   const { x, y } = getAreaCenter(area)
   const { dx = 0, dy = 0, rotate = 0, scale = 1 } = area.label ?? {}
+  const fontSize = Math.max(11, Math.round(15 * scale))
 
   return (
     <motion.span
@@ -28,12 +29,13 @@ function ActiveCutLabel({ area }: { area: CorteArea }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.16 }}
-      className="absolute whitespace-nowrap font-bold uppercase leading-none tracking-wide text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.65)]"
+      className="absolute z-20 whitespace-nowrap font-bold uppercase leading-none tracking-wide text-white"
       style={{
         left: `${x + dx}%`,
         top: `${y + dy}%`,
-        fontSize: `${1.7 * scale}cqw`,
+        fontSize: `${fontSize}px`,
         transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
+        textShadow: '0 1px 2px rgba(0,0,0,0.75), 0 0 6px rgba(120,0,8,0.9)',
       }}
     >
       {area.name}
@@ -79,8 +81,7 @@ export function CortesMapSection() {
               <svg
                 viewBox="0 0 100 100"
                 preserveAspectRatio="none"
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 h-full w-full"
+                className="absolute inset-0 h-full w-full"
               >
                 {cortesMapAreas.map((area) => {
                   const isActive = activeId === area.id
@@ -89,38 +90,32 @@ export function CortesMapSection() {
                     <polygon
                       key={`zona-${area.id}`}
                       points={getAreaPoints(area)}
-                      fill={isActive ? 'rgba(196, 18, 28, 0.88)' : 'rgba(196, 18, 28, 0.72)'}
+                      fill={isActive ? 'rgba(196, 18, 28, 0.92)' : 'rgba(196, 18, 28, 0.72)'}
                       stroke={isActive ? '#ffffff' : 'rgba(255, 248, 242, 0.92)'}
                       strokeWidth={isActive ? 2.1 : 1.15}
                       vectorEffect="non-scaling-stroke"
-                      className="transition-[fill,stroke-width] duration-200"
+                      role="button"
+                      tabIndex={0}
+                      aria-label={area.name}
+                      aria-pressed={selectedId === area.id}
+                      className="cursor-pointer transition-[fill,stroke-width] duration-200 outline-none"
+                      onMouseEnter={() => setHoveredId(area.id)}
+                      onMouseLeave={() => setHoveredId(null)}
+                      onFocus={() => setHoveredId(area.id)}
+                      onBlur={() => setHoveredId(null)}
+                      onClick={() => setSelectedId(area.id)}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          event.preventDefault()
+                          setSelectedId(area.id)
+                        }
+                      }}
                     />
                   )
                 })}
               </svg>
 
-              <div className="absolute inset-0">
-                {cortesMapAreas.map((area) => (
-                  <button
-                    key={area.id}
-                    type="button"
-                    aria-label={area.name}
-                    aria-pressed={selectedId === area.id}
-                    onMouseEnter={() => setHoveredId(area.id)}
-                    onMouseLeave={() => setHoveredId(null)}
-                    onFocus={() => setHoveredId(area.id)}
-                    onBlur={() => setHoveredId(null)}
-                    onClick={() => setSelectedId(area.id)}
-                    className="absolute inset-0 cursor-pointer border-0 bg-transparent p-0 focus:outline-none"
-                    style={{
-                      clipPath: area.clipPath,
-                      WebkitClipPath: area.clipPath,
-                    }}
-                  />
-                ))}
-              </div>
-
-              <div className="absolute inset-0 pointer-events-none">
+              <div className="pointer-events-none absolute inset-0 z-10">
                 <AnimatePresence mode="wait">
                   {activeArea && (
                     <ActiveCutLabel key={activeArea.id} area={activeArea} />

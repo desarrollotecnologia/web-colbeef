@@ -25,10 +25,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build (subcarpeta de prueba)
+      - name: Build (raíz colbeef.com)
         run: npm run build
         env:
-          VITE_BASE_PATH: /sitio-nuevo/
+          VITE_BASE_PATH: /
           VITE_WEB3FORMS_TRABAJE_ACCESS_KEY: ${{ secrets.TRABAJE_CON_NOSOTROS }}
           VITE_WEB3FORMS_HORECA_ACCESS_KEY: ${{ secrets.SOLICITUD_DE_NEGOCIO }}
 
@@ -36,7 +36,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y lftp
 
       # No usar ~/.netrc: contraseñas con @ ! rompen el parseo.
-      # Login al directorio home de la cuenta (sin cd).
+      # Destino: public_html/colbeef.com (raíz de https://colbeef.com/).
       - name: Deploy via FTPS (lftp)
         env:
           FTP_HOST: ftp.frigorificoriofrio.com
@@ -67,6 +67,10 @@ jobs:
           set ftp:ssl-protect-data true
           set ssl:verify-certificate no
           open -u "${FTP_USER}","${FTP_PASS}" -p 21 ftp://${FTP_HOST}
+          set cmd:fail-exit no
+          cd public_html/colbeef.com
+          cd colbeef.com
+          set cmd:fail-exit yes
           pwd
           ls
           mirror -R --verbose --parallel=2 ./dist/ .
