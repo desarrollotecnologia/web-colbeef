@@ -75,9 +75,10 @@ jobs:
           set net:timeout 90
           set net:max-retries 3
           set ftp:passive-mode true
-          set ftp:ssl-allow no
-          set ftp:ssl-force false
-          set ftp:ssl-protect-data false
+          set ftp:ssl-allow true
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ftp:ssl-auth TLS
           set ssl:verify-certificate no
           open -u "${FTP_USER}","${FTP_PASS}" -p 21 ftp://${FTP_HOST}
           ${CD_LINE}
