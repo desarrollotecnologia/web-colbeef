@@ -56,15 +56,12 @@ jobs:
           fi
 
           echo "Host: $FTP_HOST"
-          echo "Remote dir: ${FTP_SERVER_DIR:-.(home FTP)}"
+          echo "Remote dir: home FTP (sin cd; la cuenta ya abre en colbeef.com)"
           echo "User length: ${#FTP_USER}"
           echo "Pass length: ${#FTP_PASS}"
 
-          CD_CMD=""
-          if [ -n "$FTP_SERVER_DIR" ]; then
-            CD_CMD="cd ${FTP_SERVER_DIR}"
-          fi
-
+          # Esta cuenta FTP ya entra en public_html/colbeef.com.
+          # Un cd a esa ruta provoca: 421 Home directory not available.
           lftp -f /dev/stdin <<EOF
           set cmd:fail-exit yes
           set net:timeout 60
@@ -74,7 +71,6 @@ jobs:
           set ftp:ssl-protect-data true
           set ssl:verify-certificate no
           open -u "${FTP_USER}","${FTP_PASS}" -p 21 ftp://${FTP_HOST}
-          ${CD_CMD}
           pwd
           ls
           mirror -R --verbose --parallel=2 ./dist/ .
