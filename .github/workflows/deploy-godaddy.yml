@@ -32,60 +32,34 @@ jobs:
           VITE_WEB3FORMS_TRABAJE_ACCESS_KEY: ${{ secrets.TRABAJE_CON_NOSOTROS }}
           VITE_WEB3FORMS_HORECA_ACCESS_KEY: ${{ secrets.SOLICITUD_DE_NEGOCIO }}
 
-      - name: Install lftp
-        run: sudo apt-get update && sudo apt-get install -y lftp
-
-      # No usar ~/.netrc: contraseñas con @ ! rompen el parseo.
-      # Destino: el home de la cuenta FTP (debe ser public_html/colbeef.com).
-      # FTP_HOST opcional; si no existe, usa ftp.frigorificoriofrio.com
-      - name: Deploy via FTP (lftp)
+      - name: Prepare FTP target
+        id: ftp
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USER: ${{ secrets.FTP_USERNAME }}
-          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
-          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          set -euo pipefail
-
-          FTP_USER="$(printf '%s' "$FTP_USER" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
-          FTP_PASS="$(printf '%s' "$FTP_PASS" | tr -d '\r\n')"
-          FTP_HOST="$(printf '%s' "${FTP_HOST:-ftp.frigorificoriofrio.com}" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
-          FTP_SERVER_DIR="$(printf '%s' "${FTP_SERVER_DIR:-}" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//;s#^/##;s#/$##')"
-
-          if [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
-            echo "Faltan secrets FTP_USERNAME / FTP_PASSWORD"
-            exit 1
-          fi
-
-          echo "Host: $FTP_HOST"
-          echo "User length: ${#FTP_USER}"
-          echo "Pass length: ${#FTP_PASS}"
-          echo "Dir length: ${#FTP_SERVER_DIR}"
-
-          CD_LINE="pwd"
-          if [ -n "$FTP_SERVER_DIR" ] && [ "$FTP_SERVER_DIR" != "." ]; then
-            CD_LINE="cd ${FTP_SERVER_DIR}"
-            echo "Will cd to a remote subdirectory"
+          host="$(printf '%s' "${FTP_HOST:-ftp.frigorificoriofrio.com}" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+          dir="$(printf '%s' "${FTP_SERVER_DIR:-.}" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//;s#^/##;s#/$##')"
+          if [ -z "$dir" ] || [ "$dir" = "." ]; then
+            remote="./"
           else
-            echo "Will stay in FTP home"
+            remote="${dir}/"
           fi
+          echo "host=$host" >> "$GITHUB_OUTPUT"
+          echo "server_dir=$remote" >> "$GITHUB_OUTPUT"
+          echo "Host: $host"
+          echo "Server dir: $remote"
 
-          lftp -f /dev/stdin <<EOF
-          set cmd:fail-exit yes
-          set net:timeout 90
-          set net:max-retries 3
-          set ftp:passive-mode true
-          set ftp:ssl-allow true
-          set ftp:ssl-force true
-          set ftp:ssl-protect-data true
-          set ftp:ssl-auth TLS
-          set ssl:verify-certificate no
-          open -u "${FTP_USER}" -p 21 ftp://${FTP_HOST}
-          ${CD_LINE}
-          pwd
-          ls
-          mirror -R --verbose --parallel=2 ./dist/ .
-          ls
-          bye
-          EOF
+      # La clave puede traer * @ ! ; esta action no la interpola en un script lftp.
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ steps.ftp.outputs.host }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./dist/
+          server-dir: ${{ steps.ftp.outputs.server_dir }}
+          security: loose
+          timeout: 60000
