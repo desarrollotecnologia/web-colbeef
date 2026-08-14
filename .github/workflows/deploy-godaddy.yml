@@ -36,19 +36,19 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y lftp
 
       # No usar ~/.netrc: contraseñas con @ ! rompen el parseo.
-      # Destino: public_html/colbeef.com (raíz de https://colbeef.com/).
-      - name: Deploy via FTPS (lftp)
+      # Destino: el home de la cuenta FTP (debe ser public_html/colbeef.com).
+      # FTP_HOST opcional; si no existe, usa ftp.frigorificoriofrio.com
+      - name: Deploy via FTP (lftp)
         env:
-          FTP_HOST: ftp.frigorificoriofrio.com
+          FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
-          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
         run: |
           set -euo pipefail
 
           FTP_USER="$(printf '%s' "$FTP_USER" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
           FTP_PASS="$(printf '%s' "$FTP_PASS" | tr -d '\r\n')"
-          FTP_SERVER_DIR="$(printf '%s' "$FTP_SERVER_DIR" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//;s#^/##;s#/$##')"
+          FTP_HOST="$(printf '%s' "${FTP_HOST:-ftp.frigorificoriofrio.com}" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
 
           if [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
             echo "Faltan secrets FTP_USERNAME / FTP_PASSWORD"
@@ -56,19 +56,17 @@ jobs:
           fi
 
           echo "Host: $FTP_HOST"
-          echo "Remote dir: home FTP (sin cd; la cuenta ya abre en colbeef.com)"
           echo "User length: ${#FTP_USER}"
           echo "Pass length: ${#FTP_PASS}"
 
-          # Esta cuenta FTP ya entra en public_html/colbeef.com.
-          # Un cd a esa ruta provoca: 421 Home directory not available.
           lftp -f /dev/stdin <<EOF
           set cmd:fail-exit yes
-          set net:timeout 60
-          set net:max-retries 2
+          set net:timeout 90
+          set net:max-retries 3
           set ftp:passive-mode true
-          set ftp:ssl-force true
-          set ftp:ssl-protect-data true
+          set ftp:ssl-allow no
+          set ftp:ssl-force false
+          set ftp:ssl-protect-data false
           set ssl:verify-certificate no
           open -u "${FTP_USER}","${FTP_PASS}" -p 21 ftp://${FTP_HOST}
           pwd
