@@ -86,6 +86,6 @@ export const certificationText =
   'En Colbeef garantizamos la trazabilidad, calidad e inocuidad en todos nuestros procesos y productos, a través de la implementación de BPM, certificación HACCP, ISO 22000 y el pleno cumplimiento del decreto 1500 de 2007, generando confianza y rentabilidad a nuestros clientes.'
 
 export const aboutParagraphs = [
-  'En COLBEEF S.A.S. transformamos la excelencia en confianza. Somos líderes en el beneficio, procesamiento y comercialización de carne bovina y bufalina, ofreciendo productos que cumplen con los más altos estándares de calidad, inocuidad y seguridad alimentaria.',
-  'Nuestra experiencia, el talento de nuestro equipo y una operación respaldada por tecnología, procesos certificados y un firme compromiso con la sostenibilidad nos permiten garantizar una cadena de suministro eficiente, trazable y confiable, llevando a nuestros clientes productos frescos que responden a las exigencias del mercado nacional.',
+  'En COLBEEF S.A.S. transformamos la excelencia en confianza. Somos una empresa especializada en el beneficio, procesamiento y comercialización de carne bovina y bufalina, comprometida con los más altos estándares de calidad, inocuidad y eficiencia operacional.',
+  'Contamos con una planta certificada y habilitada para exportación, respaldada por tecnología, procesos certificados y un firme compromiso con la sostenibilidad. Nuestra experiencia y el talento de nuestro equipo nos permiten ofrecer una cadena de suministro eficiente, trazable y confiable, brindando soluciones que responden a las necesidades de nuestros clientes y de los diferentes canales de comercialización.',
 ] as const

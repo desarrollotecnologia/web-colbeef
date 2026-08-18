@@ -12,11 +12,14 @@ export function CategoryTiles({ showArrow = true }: CategoryTilesProps) {
       <motion.button
         type="button"
         whileHover={{ scale: 1.05 }}
-        className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-colbeef-green flex flex-col items-center justify-center gap-1 text-white p-2"
-        aria-label="Res"
+        className="flex items-center justify-center p-0"
+        aria-label="Ganado res"
       >
-        <img src={icons.ganado} alt="" className="h-10 w-auto object-contain brightness-0 invert" />
-        <span className="text-xs font-bold tracking-widest">RES</span>
+        <img
+          src={icons.ganado}
+          alt="Ganado res"
+          className="h-12 w-auto sm:h-16 md:h-20 lg:h-24 object-contain"
+        />
       </motion.button>
       {showArrow && (
         <motion.button

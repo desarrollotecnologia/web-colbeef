@@ -53,7 +53,7 @@ export function Header() {
           <Logo size="sm" />
         </div>
 
-        <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 font-nav">
           {navLinks.map((link) => {
             const isActive = isNavActive(location.pathname, link.href)
             const children = navDropdowns[link.href]
@@ -200,7 +200,7 @@ export function Header() {
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-white border-t border-gray-100 max-h-[calc(100dvh-var(--header-height))] overflow-y-auto overscroll-contain"
           >
-            <nav className="flex flex-col px-4 py-4">
+            <nav className="flex flex-col px-4 py-4 font-nav">
               {navLinks.map((link) => {
                 const children = navDropdowns[link.href]
 

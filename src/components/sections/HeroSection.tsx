@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { heroSlides } from '../../data/site'
-import { CategoryTiles } from '../ui/CategoryTiles'
 
 export function HeroSection() {
   const [current, setCurrent] = useState(0)
@@ -48,7 +47,7 @@ export function HeroSection() {
         className="absolute bottom-14 sm:bottom-16 md:bottom-20 left-0 right-0 z-10 flex justify-center px-4"
       >
         <div className="bg-colbeef-green/90 backdrop-blur-sm px-4 sm:px-6 md:px-12 py-2.5 sm:py-3 md:py-4 max-w-[95vw]">
-          <p className="text-white text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.15em] sm:tracking-[0.25em] uppercase text-center">
+          <p className="font-nav text-white text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.15em] sm:tracking-[0.25em] uppercase text-center">
             {slide.banner}
           </p>
         </div>
@@ -71,10 +70,6 @@ export function HeroSection() {
       >
         <ChevronRight className="w-5 h-5" />
       </button>
-
-      <div className="absolute bottom-14 sm:bottom-8 right-4 sm:right-6 md:right-12 z-10">
-        <CategoryTiles showArrow={false} />
-      </div>
 
       {/* Indicadores */}
       <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
