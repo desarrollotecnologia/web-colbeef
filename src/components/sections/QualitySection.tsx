@@ -112,7 +112,7 @@ export function QualitySection() {
           </div>
 
           <div className="flex flex-col gap-3 lg:gap-4 px-4 sm:px-6 md:px-8 lg:pr-8 xl:pr-10 py-5 lg:py-6 xl:py-8 lg:pl-0 pt-0 lg:pt-6 min-h-[220px] lg:min-h-0">
-            <div className="lg:hidden relative h-48 sm:h-60 md:h-72 rounded-xl overflow-hidden">
+            <div className="lg:hidden relative h-48 sm:h-60 md:h-72 rounded-xl overflow-hidden bg-[#A4B8B7]">
               {qualityPillars[active].id === 'calidad' ? (
                 <CertLogosPanel />
               ) : (
@@ -122,7 +122,7 @@ export function QualitySection() {
                     alt={qualityPillars[active].title}
                     className={`absolute inset-0 w-full h-full ${
                       qualityPillars[active].id === 'exportacion'
-                        ? 'object-contain bg-colbeef-green'
+                        ? 'object-cover object-center'
                         : 'object-cover'
                     }`}
                   />
@@ -151,7 +151,7 @@ export function QualitySection() {
                       isActive
                         ? 'flex-[2.5] min-h-[240px] xl:min-h-[280px] shadow-lg'
                         : 'flex-1 min-h-[88px] xl:min-h-[104px] hover:opacity-95'
-                    } ${isMap && isActive ? 'bg-colbeef-green' : ''}`}
+                    } ${isMap && isActive ? 'bg-[#A4B8B7]' : ''}`}
                     aria-label={pillar.title}
                   >
                     {isCerts ? (
@@ -173,8 +173,8 @@ export function QualitySection() {
                         <img
                           src={pillar.image}
                           alt={pillar.title}
-                          className={`absolute inset-0 w-full h-full ${
-                            isMap && isActive ? 'object-contain' : 'object-cover'
+                          className={`absolute inset-0 w-full h-full object-cover ${
+                            isMap && isActive ? 'object-center' : ''
                           }`}
                         />
                         <div

@@ -63,7 +63,7 @@ export const images = {
   beneficioLavado: asset('/assets/images/beneficio-lavado.png'),
   comercializacion: asset('/assets/images/comercializacion-empaque.png'),
   canales: asset('/assets/images/canales-colgantes.png'),
-  horecaBanner: asset('/assets/images/horeca-chef.jpg'),
+  horecaBanner: asset('/assets/images/horeca-banner.jpg'),
   img5280: asset('/images/IMG_5280.JPG'),
   img5282: asset('/images/IMG_5282.JPG'),
   img5288: asset('/images/IMG_5288.JPG'),

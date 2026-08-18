@@ -129,7 +129,7 @@ export function HorecaSection() {
               <img
                 src={images.horecaBanner}
                 alt="Chef profesional preparando carne premium Colbeef"
-                className="absolute inset-0 w-full h-full object-cover object-center"
+                className="absolute inset-0 w-full h-full object-cover object-[62%_center]"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-colbeef-green-dark from-[8%] via-colbeef-green-dark/55 via-[45%] to-transparent to-[92%]" />
             </div>
