@@ -16,13 +16,13 @@ export type ContactFormPayload = {
 }
 
 function subjectFor(kind: ContactFormPayload['kind']) {
-  if (kind === 'pqr') return 'PQR — Colbeef'
+  if (kind === 'pqr') return 'PQRS — Colbeef'
   if (kind === 'trabaje') return 'Trabaje con nosotros — Colbeef'
   return 'Contacto — Colbeef'
 }
 
 function fromNameFor(kind: ContactFormPayload['kind']) {
-  if (kind === 'pqr') return 'Colbeef Web · PQR'
+  if (kind === 'pqr') return 'Colbeef Web · PQRS'
   if (kind === 'trabaje') return 'Colbeef Web · Trabaje con nosotros'
   return 'Colbeef Web · Contacto'
 }

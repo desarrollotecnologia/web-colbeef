@@ -121,7 +121,7 @@ export function HistoriaSection() {
                           {item.title}
                         </p>
                         <p
-                          className={`${isGreen ? 'text-white/75' : 'text-colbeef-gray'} text-[11px] md:text-xs leading-relaxed`}
+                          className={`${isGreen ? 'text-white/75' : 'text-colbeef-gray'} text-[11px] md:text-xs leading-relaxed whitespace-pre-line`}
                         >
                           {item.description}
                         </p>

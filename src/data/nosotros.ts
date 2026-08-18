@@ -26,7 +26,7 @@ export const historiaTimeline = [
     year: '2006',
     title: 'Nace el proyecto empresarial',
     description:
-      'Inicia una nueva apuesta empresarial para fortalecer la cadena ganadera y promover el desarrollo económico y productivo de la región.',
+      'Inicia una nueva apuesta empresarial para fortalecer la cadena cárnica y promover el desarrollo económico y productivo de la región.',
     variant: 'green' as const,
   },
   {
@@ -36,17 +36,17 @@ export const historiaTimeline = [
     variant: 'white' as const,
   },
   {
-    year: '2013-2018',
+    year: '2013',
     title: 'Inicio de operaciones',
     description:
-      'La planta entra oficialmente en funcionamiento. Certificación INVIMA y HACCP con cumplimiento de estándares nacionales e internacionales.',
+      'Colbeef inició operaciones bajo los lineamientos establecidos por el Decreto 1500 de 2007, dando un paso decisivo hacia la consolidación de una industria cárnica más moderna, responsable y comprometida con la inocuidad y la calidad.',
     variant: 'green' as const,
   },
   {
-    year: '2021',
-    title: 'Planta de Tratamiento de Aguas Residuales',
+    year: '2019',
+    title: 'Evolucionamos',
     description:
-      'Implementación de la PTAR para el tratamiento y reutilización responsable del recurso hídrico en nuestros procesos.',
+      'Inauguramos nuestra planta de desposte y dimos un paso decisivo en nuestra evolución empresarial: Frigorífico Río Frío S.A.S. se transformó en COLBEEF S.A.S.\n\nUna nueva identidad para seguir creciendo e impulsando la industria cárnica de Santander.',
     variant: 'white' as const,
   },
   {

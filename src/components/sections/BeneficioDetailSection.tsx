@@ -2,7 +2,7 @@ import { serviciosImages } from '../../data/assets'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 
 const beneficioIntro =
-  'En COLBEEF realizamos el beneficio, sacrificio y procesamiento de ganado bovino y bufalino mediante procesos certificados, tecnología de última generación y estrictos protocolos de inocuidad alimentaria, bienestar animal y trazabilidad, garantizando una carne segura, fresca y de excelente calidad para nuestros clientes.'
+  'En COLBEEF realizamos el beneficio y procesamiento de ganado bovino y bufalino mediante procesos certificados y estrictos protocolos de inocuidad, bienestar animal y trazabilidad, garantizando productos de excelente calidad, consistencia y confianza para nuestros clientes.'
 
 const beneficioSectionImage = serviciosImages.beneficioProceso
 

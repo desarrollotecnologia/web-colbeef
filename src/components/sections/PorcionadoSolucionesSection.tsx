@@ -20,7 +20,7 @@ const soluciones: PorcionadoSolucion[] = [
     title: 'Porciones listas para cocinar',
     description: 'Ideal para operaciones que requieren rapidez y estandarización.',
     items: ['Carne en sábana', 'Julianas', 'Cubos', 'Goulash'],
-    image: serviciosImages.porcionadoProceso,
+    image: serviciosImages.porcionado01,
   },
   {
     id: 'premium',
@@ -39,7 +39,7 @@ const soluciones: PorcionadoSolucion[] = [
       'Bife de Paleta',
       'Asado de Tira',
     ],
-    image: serviciosImages.desposteTipo4,
+    image: serviciosImages.porcionado02,
   },
   {
     id: 'gramajes',
@@ -61,7 +61,7 @@ const soluciones: PorcionadoSolucion[] = [
       'Tiempos de entrega óptimos',
       'Pedido exacto',
     ],
-    image: serviciosImages.beneficioProceso,
+    image: serviciosImages.porcionado04,
   },
 ]
 

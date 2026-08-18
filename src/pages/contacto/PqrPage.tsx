@@ -13,9 +13,9 @@ import { AnimatedSection, FadeIn } from '../../components/ui/AnimatedSection'
 import { PageHero } from '../../components/ui/PageHero'
 
 const pqrHero = heroFromTitle(
-  'PQR',
+  'PQRS',
   'Estamos atentos a sus preguntas y sugerencias.',
-  'Peticiones • Quejas • Reclamos • Atención oportuna',
+  'Peticiones • Quejas • Reclamos • Sugerencias',
 )
 
 export function PqrPage() {
@@ -76,7 +76,7 @@ export function PqrPage() {
 
   return (
     <>
-      <PageHero image={images.panoramica} alt="PQR Colbeef" content={pqrHero} />
+      <PageHero image={images.panoramica} alt="PQRS Colbeef" content={pqrHero} />
 
       <AnimatedSection className="py-12 md:py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-8">

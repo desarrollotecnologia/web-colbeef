@@ -15,7 +15,7 @@ export const contactoContent = {
 }
 
 export const pqrContent = {
-  title: 'PQR',
+  title: 'PQRS',
   description:
     'En Colbeef estamos atentos para recibir sus preguntas, dudas o sugerencias. Diligencie el formulario y nos comunicaremos con usted lo más pronto posible.',
 }

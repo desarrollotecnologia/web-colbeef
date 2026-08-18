@@ -150,7 +150,7 @@ export const searchIndex: SearchEntry[] = [
     gobiernoCorporativo.reportes.join(' '),
   ),
   entry('contacto', 'Contacto', 'Información de contacto Colbeef Floridablanca', '/contacto', 'teléfono email'),
-  entry('contacto-pqr', 'PQR', pqrContent.description, '/contacto/pqr', 'peticiones quejas reclamos'),
+  entry('contacto-pqr', 'PQRS', pqrContent.description, '/contacto/pqr', 'peticiones quejas reclamos sugerencias pqrs'),
   entry(
     'contacto-trabaje',
     'Trabaje con nosotros',

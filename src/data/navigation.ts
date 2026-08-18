@@ -34,7 +34,7 @@ export const navDropdowns: Record<string, { label: string; href: string }[]> = {
     { label: 'Gobierno corporativo', href: '/corporativo/gobierno-corporativo' },
   ],
   '/contacto': [
-    { label: 'PQR', href: '/contacto/pqr' },
+    { label: 'PQRS', href: '/contacto/pqr' },
     { label: 'Trabaje con nosotros', href: '/contacto/trabaje-con-nosotros' },
   ],
 }

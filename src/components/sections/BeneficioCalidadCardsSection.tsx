@@ -25,7 +25,7 @@ const cards: CalidadCard[] = [
     id: 'trazabilidad',
     title: 'Trazabilidad Total',
     description:
-      'Seguimiento individual de cada canal desde el beneficio hasta la distribución.',
+      'Seguimiento individual de cada animal desde el beneficio hasta la distribución.',
     icon: Satellite,
   },
   {
@@ -46,7 +46,7 @@ const cards: CalidadCard[] = [
     id: 'frio',
     title: 'Cadena de Frío',
     description:
-      'Conservación óptima para mantener la frescura y calidad del producto.',
+      'Conservación óptima para preservar la calidad e integridad del producto.',
     icon: Snowflake,
   },
   {
@@ -100,7 +100,7 @@ function FlipCard({
           style={{ backgroundColor: CARD_BG }}
         >
           <Icon className="w-9 h-9 sm:w-10 sm:h-10 text-white" strokeWidth={1.5} />
-          <p className="text-white text-sm sm:text-base font-semibold text-center leading-snug px-2">
+          <p className="font-viga text-white text-sm sm:text-base text-center leading-snug px-2">
             {card.title}
           </p>
         </div>

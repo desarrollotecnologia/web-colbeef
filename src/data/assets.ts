@@ -52,6 +52,9 @@ export const serviciosImages = {
   desposteTipo3: asset('/assets/images/servicios/desposte-tipo-3.jpg'),
   desposteTipo4: asset('/assets/images/servicios/desposte-tipo-4.jpg'),
   porcionadoProceso: asset('/assets/images/servicios/porcionado-proceso.jpg'),
+  porcionado01: asset('/assets/images/servicios/porcionado-01.jpg'),
+  porcionado02: asset('/assets/images/servicios/porcionado-02.jpg'),
+  porcionado04: asset('/assets/images/servicios/porcionado-04.jpg'),
 } as const
 
 export const images = {

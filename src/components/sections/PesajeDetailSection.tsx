@@ -8,7 +8,7 @@ const pesajeIntro =
 const pesajeFeatures = [
   { label: 'Báscula alto desempeño', icon: Scale },
   { label: 'Certificación de respaldo', icon: Award },
-  { label: 'Verificación diaria 500 Kg', icon: Weight },
+  { label: 'Verificación diaria', icon: Weight },
   { label: 'Transparencia y trazabilidad', icon: ShieldCheck },
 ] as const
 
@@ -46,8 +46,8 @@ export function PesajeDetailSection() {
             <div className="relative overflow-hidden rounded-xl lg:rounded-2xl shadow-lg h-full min-h-[240px] sm:min-h-[280px] bg-colbeef-green-pale">
               <img
                 src={pesajeSectionImage}
-                alt="Pesaje de ganado en COLBEEF"
-                className="absolute inset-0 h-full w-full object-cover object-center"
+                alt="Ganado en báscula y manga de pesaje COLBEEF"
+                className="absolute inset-0 h-full w-full object-cover object-[62%_center]"
               />
             </div>
           </FadeIn>
