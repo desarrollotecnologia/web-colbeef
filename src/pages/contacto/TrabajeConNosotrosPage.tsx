@@ -25,8 +25,8 @@ export function TrabajeConNosotrosPage() {
     telefono: '',
     cargo: '',
     mensaje: '',
+    enlaceHv: '',
   })
-  const [file, setFile] = useState<File | null>(null)
   const [privacyAccepted, setPrivacyAccepted] = useState(false)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
@@ -50,21 +50,16 @@ export function TrabajeConNosotrosPage() {
     setErrorMessage('')
 
     try {
-      await submitContactForm(
-        {
-          kind: 'trabaje',
-          nombre: form.nombre,
-          email: form.email,
-          telefono: form.telefono,
-          cargo: form.cargo,
-          mensaje: form.mensaje,
-          archivoNombre: file?.name,
-        },
-        file,
-      )
+      await submitContactForm({
+        kind: 'trabaje',
+        nombre: form.nombre,
+        email: form.email,
+        telefono: form.telefono,
+        cargo: form.cargo,
+        mensaje: form.mensaje + (form.enlaceHv ? `\n\nEnlace HV: ${form.enlaceHv}` : ''),
+      })
       setStatus('success')
-      setForm({ nombre: '', email: '', telefono: '', cargo: '', mensaje: '' })
-      setFile(null)
+      setForm({ nombre: '', email: '', telefono: '', cargo: '', mensaje: '', enlaceHv: '' })
       setPrivacyAccepted(false)
     } catch (error) {
       setStatus('error')
@@ -137,16 +132,17 @@ export function TrabajeConNosotrosPage() {
 
                   <div>
                     <label className="block text-xs font-semibold text-colbeef-dark mb-2">
-                      Hoja de vida
+                      Enlace a hoja de vida
                     </label>
                     <input
-                      type="file"
-                      accept=".pdf,.doc,.docx"
-                      onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-                      className="block w-full text-sm text-colbeef-gray file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-colbeef-green/10 file:text-colbeef-green file:text-xs file:font-semibold hover:file:bg-colbeef-green/15"
+                      type="url"
+                      placeholder="https://drive.google.com/... (Google Drive, Dropbox, etc.)"
+                      value={form.enlaceHv}
+                      onChange={(e) => setForm({ ...form, enlaceHv: e.target.value })}
+                      className={contactUnderlineInputClass}
                     />
                     <p className="text-xs text-colbeef-gray mt-1.5">
-                      {file ? file.name : 'Ningún archivo seleccionado'}
+                      Comparte el enlace de tu hoja de vida desde Google Drive, Dropbox u otro servicio.
                     </p>
                   </div>
 
