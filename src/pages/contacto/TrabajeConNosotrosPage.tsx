@@ -56,7 +56,9 @@ export function TrabajeConNosotrosPage() {
         email: form.email,
         telefono: form.telefono,
         cargo: form.cargo,
-        mensaje: form.mensaje + (form.enlaceHv ? `\n\nEnlace HV: ${form.enlaceHv}` : ''),
+        mensaje: form.mensaje,
+        // En vez de adjunto, enviamos el enlace como valor del campo "Hoja de vida"
+        archivoNombre: form.enlaceHv || undefined,
       })
       setStatus('success')
       setForm({ nombre: '', email: '', telefono: '', cargo: '', mensaje: '', enlaceHv: '' })
