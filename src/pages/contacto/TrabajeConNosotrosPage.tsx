@@ -27,6 +27,7 @@ export function TrabajeConNosotrosPage() {
     mensaje: '',
     enlaceHv: '',
   })
+  const [botcheck, setBotcheck] = useState(false)
   const [privacyAccepted, setPrivacyAccepted] = useState(false)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
@@ -57,11 +58,12 @@ export function TrabajeConNosotrosPage() {
         telefono: form.telefono,
         cargo: form.cargo,
         mensaje: form.mensaje,
-        // En vez de adjunto, enviamos el enlace como valor del campo "Hoja de vida"
-        archivoNombre: form.enlaceHv || undefined,
+        enlaceHv: form.enlaceHv,
+        botcheck,
       })
       setStatus('success')
       setForm({ nombre: '', email: '', telefono: '', cargo: '', mensaje: '', enlaceHv: '' })
+      setBotcheck(false)
       setPrivacyAccepted(false)
     } catch (error) {
       setStatus('error')
@@ -95,6 +97,17 @@ export function TrabajeConNosotrosPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Honeypot anti-spam: oculto para usuarios, visible para bots */}
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    checked={botcheck}
+                    onChange={(e) => setBotcheck(e.target.checked)}
+                    className="hidden"
+                    aria-hidden
+                  />
                   <input
                     type="text"
                     placeholder="Nombre*"
