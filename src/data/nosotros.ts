@@ -70,7 +70,7 @@ export const filosofiaTabs = [
     label: 'Misión',
     title: 'Misión',
     content:
-      'En COLBEEF S.A.S. nos dedicamos a la prestación de servicios de beneficio, desposte, transformación y comercialización de productos cárnicos bovinos y bufalinos, garantizando los más altos estándares de calidad, inocuidad alimentaria, trazabilidad y seguridad. Contribuimos al fortalecimiento de la cadena cárnica colombiana mediante un equipo humano altamente calificado, tecnología de vanguardia, procesos eficientes y un firme compromiso con la sostenibilidad ambiental, generando valor para nuestros clientes, proveedores, colaboradores y comunidades.',
+      'Nos dedicamos a la prestación del servicio de beneficio, desposte y transformación de productos cárnicos, contribuyendo con la seguridad alimentaria, con un equipo humano calificado, cuidando el medio ambiente y con alta tecnología para el servicio de nuestros clientes.',
   },
   {
     id: 'vision',
@@ -205,7 +205,7 @@ export const gobiernoCorporativo = {
   lineaEtica:
     'La Línea Ética de COLBEEF S.A.S. es un canal seguro, confidencial y disponible 24/7 que permite reportar cualquier conducta que pueda ir en contra de nuestros principios.',
   queEs: '¿Qué es la línea ética?',
-  queReportar: '¿Qué puedes reportar?',
+  queReportar: '¿Qué se puede reportar?',
   quienPuede: '¿Quiénes pueden usar la línea ética o canal de denuncias?',
   canales: [
     { label: 'Correo', value: 'linea.etica@colbeef.com' },

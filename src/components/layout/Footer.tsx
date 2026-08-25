@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { footerAssets } from '../../data/assets'
+import { docs, footerAssets } from '../../data/assets'
 import { contactInfo, socialLinks } from '../../data/site'
 import { FadeIn } from '../ui/AnimatedSection'
 
@@ -7,18 +7,22 @@ const legalLinks = [
   {
     label: 'Línea ética y canal de denuncias',
     href: '/corporativo/gobierno-corporativo',
+    external: false,
   },
   {
     label: 'Aviso de privacidad',
-    href: '/corporativo/gobierno-corporativo',
+    href: docs.politicaDatos,
+    external: true,
   },
   {
     label: 'Declaratoria cero tolerancia a la corrupción',
     href: '/corporativo/gobierno-corporativo',
+    external: false,
   },
   {
     label: 'Políticas de tratamiento de información personal',
-    href: '/corporativo/gobierno-corporativo',
+    href: docs.politicaDatos,
+    external: true,
   },
 ] as const
 
@@ -86,13 +90,25 @@ export function Footer() {
             <ul className="space-y-2.5 sm:space-y-3 text-center md:text-right">
               {legalLinks.map((item) => (
                 <li key={item.label}>
-                  <Link
-                    to={item.href}
-                    className="inline-flex items-start gap-2 text-white text-[10px] sm:text-xs font-semibold tracking-wide uppercase leading-snug hover:text-white/80 transition-colors max-w-[18rem] sm:max-w-md md:max-w-none mx-auto md:ml-auto md:mr-0 md:justify-end"
-                  >
-                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white shrink-0 md:order-2" />
-                    <span className="md:order-1 text-balance">{item.label}</span>
-                  </Link>
+                  {item.external ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-start gap-2 text-white text-[10px] sm:text-xs font-semibold tracking-wide uppercase leading-snug hover:text-white/80 transition-colors max-w-[18rem] sm:max-w-md md:max-w-none mx-auto md:ml-auto md:mr-0 md:justify-end"
+                    >
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white shrink-0 md:order-2" />
+                      <span className="md:order-1 text-balance">{item.label}</span>
+                    </a>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className="inline-flex items-start gap-2 text-white text-[10px] sm:text-xs font-semibold tracking-wide uppercase leading-snug hover:text-white/80 transition-colors max-w-[18rem] sm:max-w-md md:max-w-none mx-auto md:ml-auto md:mr-0 md:justify-end"
+                    >
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white shrink-0 md:order-2" />
+                      <span className="md:order-1 text-balance">{item.label}</span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

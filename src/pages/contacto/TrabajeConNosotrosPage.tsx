@@ -29,11 +29,15 @@ export function TrabajeConNosotrosPage() {
   })
   const [botcheck, setBotcheck] = useState(false)
   const [privacyAccepted, setPrivacyAccepted] = useState(false)
+  const [privacyTouched, setPrivacyTouched] = useState(false)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
+  const showPrivacyError = privacyTouched && !privacyAccepted
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setPrivacyTouched(true)
 
     if (!form.nombre.trim() || !form.email.trim()) {
       setStatus('error')
@@ -65,6 +69,7 @@ export function TrabajeConNosotrosPage() {
       setForm({ nombre: '', email: '', telefono: '', cargo: '', mensaje: '', enlaceHv: '' })
       setBotcheck(false)
       setPrivacyAccepted(false)
+      setPrivacyTouched(false)
     } catch (error) {
       setStatus('error')
       setErrorMessage(
@@ -161,13 +166,24 @@ export function TrabajeConNosotrosPage() {
                     </p>
                   </div>
 
-                  <ContactPrivacyCheckbox
-                    checked={privacyAccepted}
-                    onChange={setPrivacyAccepted}
-                    id="trabaje-privacy"
-                  />
+                  <div>
+                    <ContactPrivacyCheckbox
+                      checked={privacyAccepted}
+                      onChange={(value) => {
+                        setPrivacyAccepted(value)
+                        setPrivacyTouched(true)
+                        if (value) setErrorMessage('')
+                      }}
+                      id="trabaje-privacy"
+                    />
+                    {showPrivacyError && (
+                      <p className="text-colbeef-red text-xs mt-1.5" role="alert">
+                        Debes marcar esta casilla para enviar el mensaje.
+                      </p>
+                    )}
+                  </div>
 
-                  {status === 'error' && errorMessage && (
+                  {status === 'error' && errorMessage && !showPrivacyError && (
                     <p className="text-colbeef-red text-sm" role="alert">
                       {errorMessage}
                     </p>
@@ -175,8 +191,13 @@ export function TrabajeConNosotrosPage() {
 
                   <button
                     type="submit"
-                    disabled={status === 'loading'}
+                    disabled={status === 'loading' || !privacyAccepted}
                     className={contactSubmitClass}
+                    title={
+                      !privacyAccepted
+                        ? 'Marca la casilla de autorización para poder enviar'
+                        : undefined
+                    }
                   >
                     {status === 'loading' ? 'Enviando...' : 'Enviar mensaje'}
                   </button>

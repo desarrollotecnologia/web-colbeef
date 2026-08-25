@@ -1,15 +1,14 @@
 import { motion } from 'framer-motion'
-import { Eye, Target } from 'lucide-react'
+import { Target } from 'lucide-react'
 import { familiaColbeef, filosofiaTabs } from '../../data/nosotros'
 import { corporativo } from '../../data/assets'
 import { AnimatedSection, FadeIn } from '../ui/AnimatedSection'
 import { ValoresFlipSection } from './ValoresFlipSection'
 
-const filosofiaItems = filosofiaTabs.filter((tab) => tab.id === 'mision' || tab.id === 'vision')
+const filosofiaItems = filosofiaTabs.filter((tab) => tab.id === 'mision')
 
 const itemIcons = {
   mision: Target,
-  vision: Eye,
 } as const
 
 export function FilosofiaSection() {
@@ -25,7 +24,7 @@ export function FilosofiaSection() {
           </h2>
         </FadeIn>
 
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-16">
+        <div className="flex justify-center mb-16">
           {filosofiaItems.map((item, index) => {
             const Icon = itemIcons[item.id as keyof typeof itemIcons]
 
@@ -37,7 +36,7 @@ export function FilosofiaSection() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.12, duration: 0.45 }}
                 whileHover={{ y: -6 }}
-                className="group relative overflow-hidden rounded-2xl border border-colbeef-green/15 bg-gradient-to-br from-white to-[#d4edda]/40 p-6 sm:p-8 shadow-sm hover:shadow-lg hover:border-colbeef-green/35 transition-shadow duration-300"
+                className="group relative overflow-hidden rounded-2xl border border-colbeef-green/15 bg-gradient-to-br from-white to-[#d4edda]/40 p-6 sm:p-8 shadow-sm hover:shadow-lg hover:border-colbeef-green/35 transition-shadow duration-300 w-full max-w-2xl"
               >
                 <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-colbeef-green/5 transition-transform duration-500 group-hover:scale-125" />
 

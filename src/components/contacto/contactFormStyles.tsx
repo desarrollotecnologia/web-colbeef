@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { docs } from '../../data/assets'
 import { contactoPrivacyText } from '../../data/contacto'
 
 export const contactUnderlineInputClass =
@@ -31,12 +31,15 @@ export function ContactPrivacyCheckbox({
       />
       <span className="text-[11px] sm:text-xs text-colbeef-gray leading-relaxed">
         {contactoPrivacyText}{' '}
-        <Link
-          to="/corporativo/gobierno-corporativo"
+        <a
+          href={docs.politicaDatos}
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-colbeef-green font-semibold underline"
+          onClick={(e) => e.stopPropagation()}
         >
           Ver política
-        </Link>
+        </a>
         .
       </span>
     </label>

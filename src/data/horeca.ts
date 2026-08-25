@@ -8,7 +8,6 @@ export const horecaIntroParagraphs = [
 export const horecaFeatures = [
   { id: 'rendimiento', label: 'Rendimiento superior por corte' },
   { id: 'trazabilidad', label: 'Trazabilidad y control de origen' },
-  { id: 'frio', label: 'Cadena de frío certificada' },
   { id: 'invima', label: 'Respaldo INVIMA' },
   { id: 'abastecimiento', label: 'Abastecimiento continuo y puntual' },
   { id: 'atencion', label: 'Atención especializada' },

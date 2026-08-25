@@ -36,7 +36,13 @@ export function PageHero({ image, alt, content }: PageHeroProps) {
           </h1>
 
           {content.features ? (
-            <p className="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl">
+            <p
+              className={`text-white/90 text-sm sm:text-base md:text-lg leading-relaxed ${
+                content.featuresSingleLine
+                  ? 'max-w-none whitespace-nowrap'
+                  : 'max-w-xl'
+              }`}
+            >
               {content.features}
             </p>
           ) : null}

@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Check, Send } from 'lucide-react'
-import { images } from '../../data/assets'
+import { images, docs } from '../../data/assets'
 import {
   horecaEmail,
   horecaBusinessTypes,
@@ -392,9 +391,15 @@ export function HorecaSection() {
                     />
                     <span className="text-xs sm:text-sm text-colbeef-gray leading-snug">
                       Autorizo el tratamiento de mis datos personales conforme a la{' '}
-                      <Link to="/corporativo/gobierno-corporativo" className="text-colbeef-green font-semibold underline">
+                      <a
+                        href={docs.politicaDatos}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-colbeef-green font-semibold underline"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         Política de Tratamiento de Datos de COLBEEF
-                      </Link>
+                      </a>
                       . <span className="text-colbeef-red">*</span>
                     </span>
                   </label>

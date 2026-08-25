@@ -14,6 +14,10 @@ export const footerAssets = {
   logoWhite: asset('/assets/images/footer/logo-white-transparent.png'),
 } as const
 
+export const docs = {
+  politicaDatos: asset('/assets/docs/politica-tratamiento-datos-personales.pdf'),
+} as const
+
 export const icons = {
   ganado: asset('/assets/icons/ganado.png'),
   beneficio: asset('/assets/icons/beneficio.png'),

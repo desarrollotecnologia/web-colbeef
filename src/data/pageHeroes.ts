@@ -59,6 +59,7 @@ export const contactoHero: PageHeroContent = {
   badge: 'CONTACTO',
   headline: 'Estamos listos para atenderle.',
   features: 'Asesoría comercial • Información • Soporte • Atención personalizada',
+  featuresSingleLine: true,
 }
 
 export function getSostenibilidadPillarHero(label: string, description: string): PageHeroContent {

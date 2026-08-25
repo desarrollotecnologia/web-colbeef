@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { images } from '../data/assets'
 import { contactoContent } from '../data/contacto'
 import { contactoHero } from '../data/pageHeroes'
-import { contactInfo, socialLinks } from '../data/site'
 import { submitContactForm } from '../utils/submitContactForm'
 import {
   ContactPrivacyCheckbox,
@@ -21,6 +20,7 @@ export function ContactoPage() {
     mensaje: '',
   })
   const [privacyAccepted, setPrivacyAccepted] = useState(false)
+  const [privacyTouched, setPrivacyTouched] = useState(false)
   const [touched, setTouched] = useState<Record<string, boolean>>({})
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
@@ -28,9 +28,12 @@ export function ContactoPage() {
   const showError = (field: 'nombre' | 'email' | 'telefono') =>
     touched[field] && !form[field].trim()
 
+  const showPrivacyError = privacyTouched && !privacyAccepted
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setTouched({ nombre: true, email: true, telefono: true })
+    setPrivacyTouched(true)
 
     if (!form.nombre.trim() || !form.email.trim() || !form.telefono.trim()) {
       setStatus('error')
@@ -58,6 +61,7 @@ export function ContactoPage() {
       setStatus('success')
       setForm({ nombre: '', email: '', telefono: '', mensaje: '' })
       setPrivacyAccepted(false)
+      setPrivacyTouched(false)
       setTouched({})
     } catch (error) {
       setStatus('error')
@@ -73,58 +77,11 @@ export function ContactoPage() {
 
       <AnimatedSection className="py-12 md:py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-20">
-            <FadeIn>
-              <h2 className="text-colbeef-dark text-2xl sm:text-3xl font-bold mb-4">
-                {contactoContent.title}
-              </h2>
-              <p className="text-colbeef-gray text-sm leading-relaxed mb-3">
-                {contactoContent.intro}
-              </p>
-              <p className="text-colbeef-gray text-sm font-medium mb-6">{contactoContent.hours}</p>
-
-              <div className="space-y-2 text-sm text-colbeef-gray mb-8">
-                <p>
-                  <span className="font-semibold text-colbeef-dark">
-                    {contactoContent.addressLabel}:
-                  </span>{' '}
-                  {contactInfo.address}
-                </p>
-                <p>
-                  <span className="font-semibold text-colbeef-dark">Email:</span>{' '}
-                  <a
-                    href={`mailto:${contactInfo.email}`}
-                    className="hover:text-colbeef-green transition-colors"
-                  >
-                    {contactInfo.email}
-                  </a>
-                </p>
-              </div>
-
-              <p className="text-colbeef-dark text-sm font-semibold mb-3">
-                {contactoContent.socialLabel}
-              </p>
-              <div className="flex gap-3">
-                {socialLinks.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 flex items-center justify-center hover:scale-105 transition-transform"
-                    aria-label={s.label}
-                  >
-                    <img src={s.icon} alt={s.label} className="w-8 h-8 object-contain" />
-                  </a>
-                ))}
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.1}>
-              <h2 className="text-colbeef-dark text-2xl sm:text-3xl font-bold mb-2">
+            <FadeIn className="max-w-xl mx-auto w-full">
+              <h2 className="text-colbeef-dark text-2xl sm:text-3xl font-bold mb-2 text-center">
                 {contactoContent.formTitle}
               </h2>
-              <p className="text-colbeef-gray text-sm mb-8">{contactoContent.formSubtitle}</p>
+              <p className="text-colbeef-gray text-sm mb-8 text-center">{contactoContent.formSubtitle}</p>
 
               {status === 'success' ? (
                 <div className="rounded-xl border border-colbeef-green/20 bg-[#d4edda]/40 px-5 py-8 text-center">
@@ -146,6 +103,7 @@ export function ContactoPage() {
                     <input
                       type="text"
                       placeholder="Nombre*"
+                      required
                       value={form.nombre}
                       onBlur={() => setTouched((t) => ({ ...t, nombre: true }))}
                       onChange={(e) => setForm({ ...form, nombre: e.target.value })}
@@ -160,6 +118,7 @@ export function ContactoPage() {
                     <input
                       type="email"
                       placeholder="Email*"
+                      required
                       value={form.email}
                       onBlur={() => setTouched((t) => ({ ...t, email: true }))}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -173,7 +132,8 @@ export function ContactoPage() {
                   <div>
                     <input
                       type="tel"
-                      placeholder="Teléfono"
+                      placeholder="Teléfono*"
+                      required
                       value={form.telefono}
                       onBlur={() => setTouched((t) => ({ ...t, telefono: true }))}
                       onChange={(e) => setForm({ ...form, telefono: e.target.value })}
@@ -191,29 +151,46 @@ export function ContactoPage() {
                     className={contactTextareaClass}
                   />
 
-                  <ContactPrivacyCheckbox
-                    checked={privacyAccepted}
-                    onChange={setPrivacyAccepted}
-                    id="contacto-main-privacy"
-                  />
+                  <div>
+                    <ContactPrivacyCheckbox
+                      checked={privacyAccepted}
+                      onChange={(value) => {
+                        setPrivacyAccepted(value)
+                        setPrivacyTouched(true)
+                        if (value) setErrorMessage('')
+                      }}
+                      id="contacto-main-privacy"
+                    />
+                    {showPrivacyError && (
+                      <p className="text-colbeef-red text-xs mt-1.5" role="alert">
+                        Debes marcar esta casilla para enviar el mensaje.
+                      </p>
+                    )}
+                  </div>
 
-                  {status === 'error' && errorMessage && (
+                  {status === 'error' && errorMessage && !showPrivacyError && (
                     <p className="text-colbeef-red text-sm" role="alert">
                       {errorMessage}
                     </p>
                   )}
 
-                  <button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className={contactSubmitClass}
-                  >
-                    {status === 'loading' ? 'Enviando...' : 'Enviar mensaje'}
-                  </button>
+                  <div className="flex justify-center">
+                    <button
+                      type="submit"
+                      disabled={status === 'loading' || !privacyAccepted}
+                      className={contactSubmitClass}
+                      title={
+                        !privacyAccepted
+                          ? 'Marca la casilla de autorización para poder enviar'
+                          : undefined
+                      }
+                    >
+                      {status === 'loading' ? 'Enviando...' : 'Enviar mensaje'}
+                    </button>
+                  </div>
                 </form>
               )}
             </FadeIn>
-          </div>
         </div>
       </AnimatedSection>
     </>
