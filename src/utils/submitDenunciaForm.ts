@@ -13,52 +13,17 @@ export type DenunciaFormPayload = {
   archivoNombre?: string
 }
 
-function formatDenunciaMessage(data: DenunciaFormPayload): string {
-  const fechaEnvio = new Date().toLocaleString('es-CO', {
+function fechaEnvioLabel(): string {
+  return new Date().toLocaleString('es-CO', {
     timeZone: 'America/Bogota',
     dateStyle: 'long',
     timeStyle: 'short',
   })
+}
 
-  return [
-    '================================================',
-    '  NUEVA DENUNCIA — LINEA ETICA',
-    '  COLBEEF S.A.S.',
-    '================================================',
-    '',
-    'CONFIDENCIALIDAD',
-    '------------------------------------------------',
-    data.anonimo ? 'Denuncia ANONIMA' : 'Denuncia IDENTIFICADA',
-    '',
-    'DATOS DEL REPORTANTE',
-    '------------------------------------------------',
-    `Nombre:                 ${data.anonimo ? 'Anonimo' : data.nombre.trim() || 'No indicado'}`,
-    `Correo:                 ${data.anonimo ? 'No aplica (anonima)' : data.email?.trim() || 'No indicado'}`,
-    `Relacion con la empresa: ${data.relacion.trim() || 'No indicado'}`,
-    '',
-    'PERSONAS INVOLUCRADAS',
-    '------------------------------------------------',
-    data.personas.trim() || 'No indicado',
-    '',
-    'FECHA DEL HECHO',
-    '------------------------------------------------',
-    data.fecha.trim() || 'No indicada',
-    '',
-    'DESCRIPCION DEL HECHO',
-    '------------------------------------------------',
-    data.descripcion.trim() || 'Sin descripcion',
-    '',
-    'EVIDENCIA',
-    '------------------------------------------------',
-    data.archivoNombre?.trim()
-      ? `El reportante indico el archivo: ${data.archivoNombre.trim()}\n(Nota: por el canal web no se adjunta el archivo. Solicitarlo a ${lineaEticaEmail} si aplica.)`
-      : 'Ninguna evidencia adjunta en el formulario',
-    '',
-    '------------------------------------------------',
-    `Fecha de envio: ${fechaEnvio}`,
-    'Origen: colbeef.com/corporativo/gobierno-corporativo',
-    `Destino: ${lineaEticaEmail}`,
-  ].join('\n')
+function evidenciaLabel(archivoNombre?: string): string {
+  if (!archivoNombre?.trim()) return 'Sin evidencia indicada'
+  return `${archivoNombre.trim()} (referencia; enviar archivo a ${lineaEticaEmail} si aplica)`
 }
 
 export async function submitDenunciaForm(data: DenunciaFormPayload): Promise<void> {
@@ -88,16 +53,23 @@ export async function submitDenunciaForm(data: DenunciaFormPayload): Promise<voi
   formData.append('name', data.anonimo ? 'Denuncia anonima' : data.nombre.trim())
   formData.append(
     'email',
-    data.anonimo
-      ? lineaEticaEmail
-      : data.email?.trim() || lineaEticaEmail,
+    data.anonimo ? lineaEticaEmail : data.email?.trim() || lineaEticaEmail,
   )
   if (!data.anonimo && data.email?.trim()) {
     formData.append('replyto', data.email.trim())
   }
   formData.append('botcheck', '')
   formData.append('form_type', 'Denuncia linea etica')
-  formData.append('message', formatDenunciaMessage(data))
+
+  // Campos separados: Web3Forms los muestra como ficha legible en el correo
+  formData.append('Tipo de denuncia', data.anonimo ? 'Anonima' : 'Identificada')
+  formData.append('Relacion con la empresa', data.relacion.trim() || 'No indicada')
+  formData.append('Personas involucradas', data.personas.trim() || 'No indicadas')
+  formData.append('Fecha del hecho', data.fecha.trim() || 'No indicada')
+  formData.append('Evidencia', evidenciaLabel(data.archivoNombre))
+  formData.append('Fecha de envio', fechaEnvioLabel())
+  formData.append('Origen', 'colbeef.com/corporativo/gobierno-corporativo')
+  formData.append('message', data.descripcion.trim())
 
   const response = await fetch('https://api.web3forms.com/submit', {
     method: 'POST',
