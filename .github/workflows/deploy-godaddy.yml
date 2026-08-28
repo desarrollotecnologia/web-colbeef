@@ -31,6 +31,7 @@ jobs:
           VITE_BASE_PATH: /
           VITE_WEB3FORMS_TRABAJE_ACCESS_KEY: ${{ secrets.TRABAJE_CON_NOSOTROS }}
           VITE_WEB3FORMS_HORECA_ACCESS_KEY: ${{ secrets.SOLICITUD_DE_NEGOCIO }}
+          VITE_WEB3FORMS_LINEA_ETICA_ACCESS_KEY: ${{ secrets.LINEA_ETICA }}
 
       # Cuenta FTP adicional enjaulada en public_html/colbeef.com (no usar frigofrfadmin).
       # Secrets: FTP_USERNAME (usuario@frigorificoriofrio.com), FTP_PASSWORD

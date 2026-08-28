@@ -1,5 +1,6 @@
 export const contactoEmail = 'info@colbeef.com'
 export const trabajeEmail = 'gestor.contratacion@colbeef.com'
+export const lineaEticaEmail = 'linea.etica@colbeef.com'
 export const proteccionDatosEmail = 'protecciondedatos@colbeef.com'
 
 export const contactoContent = {
